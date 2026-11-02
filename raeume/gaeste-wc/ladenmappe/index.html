@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ladenmappe Gäste-WC · Kleiststraße 16</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Mono&display=swap">
+<style>
+/* Layout: Mappe für den Laden – Kopf mit Raumdaten, Bildstrecke, Einkaufsliste, Grundriss mit Maßen, Fragen für den Fachhandel */
+:root{
+  --paper:#f5f3ee;--sheet:#ffffff;--ink:#1f2321;--ink2:#5b625e;--line:#dcdad2;--green:#2f4a3c;--brass:#a8834c;
+  --display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#151816;--sheet:#1d211f;--ink:#ecefeb;--ink2:#a3aaa5;--line:#323834;--green:#7fae93;--brass:#d2ab70;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#151816;--sheet:#1d211f;--ink:#ecefeb;--ink2:#a3aaa5;--line:#323834;--green:#7fae93;--brass:#d2ab70;color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px}
+.wrap{max-width:980px;margin:0 auto;display:grid;gap:26px}
+header{border-bottom:1.5px solid var(--ink);padding-bottom:10px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:6px 20px}
+h1{margin:0;font-size:clamp(28px,6vw,40px);font-weight:600;line-height:1.02}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+h2{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px;color:var(--ink2)}
+.note{font-size:14px;color:var(--ink2);margin:0;max-width:68ch}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chip{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.chip[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--sheet) inset}
+button:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+figure{margin:0;display:grid;gap:6px}
+.shot{position:relative;aspect-ratio:4/3;max-width:100%;background:var(--sheet);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.shot img{display:block;width:100%;height:100%;object-fit:cover}
+figcaption{font-size:14px}figcaption b{font-weight:600}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:520px}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);text-align:left;font-weight:600;padding:6px 10px 6px 0;border-bottom:1.5px solid var(--ink)}
+td{padding:8px 10px 8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.n{font-family:var(--mono);font-size:13px;white-space:nowrap}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:7px;vertical-align:-1px;border:1px solid var(--line)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 36px;align-items:start}
+.plan{background:var(--sheet);border:1px solid var(--line);border-radius:4px;padding:10px;overflow-x:auto}
+.plan svg{display:block;width:100%;min-width:300px;height:auto}
+.plan .w{fill:var(--ink)}.plan .t{fill:var(--green);opacity:.85}.plan .o{fill:none;stroke:var(--ink);stroke-width:1}
+.plan .d{stroke:var(--ink2);stroke-width:.8;fill:none}.plan text{font-family:var(--mono);font-size:10px;fill:var(--ink2)}
+.plan .lab{font-family:var(--display);font-size:11px;fill:var(--ink)}
+ol{margin:0;padding-left:20px;display:grid;gap:6px;max-width:68ch}
+.shot img{cursor:zoom-in}
+#lb{position:fixed;inset:0;z-index:20;background:rgba(10,12,11,.92);display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));cursor:zoom-out}
+#lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
+nav.sitenav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 18px;font-size:14px;padding-block:2px 6px}
+nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:600}nav.sitenav span{display:flex;flex-wrap:wrap;gap:4px 16px}nav.sitenav span a{color:var(--ink2)}
+.wrap>*{min-width:0}</style>
+
+<div class="wrap">
+  <nav class="sitenav"><a class="b" href="../../../index.html">Kleiststraße 16</a><span><a href="../index.html">← Raumseite Gäste-WC</a><a href="../../../lv/index.html">Leistungsverzeichnis</a></span></nav>
+  <header>
+    <h1>Gäste-WC<br>Ladenmappe</h1>
+    <div class="meta">BV König · EG · 1,77 × 0,93 m · Höhe 2,50 m</div>
+  </header>
+
+  <section>
+    <h2>Ansichten</h2>
+    <p class="note" style="margin-bottom:12px">Die Bilder sind 3D-Visualisierungen aus dem Modell, keine Fotos. Proportionen und Maße stimmen, Farben und Glanz wirken auf jedem Bildschirm etwas anders. Fliesenmuster deshalb immer im Laden bei Tageslicht ansehen. Zum Speichern lange auf ein Bild drücken, zum Vergrößern antippen.</p>
+    <div class="bar" style="margin-bottom:14px"><span class="meta">Fliesenfarbe</span>
+      <button class="chip" id="t1" data-t="#2f4a3c" style="background:#2f4a3c" aria-label="Dunkelgrün" aria-pressed="true"></button>
+      <button class="chip" id="t2" data-t="#1f3b3f" style="background:#1f3b3f" aria-label="Petrol" aria-pressed="false"></button>
+      <button class="chip" id="t3" data-t="#7f8f6c" style="background:#7f8f6c" aria-label="Salbeigrün" aria-pressed="false"></button>
+      <button class="chip" id="t4" data-t="#a8783a" style="background:#a8783a" aria-label="Ocker" aria-pressed="false"></button>
+      <span class="meta" id="tname">Dunkelgrün</span>
+    </div>
+    <div class="gallery" id="gal"><figure><div class="shot"><img src="img/wc_t1_0.jpg" alt="Blick beim Eintreten: Von der Tür aus: links der Waschtisch, rechts das WC vor der gefliesten Vorwand." data-k="0" width="1440" height="1080" loading="eager"></div><figcaption><b>Blick beim Eintreten.</b> Von der Tür aus: links der Waschtisch, rechts das WC vor der gefliesten Vorwand.</figcaption></figure><figure><div class="shot"><img src="img/wc_t1_1.jpg" alt="Waschtischwand: Eichenbord mit Aufsatzbecken, Wandarmatur, runder Spiegel und Leuchte in Messing." data-k="1" width="1440" height="1080" loading="eager"></div><figcaption><b>Waschtischwand.</b> Eichenbord mit Aufsatzbecken, Wandarmatur, runder Spiegel und Leuchte in Messing.</figcaption></figure><figure><div class="shot"><img src="img/wc_t1_2.jpg" alt="WC-Wand: Wand-WC mit Messing-Drückerplatte, darüber die Terrazzo-Ablage." data-k="2" width="1440" height="1080" loading="lazy"></div><figcaption><b>WC-Wand.</b> Wand-WC mit Messing-Drückerplatte, darüber die Terrazzo-Ablage.</figcaption></figure><figure><div class="shot"><img src="img/wc_t1_3.jpg" alt="Detail Waschtisch: Beckenhöhe, Armatur und das Zusammenspiel von Eiche, Keramik und Fliese." data-k="3" width="1440" height="1080" loading="lazy"></div><figcaption><b>Detail Waschtisch.</b> Beckenhöhe, Armatur und das Zusammenspiel von Eiche, Keramik und Fliese.</figcaption></figure><figure><div class="shot"><img src="img/wc_t1_4.jpg" alt="Detail Fliese und Ablage: Stäbchenfliese senkrecht, Terrazzo-Ablage und Drückerplatte." data-k="4" width="1440" height="1080" loading="lazy"></div><figcaption><b>Detail Fliese und Ablage.</b> Stäbchenfliese senkrecht, Terrazzo-Ablage und Drückerplatte.</figcaption></figure><figure><div class="shot"><img src="img/wc_t1_5.jpg" alt="Von oben: Aufsicht ohne Decke und Türwand: so verteilt sich der Platz." data-k="5" width="1440" height="1080" loading="lazy"></div><figcaption><b>Von oben.</b> Aufsicht ohne Decke und Türwand: so verteilt sich der Platz.</figcaption></figure></div>
+  </section>
+
+  <section>
+    <h2>Einkaufsliste</h2>
+    <div class="tbl"><table>
+      <tr><th>Produkt</th><th>Was wir suchen</th><th>Menge</th></tr>
+      <tr><td><span class="sw" id="swt" style="background:#2f4a3c"></span>Wandfliese</td><td>Stäbchenfliese, senkrecht verlegt, ca. 3 × 15 cm, glänzend, leicht unregelmäßig (handgemachte Optik), <span id="tname2">Dunkelgrün</span>. Fuge sandbeige.</td><td class="n">≈ 4,6 m²<br>+10 % = 5,1 m²</td></tr>
+      <tr><td>Fliesenflächen</td><td>Waschtischwand raumhoch 0,93 × 2,50 m; WC-Wand: Vorwand 0,93 × 1,12 m plus Wand oberhalb der Ablage 0,93 × 1,34 m</td><td class="n">2,33 + 2,29 m²</td></tr>
+      <tr><td><span class="sw" style="background:#ece8e1"></span>Boden</td><td>Terrazzo hell, feine Körnung, wie Küche und Flur (durchgehend)</td><td class="n">1,65 m²</td></tr>
+      <tr><td>Ablage Vorwand</td><td>Terrazzo-Platte passend zum Boden, ca. 93 × 19 cm, 4 cm stark</td><td class="n">1 Stück</td></tr>
+      <tr><td><span class="sw" style="background:#c99d64"></span>Waschtischplatte</td><td>Eiche massiv geölt, wandhängend ohne sichtbare Konsolen, ca. 93 × 42 cm, 4 cm stark, Oberkante 75 cm</td><td class="n">1 Stück</td></tr>
+      <tr><td>Aufsatzbecken</td><td>rund, Ø ca. 38 cm, Höhe ca. 13 cm, Keramik weiß matt oder seidenmatt, ohne Überlauf, Ablaufventil ohne Verschluss</td><td class="n">1 Stück</td></tr>
+      <tr><td><span class="sw" style="background:#b8935a"></span>Waschtischarmatur</td><td>Wandarmatur Unterputz, Messing gebürstet, Auslauf ca. 18–20 cm (reicht bis Beckenmitte)</td><td class="n">1 Set</td></tr>
+      <tr><td>Wand-WC</td><td>spülrandlos, kompakt, Ausladung ca. 48–52 cm, mit Softclose-Sitz, weiß</td><td class="n">1 Stück</td></tr>
+      <tr><td><span class="sw" style="background:#b8935a"></span>Betätigungsplatte</td><td>Messing gebürstet, passend zum Hersteller des Vorwandelements</td><td class="n">1 Stück</td></tr>
+      <tr><td><span class="sw" style="background:#b8935a"></span>Spiegel</td><td>rund, Ø ca. 55 cm, schmaler Rahmen Messing gebürstet</td><td class="n">1 Stück</td></tr>
+      <tr><td>Wandleuchte</td><td>über dem Spiegel, Zylinder oder Opalglas, Messing, warmweiß 2700 K, für Feuchträume geeignet (mind. IP44)</td><td class="n">1 Stück</td></tr>
+      <tr><td><span class="sw" style="background:#b8935a"></span>Handtuchhalter</td><td>Handtuchring Messing gebürstet, neben dem Waschtisch</td><td class="n">1 Stück</td></tr>
+      <tr><td><span class="sw" style="background:#ece4d4"></span>Teppich</td><td>Wolle, Berber-Optik creme mit dunklem Rautenmuster, ca. 50 × 70 cm, rutschfest</td><td class="n">1 Stück</td></tr>
+      <tr><td><span class="sw" style="background:#e9e3d9"></span>Wände ohne Fliesen</td><td>Kalkputz oder Kalkfarbe in warmem Beige, wie Flur und Küche</td><td class="n">≈ 7 m²</td></tr>
+    </table></div>
+  </section>
+
+  <div class="cols">
+    <section>
+      <h2>Grundriss mit Maßen</h2>
+      <div class="plan">
+        <svg viewBox="0 0 330 230" role="img" aria-label="Grundriss Gäste-WC 1,77 mal 0,93 Meter mit WC an der Ostwand, Waschtisch an der Westwand, Fenster im Norden und Tür im Süden">
+          <rect class="w" x="40" y="40" width="250" height="14"/>
+          <rect class="w" x="26" y="40" width="14" height="150"/>
+          <rect class="w" x="290" y="40" width="10" height="150"/>
+          <rect class="w" x="40" y="176" width="58" height="14"/><rect class="w" x="150" y="176" width="140" height="14"/>
+          <rect x="119" y="40" width="58" height="14" fill="var(--sheet)" stroke="var(--ink)" stroke-width="1"/>
+          <line x1="119" y1="47" x2="177" y2="47" stroke="var(--ink)" stroke-width="1"/>
+          <rect class="t" x="40" y="54" width="3" height="122"/>
+          <rect class="t" x="287" y="54" width="3" height="122"/>
+          <rect class="o" x="267" y="54" width="20" height="122"/>
+          <path class="o" d="M267 90 H220 a26 26 0 0 0 0 50 H267"/>
+          <rect class="o" x="43" y="56" width="58" height="118"/>
+          <circle class="o" cx="72" cy="115" r="26"/>
+          <rect x="140" y="88" width="72" height="54" fill="none" stroke="var(--ink2)" stroke-dasharray="3 2"/>
+          <text class="lab" x="232" y="120" text-anchor="middle">WC</text>
+          <text class="lab" x="72" y="160" text-anchor="middle">Waschtisch</text>
+          <text class="lab" x="176" y="118" text-anchor="middle">Teppich</text>
+          <text class="lab" x="148" y="34" text-anchor="middle">Fenster</text>
+          <text class="lab" x="124" y="205" text-anchor="middle">Tür</text>
+          <path class="d" d="M40 222 H290 M40 216 V228 M290 216 V228"/><text x="165" y="219" text-anchor="middle">1,77 m</text>
+          <path class="d" d="M312 54 V176 M306 54 H318 M306 176 H318"/><text x="320" y="118">0,93</text>
+          <path class="d" d="M43 192 V176"/><text x="44" y="204">42 cm</text>
+          <path class="d" d="M220 90 V82 M267 90 V82 M220 86 H267"/><text x="243" y="80" text-anchor="middle">≈ 50</text>
+        </svg>
+      </div>
+      <p class="note" style="margin-top:8px">Zwischen Waschtischkante und WC bleiben etwa 66 cm Bewegungsfläche. Die grünen Linien markieren die gefliesten Wände.</p>
+    </section>
+    <section>
+      <h2>Im Laden klären</h2>
+      <ol>
+        <li>Gibt es die Stäbchenfliese in genau diesem Grün auch als Muster zum Mitnehmen? Wie stark schwanken Farbe und Glanz zwischen den Chargen?</li>
+        <li>Wird die Fliese einzeln oder auf Netzmatten geliefert, und welche Fugenbreite ist vorgesehen?</li>
+        <li>Passen Auslauflänge der Wandarmatur und Höhe des Aufsatzbeckens zusammen? Strahl soll mittig treffen, Beckenrand etwa auf 88 cm.</li>
+        <li>Welche Betätigungsplatte in Messing passt zu unserem Vorwandelement?</li>
+        <li>Gibt es Waschtischplatte, Armatur und Leuchte im selben Messington? Gebürstetes Messing variiert je nach Hersteller.</li>
+        <li>Ist die Eichenplatte für den Nassbereich geölt oder lackiert, und wie wird sie unsichtbar befestigt?</li>
+      </ol>
+    </section>
+  </div>
+</div>
+
+<div id="lb" hidden><img alt=""></div>
+<script>
+(function(){
+const imgs=[...document.querySelectorAll('#gal img')];
+const chips=[...document.querySelectorAll('.chip')];
+chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.setAttribute('aria-pressed',x===c));const n=c.getAttribute('aria-label');
+  document.getElementById('tname').textContent=n;document.getElementById('tname2').textContent=n;document.getElementById('swt').style.background=c.dataset.t;
+  imgs.forEach(i=>{i.src=`img/wc_${c.id}_${i.dataset.k}.jpg`;});}));
+const lb=document.getElementById('lb'),lbi=lb.querySelector('img');
+imgs.forEach(i=>i.addEventListener('click',()=>{lbi.src=i.src;lbi.alt=i.alt;lb.hidden=false;}));
+lb.addEventListener('click',()=>{lb.hidden=true;});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true;});
+})();
+
+</script>

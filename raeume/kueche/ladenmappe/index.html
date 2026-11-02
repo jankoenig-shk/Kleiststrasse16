@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ladenmappe Kochen | Essen · Kleiststraße 16</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Mono&display=swap">
+<style>
+/* Layout: Mappe fürs Küchenstudio – Kopf mit Raumdaten, Frontwahl, Bildstrecke, Einkaufsliste, Grundriss mit Abständen, Fragen, ChatGPT-Prompt */
+:root{
+  --paper:#f5f3ee;--sheet:#ffffff;--ink:#1f2321;--ink2:#5b625e;--line:#dcdad2;--oak:#b98a55;--greige:#bcb2a5;--warn:#a5521f;--ok:#3f6f45;
+  --display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#151816;--sheet:#1d211f;--ink:#ecefeb;--ink2:#a3aaa5;--line:#323834;--oak:#d7a86f;--greige:#a69d90;--warn:#e39a6a;--ok:#86bd8c;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#151816;--sheet:#1d211f;--ink:#ecefeb;--ink2:#a3aaa5;--line:#323834;--oak:#d7a86f;--greige:#a69d90;--warn:#e39a6a;--ok:#86bd8c;color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px}
+.wrap{max-width:1000px;margin:0 auto;display:grid;gap:26px}
+header{border-bottom:1.5px solid var(--ink);padding-bottom:10px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:6px 20px}
+h1{margin:0;font-size:clamp(28px,6vw,40px);font-weight:600;line-height:1.02}
+.meta{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+h2{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px;color:var(--ink2)}
+.note{font-size:14px;color:var(--ink2);margin:0;max-width:68ch}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--sheet)}
+.seg button,.btn{font:500 14px var(--display);color:var(--ink);background:none;border:0;padding:8px 13px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
+.btn{border:1px solid var(--line);border-radius:6px;background:var(--sheet)}
+button:focus-visible{outline:2px solid var(--oak);outline-offset:2px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+figure{margin:0;display:grid;gap:6px}
+.shot{position:relative;aspect-ratio:4/3;max-width:100%;background:var(--sheet);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.shot img{display:block;width:100%;height:100%;object-fit:cover}
+figcaption{font-size:14px}figcaption b{font-weight:600}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:540px}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);text-align:left;font-weight:600;padding:6px 10px 6px 0;border-bottom:1.5px solid var(--ink)}
+td{padding:8px 10px 8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td.n{font-family:var(--mono);font-size:13px;white-space:nowrap}
+tr.grp td{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);font-weight:600;padding-top:16px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:7px;vertical-align:-1px;border:1px solid var(--line)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 36px;align-items:start}
+.plan{background:var(--sheet);border:1px solid var(--line);border-radius:4px;padding:10px;overflow-x:auto}
+.plan svg{display:block;width:100%;max-width:360px;margin:0 auto;height:auto}
+.plan .w{fill:none;stroke:var(--ink);stroke-width:5}.plan .gap{stroke:var(--sheet);stroke-width:6}
+.plan .gl{stroke:#7fb2cc;stroke-width:2}
+.plan .oak{fill:var(--oak);opacity:.55;stroke:var(--ink);stroke-width:.8}.plan .gr{fill:var(--greige);stroke:var(--ink);stroke-width:.8}
+.plan .tz{fill:none;stroke:var(--ink);stroke-width:.8}
+.plan .d{stroke:var(--ink2);stroke-width:.8;fill:none}.plan .dw{stroke:var(--warn);stroke-width:1.2;fill:none}
+.plan text{font-family:var(--mono);font-size:9px;fill:var(--ink2)}.plan .lab{font-family:var(--display);font-size:10px;fill:var(--ink)}.plan .tw{fill:var(--warn);font-weight:600}
+ol{margin:0;padding-left:20px;display:grid;gap:7px;max-width:70ch}
+.warn{color:var(--warn)}
+pre{white-space:pre-wrap;font:13px/1.55 var(--mono);background:var(--sheet);border:1px solid var(--line);border-radius:4px;padding:14px;margin:0 0 10px;max-width:100%;overflow-x:auto}
+.shot img{cursor:zoom-in}
+#lb{position:fixed;inset:0;z-index:20;background:rgba(10,12,11,.92);display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));cursor:zoom-out}
+#lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
+nav.sitenav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 18px;font-size:14px;padding-block:2px 6px}
+nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:600}nav.sitenav span{display:flex;flex-wrap:wrap;gap:4px 16px}nav.sitenav span a{color:var(--ink2)}
+.wrap>*{min-width:0}</style>
+
+<div class="wrap">
+  <nav class="sitenav"><a class="b" href="../../../index.html">Kleiststraße 16</a><span><a href="../index.html">← Raumseite Kochen | Essen</a><a href="../../../lv/index.html">Leistungsverzeichnis</a></span></nav>
+  <header>
+    <h1>Küche<br>Ladenmappe</h1>
+    <div class="meta">BV König · EG · Kochen | Essen 3,70 × 8,15 m · Variante mit Hochschränken</div>
+  </header>
+
+  <section>
+    <h2>Ansichten</h2>
+    <p class="note" style="margin-bottom:12px">3D-Visualisierungen aus dem Modell, keine Fotos. Maße und Anordnung stimmen mit dem Plan überein, Farben und Glanz wirken je nach Bildschirm anders. Zum Speichern lange auf ein Bild drücken, zum Vergrößern antippen.</p>
+    <div class="bar" style="margin-bottom:14px"><span class="meta">Fronten</span>
+      <div class="seg" id="fins">
+        <button id="s1" data-s="1" aria-pressed="true">Eiche unten · Greige hoch</button>
+        <button id="s2" data-s="2" aria-pressed="false">Greige · Insel Eiche</button>
+        <button id="s3" data-s="3" aria-pressed="false">Beige · Eiche hoch</button>
+      </div></div>
+    <div class="gallery" id="gal"><figure><div class="shot"><img src="img/km_s1_0.jpg" alt="Vom Esstisch: Der ganze Raum: Insel mit Kochfeld, Zeile unter dem Fenster, rechts die Hochschränke." data-k="0" width="1440" height="1080" loading="eager"></div><figcaption><b>Vom Esstisch.</b> Der ganze Raum: Insel mit Kochfeld, Zeile unter dem Fenster, rechts die Hochschränke.</figcaption></figure><figure><div class="shot"><img src="img/km_s1_1.jpg" alt="Zeile über Eck: Nordzeile mit Spüle und Kühlschrank-Hochschrank, an der Terrassenwand der Hochschrankblock mit zwei Backöfen." data-k="1" width="1440" height="1080" loading="eager"></div><figcaption><b>Zeile über Eck.</b> Nordzeile mit Spüle und Kühlschrank-Hochschrank, an der Terrassenwand der Hochschrankblock mit zwei Backöfen.</figcaption></figure><figure><div class="shot"><img src="img/km_s1_2.jpg" alt="Hochschränke: Backofen und Kompaktgerät auf Arbeitshöhe, davor die Insel: hier sind es nur 80 cm Abstand." data-k="2" width="1440" height="1080" loading="lazy"></div><figcaption><b>Hochschränke.</b> Backofen und Kompaktgerät auf Arbeitshöhe, davor die Insel: hier sind es nur 80 cm Abstand.</figcaption></figure><figure><div class="shot"><img src="img/km_s1_3.jpg" alt="Kochinsel: Insel mit Kochfeld und Muldenlüfter, Terrazzo-Platte mit seitlichen Wangen bis zum Boden." data-k="3" width="1440" height="1080" loading="lazy"></div><figcaption><b>Kochinsel.</b> Insel mit Kochfeld und Muldenlüfter, Terrazzo-Platte mit seitlichen Wangen bis zum Boden.</figcaption></figure><figure><div class="shot"><img src="img/km_s1_4.jpg" alt="Spüle am Fenster: Unterbauspüle unter dem Fenster, rechts das Wandbord aus Eiche." data-k="4" width="1440" height="1080" loading="lazy"></div><figcaption><b>Spüle am Fenster.</b> Unterbauspüle unter dem Fenster, rechts das Wandbord aus Eiche.</figcaption></figure><figure><div class="shot"><img src="img/km_s1_5.jpg" alt="Von der Küche zum Esstisch: Blick über die Insel auf den Tisch für zehn Personen und die Glasfront." data-k="5" width="1440" height="1080" loading="lazy"></div><figcaption><b>Von der Küche zum Esstisch.</b> Blick über die Insel auf den Tisch für zehn Personen und die Glasfront.</figcaption></figure><figure><div class="shot"><img src="img/km_s1_6.jpg" alt="Von oben: Aufsicht ohne Decke: Laufwege und Abstände." data-k="6" width="1440" height="1080" loading="lazy"></div><figcaption><b>Von oben.</b> Aufsicht ohne Decke: Laufwege und Abstände.</figcaption></figure></div>
+  </section>
+
+  <section>
+    <h2>Einkaufsliste</h2>
+    <div class="tbl"><table>
+      <tr><th>Position</th><th>Was wir suchen</th><th>Menge</th></tr>
+      <tr class="grp"><td colspan="3">Möbel</td></tr>
+      <tr data-fs="1"><td><span class="sw" style="background:var(--oak)"></span>Fronten unten + Insel</td><td>Eiche furniert, Maserung senkrecht und durchlaufend, matt geölt-Optik, grifflos</td><td class="n">≈ 4,9 lfm + Insel</td></tr>
+      <tr data-fs="1"><td><span class="sw" style="background:#bcb2a5"></span>Fronten Hochschränke</td><td>Lack matt, warmes Greige, grifflos (Farbmuster mitnehmen)</td><td class="n">60 + 90 cm</td></tr>
+      <tr data-fs="2" hidden><td><span class="sw" style="background:#bcb2a5"></span>Fronten Zeile + Hochschränke</td><td>Lack matt, warmes Greige, grifflos</td><td class="n">≈ 4,9 lfm + 150 cm</td></tr>
+      <tr data-fs="2" hidden><td><span class="sw" style="background:var(--oak)"></span>Fronten Insel</td><td>Eiche furniert, Maserung senkrecht, grifflos</td><td class="n">1,50 m</td></tr>
+      <tr data-fs="3" hidden><td><span class="sw" style="background:#d8ccb8"></span>Fronten unten + Insel</td><td>Lack matt, helles Sandbeige, grifflos</td><td class="n">≈ 4,9 lfm + Insel</td></tr>
+      <tr data-fs="3" hidden><td><span class="sw" style="background:var(--oak)"></span>Fronten Hochschränke</td><td>Eiche furniert, Maserung senkrecht, grifflos</td><td class="n">60 + 90 cm</td></tr>
+      <tr><td>Unterschränke</td><td>Nordwand 3,10 m (inkl. Eckschrank), Terrassenwand 1,80 m; Tiefe 60 cm, Arbeitshöhe 92 cm, Sockel 10 cm dunkel und zurückgesetzt</td><td class="n">4,90 lfm</td></tr>
+      <tr><td>Hochschränke</td><td>Ecke Nord/West: 60 cm für Kühlschrank. Terrassenwand: 90-cm-Block aus 60 cm Gerätehochschrank (Backofen + Kompaktgerät) und 30 cm Apothekerauszug. Höhe 2,30 m, Blende bis zur Decke</td><td class="n">2 Blöcke</td></tr>
+      <tr><td>Kochinsel</td><td>Unterschränke von beiden Seiten nutzbar, mittig das Kochfeld</td><td class="n">1,50 × 1,50 m</td></tr>
+      <tr><td><span class="sw" style="background:#ece8e1"></span>Arbeitsplatte</td><td>Terrazzo hell, feine Körnung wie der Boden, 4 cm. Insel mit Wangen bis zum Boden. Alternativ Keramik oder Quarz in Terrazzo-Optik</td><td class="n">≈ 8 m²</td></tr>
+      <tr><td><span class="sw" style="background:#a0794a"></span>Wandbord</td><td>Eiche massiv, rechts neben dem Fenster, 4 cm stark, verdeckte Befestigung</td><td class="n">≈ 85 × 25 cm</td></tr>
+      <tr class="grp"><td colspan="3">Geräte und Spüle</td></tr>
+      <tr><td>Kochfeld</td><td>Induktion ca. 80 cm mit integriertem Muldenlüfter, Umluft</td><td class="n">1</td></tr>
+      <tr><td>Backofen</td><td>60 cm, Einbau auf Arbeitshöhe, schwarzes Glas</td><td class="n">1</td></tr>
+      <tr><td>Kompaktgerät</td><td>45 cm, Dampfgarer oder Kompaktbackofen mit Mikrowelle</td><td class="n">1</td></tr>
+      <tr><td>Kühlschrank</td><td>Einbau-Kühl-Gefrierkombination, Nische 178 cm</td><td class="n">1</td></tr>
+      <tr><td>Geschirrspüler</td><td>60 cm, vollintegriert, neben der Spüle</td><td class="n">1</td></tr>
+      <tr><td>Spüle + Armatur</td><td>Unterbau-Einzelbecken ca. 70–76 cm unter dem Fenster. Armatur Edelstahl gebürstet (oder Messing passend zum Gäste-WC), niedrig genug für den Fensterflügel</td><td class="n">1 Set</td></tr>
+      <tr class="grp"><td colspan="3">Essplatz, Licht, Boden</td></tr>
+      <tr><td><span class="sw" style="background:var(--oak)"></span>Esstisch</td><td>Eiche massiv, 250 × 100 cm, Platz für 8 Personen plus 2 an den Stirnseiten</td><td class="n">1</td></tr>
+      <tr><td><span class="sw" style="background:#8d8f8a"></span>Stühle</td><td>Polsterstühle mit Eichenbeinen, Stoff z. B. Steingrau oder Salbei</td><td class="n">10</td></tr>
+      <tr><td>Leuchten</td><td>über dem Tisch 3 Pendel mit Opalglas-Kugel, über der Insel 2 Pendel mit hellem Stoffschirm, warmweiß 2700 K, dimmbar</td><td class="n">3 + 2</td></tr>
+      <tr><td><span class="sw" style="background:#ece8e1"></span>Boden</td><td>Terrazzo hell, feine Körnung, durchgehend in Flur und Gäste-WC</td><td class="n">≈ 30 m²</td></tr>
+    </table></div>
+  </section>
+
+  <div class="cols">
+    <section>
+      <h2>Grundriss mit Abständen</h2>
+      <div class="plan">
+        <svg viewBox="0 0 250 400" role="img" aria-label="Grundriss der Küche mit Zeile über Eck, Hochschränken, Kochinsel und Esstisch, Abstand Insel zu Hochschränken nur 80 Zentimeter">
+          <rect class="w" x="50" y="30" width="148" height="326"/>
+          <line class="gap" x1="82" y1="30" x2="162" y2="30"/><line class="gl" x1="82" y1="30" x2="162" y2="30"/>
+          <line class="gap" x1="198" y1="72" x2="198" y2="126"/><line class="gl" x1="198" y1="72" x2="198" y2="126"/>
+          <line class="gap" x1="198" y1="162" x2="198" y2="320"/><line class="gl" x1="198" y1="162" x2="198" y2="320"/>
+          <line class="gap" x1="82" y1="356" x2="162" y2="356"/><line class="gl" x1="82" y1="356" x2="162" y2="356"/>
+          <line class="gap" x1="50" y1="72" x2="50" y2="126"/><line class="gap" x1="50" y1="159" x2="50" y2="243"/>
+          <rect class="gr" x="50" y="32" width="24" height="22"/>
+          <rect class="oak" x="74" y="32" width="122" height="22"/>
+          <rect class="oak" x="174" y="54" width="22" height="72"/>
+          <rect class="gr" x="174" y="126" width="22" height="36"/>
+          <rect class="oak" x="82" y="102" width="60" height="60"/>
+          <rect class="tz" x="98" y="114" width="32" height="21"/>
+          <rect class="tz" x="109" y="33" width="31" height="15"/>
+          <rect class="oak" x="106" y="225" width="40" height="100"/>
+          <text class="lab" x="62" y="47" text-anchor="middle">KS</text>
+          <text class="lab" x="112" y="152" text-anchor="middle">Insel</text>
+          <text class="lab" x="185" y="148" text-anchor="middle" style="font-size:8px">BO</text>
+          <text class="lab" x="126" y="279" text-anchor="middle">Tisch</text>
+          <text x="40" y="104" text-anchor="end">Flur</text><text x="40" y="204" text-anchor="end">Podest</text>
+          <text x="206" y="244">Terrasse</text>
+          <path class="d" d="M112 54 V102 M108 54 H116 M108 102 H116"/><text x="116" y="82">1,20</text>
+          <path class="dw" d="M142 140 H174 M142 136 V144 M174 136 V144"/><text class="tw" x="158" y="134" text-anchor="middle">0,80</text>
+          <path class="d" d="M126 162 V225 M122 162 H130 M122 225 H130"/><text x="130" y="196">1,58</text>
+          <path class="d" d="M50 372 H198 M50 366 V378 M198 366 V378"/><text x="124" y="388" text-anchor="middle">3,70 m</text>
+          <path class="d" d="M222 30 V356 M216 30 H228 M216 356 H228"/><text x="226" y="22">8,15 m</text>
+        </svg>
+      </div>
+      <p class="note" style="margin-top:8px">Gelb-braun: Eiche, grau: Greige (Schema 1). KS Kühlschrank, BO Backöfen. Blau: Fenster und Glasfront.</p>
+    </section>
+    <section>
+      <h2>Im Küchenstudio klären</h2>
+      <ol>
+        <li class="warn">Zwischen Insel und Hochschränken bleiben nur 80 cm. Eine geöffnete Backofentür braucht etwa 50 cm, dann kommt niemand mehr vorbei. Üblich sind 100–120 cm. Lösungen: Insel auf 1,30 m schmaler machen oder Backöfen in die Insel verlegen.</li>
+        <li>Terrazzo massiv oder Keramik bzw. Quarz in Terrazzo-Optik? Gewicht der Wangen, Fleckenempfindlichkeit durch Öl und Säure, Preis.</li>
+        <li>Muldenlüfter mit Umluft: Wie oft müssen Filter gewechselt werden, und wie viel Stauraum unter dem Kochfeld geht verloren?</li>
+        <li>Spüle unter dem Fenster: Kollidiert der Fensterflügel mit der Armatur? Brüstung liegt bei etwa 1,00 m.</li>
+        <li>Welche Lösung gibt es für den Eckschrank Nord/Ost (Karussell, Le-Mans-Auszug oder Blindecke)?</li>
+        <li>Grifflos mit Griffleiste oder Push-to-open? Läuft die Eichenmaserung über mehrere Fronten durch?</li>
+        <li>Greige-Lack und Eichenfurnier als Muster zusammen mit einem Terrazzo-Muster bei Tageslicht vergleichen.</li>
+      </ol>
+    </section>
+  </div>
+
+  <section>
+    <h2>Prompt für ChatGPT</h2>
+    <p class="note" style="margin-bottom:10px">Zwei oder drei Bilder von oben in ChatGPT hochladen und diesen Text dazu einfügen. KI-Bilder halten Maße und Anzahl der Teile oft nicht genau ein, für die Stimmung sind sie gut.</p>
+    <pre id="prompt">Erstelle aus den beigefügten 3D-Ansichten ein fotorealistisches Innenraumfoto einer offenen Wohnküche (3,70 × 8,15 m, Raumhöhe 2,50 m). Halte Anordnung, Proportionen und Blickwinkel der Vorlage exakt ein, verändere nichts an der Raumaufteilung.
+
+Möblierung:
+- Küchenzeile über Eck: an der Fensterwand mit Unterbauspüle unter dem Fenster, links ein raumhoher Kühlschrank-Hochschrank; an der Wand zur Terrasse Unterschränke und ein raumhoher Hochschrankblock mit Backofen und Kompaktbackofen (schwarzes Glas) auf Arbeitshöhe
+- Unterschränke und Kochinsel: Eichenfurnier mit senkrechter Maserung, grifflos
+- Hochschränke: matt lackiert in warmem Greige, grifflos, bis zur Decke
+- Kochinsel 1,50 × 1,50 m mit schwarzem Induktionskochfeld und Muldenlüfter
+- Arbeitsplatte 4 cm aus hellem Terrazzo mit feiner Körnung, an der Insel als Wangen seitlich bis zum Boden
+- Boden: derselbe helle Terrazzo, cremeweiß mit kleinen grauen Steinchen
+- Wände: warmer beiger Kalkputz, ein schmales Wandbord aus Eiche neben dem Fenster
+- Esstisch aus massiver Eiche, 2,50 × 1,00 m, mit zehn Polsterstühlen in Steingrau und Eichenbeinen
+- über dem Tisch drei Pendelleuchten mit Opalglas-Kugeln, über der Insel zwei Pendel mit hellem Stoffschirm
+- große Glasfront zur Terrasse mit Blick ins Grüne, Olivenbaum im Topf in der Ecke
+
+Licht: weiches Nachmittagslicht durch die Glasfront, warme Akzente der Leuchten (2700 K). Stil: ruhig, hochwertig, warm-minimalistisch, Architekturfotografie, Weitwinkel 24 mm, Augenhöhe, natürliche Schatten.</pre>
+    <button class="btn" id="copy">Prompt kopieren</button>
+  </section>
+</div>
+
+<div id="lb" hidden><img alt=""></div>
+<script>
+(function(){
+const imgs=[...document.querySelectorAll('#gal img')];
+const chips=[...document.querySelectorAll("#fins button")];
+chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.setAttribute('aria-pressed',x===c));
+  document.querySelectorAll("[data-fs]").forEach(e=>e.hidden=e.dataset.fs!==c.dataset.s);
+  imgs.forEach(i=>{i.src=`img/km_${c.id}_${i.dataset.k}.jpg`;});}));
+const lb=document.getElementById('lb'),lbi=lb.querySelector('img');
+imgs.forEach(i=>i.addEventListener('click',()=>{lbi.src=i.src;lbi.alt=i.alt;lb.hidden=false;}));
+lb.addEventListener('click',()=>{lb.hidden=true;});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true;});
+const cp=document.getElementById('copy');cp.addEventListener('click',()=>{const t=document.getElementById('prompt').textContent;
+  const ok=()=>{cp.textContent='Kopiert';setTimeout(()=>cp.textContent='Prompt kopieren',1600);};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('prompt'));const s=getSelection();s.removeAllRanges();s.addRange(r);cp.textContent='Text markiert – jetzt kopieren';};
+  try{navigator.clipboard.writeText(t).then(ok,sel);}catch(e){sel();}});
+})();
+
+</script>

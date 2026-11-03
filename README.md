@@ -1,7 +1,7 @@
 # Kleiststraße 16
 
 Website zur Sanierung: Haus, Geschosse, Räume mit Bildern und Ladenmappen, Animationen im 3D-Modell, Leistungsverzeichnis.
-Veröffentlicht über GitHub Pages (Branch `main`, Ordner `/`). Stand 2. November 2026.
+Veröffentlicht über GitHub Pages (Branch `main`, Ordner `/`). Stand 3. November 2026.
 
 ## Aufbau
 - `index.html` Startseite · `eg/`, `og/`, `dg/` Geschosse · `raeume/<raum>/` Raumseiten (mit `ladenmappe/`)

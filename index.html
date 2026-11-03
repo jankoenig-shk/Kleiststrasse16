@@ -7,28 +7,33 @@
 <title>Kleiststraße 16</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/site.css">
-
+<style>.haus{position:relative;height:clamp(360px,62vw,640px);border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#dfe8ec;touch-action:none}.haus #haus3d{position:absolute;inset:0}.haus canvas{display:block;width:100%;height:100%}.hlegend,.hhint{position:absolute;font-size:12px;background:rgba(255,255,255,.88);padding:3px 8px;border-radius:4px;pointer-events:none}.hlegend{right:10px;top:10px;font-family:var(--mono)}.hhint{left:10px;bottom:10px}.hctl{display:flex;flex-direction:column;gap:8px}.crow{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}.lbl{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);min-width:72px}.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--sheet)}.seg button{font:500 14px var(--body);color:var(--ink);background:none;border:0;padding:8px 13px;cursor:pointer}.seg button+button{border-left:1px solid var(--line)}.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}</style>
 </head>
 <body>
-<header class="top"><nav class="in"><a class="brand" href="index.html">Kleiststraße 16</a><div class="links"><a href="index.html" aria-current="page">Haus</a><a href="eg/index.html">Geschosse</a><a href="eg/index.html#raeume">Räume</a><a href="animationen/index.html">Animationen</a><a href="lv/index.html">Leistungsverzeichnis</a></div><span class="stand">Stand 2. November 2026 · Entwurf I</span></nav></header>
+<header class="top"><nav class="in"><a class="brand" href="index.html">Kleiststraße 16</a><div class="links"><a href="index.html" aria-current="page">Haus</a><a href="eg/index.html">Geschosse</a><a href="eg/index.html#raeume">Räume</a><a href="animationen/index.html">Animationen</a><a href="lv/index.html">Leistungsverzeichnis</a></div><span class="stand">Stand 3. November 2026 · Entwurf I</span></nav></header>
 <main class="in">
   <section class="hero">
     <div><span class="eyebrow">Sanierung · Baujahr 1950er · zwei Wohneinheiten</span><h1>Kleiststraße 16</h1></div>
     <p class="lead">Das Haus von außen, die Geschosse mit maßstäblichen Grundrissen und jeder Raum mit Bildern, Maßen und Ladenmappe. Am Ende fließt alles ins Leistungsverzeichnis.</p>
   </section>
   <section style="display:flex;flex-direction:column;gap:12px">
-    <div class="ph big">
-      <div class="tag"><strong>[3D-Modell des Hauses von außen]</strong><span>Drehbar und zoombar, im selben Maßstab wie die Grundrisse. Entsteht, sobald Ansichten und Schnitt vorliegen.</span></div>
-      <div style="position:absolute;left:16px;bottom:16px;display:flex;gap:8px;flex-wrap:wrap"><span class="btn dark">Ansicht Süd</span><span class="btn">Nord</span><span class="btn">Ost</span><span class="btn">West</span><span class="btn">Dach abnehmen</span></div>
+    <div class="haus"><div id="haus3d" aria-label="3D-Modell des Hauses von außen, drehbar"></div>
+      <div class="hlegend">Höhen über Gelände · Ansicht Süd M 1:100</div>
+      <div class="hhint">Ziehen zum Drehen · zwei Finger zum Zoomen</div></div>
+    <div class="hctl">
+      <div class="crow"><span class="lbl">Ansicht</span><div class="seg" id="h-view"><button data-v="sw" aria-pressed="true">Südwest</button><button data-v="s" aria-pressed="false">Süd</button><button data-v="w" aria-pressed="false">West · Garten</button><button data-v="n" aria-pressed="false">Nord</button><button data-v="o" aria-pressed="false">Ost</button><button data-v="ne" aria-pressed="false">Nordost</button></div></div>
+      <div class="crow"><span class="lbl">Klinker</span><div class="seg" id="h-brick"><button data-v="lang" aria-pressed="true">Langformat rosé</button><button data-v="rot" aria-pressed="false">Klassisch rot</button></div></div>
+      <div class="crow"><span class="lbl">Gauben</span><div class="seg" id="h-dormer"><button data-v="weiss" aria-pressed="true">Weiß lackiert</button><button data-v="holz" aria-pressed="false">Holz natur</button></div></div>
+      <div class="crow"><span class="lbl">Fenster</span><div class="seg" id="h-frame"><button data-v="grau" aria-pressed="true">Anthrazit</button><button data-v="holz" aria-pressed="false">Holz</button></div></div>
     </div>
-    <span class="meta">Grundlage: Ansichten Nord, Ost, Süd, West und Schnitt · Status: Pläne angefragt</span>
+    <span class="meta">Maßstäblich aus EG- und DG-Grundriss und Ansicht Süd. Fenster im OG auf Nord-, Ost- und Westseite geschätzt, bis die übrigen Ansichten vorliegen. „Weiß lackiert“ entspricht der Kostenschätzung (Glattkantbrett, weiß).</span>
   </section>
   <section style="display:flex;flex-direction:column;gap:20px">
     <div class="row"><h2>Geschosse</h2><span class="meta">Alle Grundrisse im gleichen Maßstab</span></div>
     <div class="g3">
       <a class="card" href="eg/index.html"><img class="im plan" src="img/plan_eg.jpg" alt="Grundriss Erdgeschoss" width="1400" height="1300"><div class="bd"><div class="t"><strong>Erdgeschoss</strong><span>94,48 m²</span></div><p>10 Räume · Küche, Wohnzimmer, Spielzimmer, Gäste-WC, HWR</p><span class="chip ok" style="align-self:flex-start">Grundriss maßgenau · Bilder</span></div></a>
       <a class="card" href="og/index.html"><div class="ph">[Grundriss OG]</div><div class="bd"><div class="t"><strong>Obergeschoss</strong><span>[Fläche]</span></div><p>[Räume]</p><span class="chip" style="align-self:flex-start">Plan folgt</span></div></a>
-      <a class="card" href="dg/index.html"><div class="ph">[Grundriss DG]</div><div class="bd"><div class="t"><strong>Dachgeschoss</strong><span>[Fläche]</span></div><p>[Räume]</p><span class="chip" style="align-self:flex-start">Plan folgt</span></div></a>
+      <a class="card" href="dg/index.html"><img class="im plan" src="img/plan_dg.jpg" alt="Grundriss Dachgeschoss" width="771" height="854"><div class="bd"><div class="t"><strong>Dachgeschoss</strong><span>≈ 30 m²</span></div><p>Schlafen, Bad, Abstell und Ankleide</p><span class="chip ok" style="align-self:flex-start">Grundriss maßgenau</span></div></a>
     </div>
   </section>
   <section style="display:flex;flex-direction:column;gap:20px">
@@ -41,6 +46,9 @@
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;font-family:var(--mono)"><div><div style="font-size:26px">63</div><div class="meta">Positionen EG</div></div><div><div style="font-size:26px">10</div><div class="meta">Gewerke</div></div><div><div style="font-size:26px">[€]</div><div class="meta">nach Angeboten</div></div></div></a>
   </section>
 </main>
-<footer class="foot"><div class="in"><span>Kleiststraße 16 · Stand 2. November 2026</span><span>Visualisierungen aus dem 3D-Modell, keine verbindlichen Planunterlagen</span></div></footer>
+<footer class="foot"><div class="in"><span>Kleiststraße 16 · Stand 3. November 2026</span><span>Visualisierungen aus dem 3D-Modell, keine verbindlichen Planunterlagen</span></div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="assets/haus.js"></script>
 </body>
 </html>

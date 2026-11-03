@@ -47,6 +47,17 @@ p.note{margin:0 0 8px;font-size:14px;color:var(--ink2);max-width:65ch}
 nav.sitenav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 18px;font-size:14px;padding-block:2px 6px}
 nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:600}nav.sitenav span{display:flex;flex-wrap:wrap;gap:4px 16px}nav.sitenav span a{color:var(--ink2)}
 .wrap>*{min-width:0}
+.panel{display:flex;flex-direction:column;gap:12px}
+.bar1{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+.rooms{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.rooms button{flex:none;font:500 15px var(--display);padding:10px 16px;border-radius:22px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer}
+.rooms button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.card3{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.crow{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.card3 .lbl{min-width:84px}
+.oh{margin:4px 0 0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);font-weight:600}
+.tour{font-weight:600!important}
+#view.walking{cursor:crosshair}
 </style>
 
 <div class="wrap">
@@ -58,72 +69,87 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
 
   <div id="view"><div id="hint">Ziehen zum Drehen · zwei Finger zum Zoomen</div><div id="legend"><span class="sq"></span>Raster 1 × 1 m · Maße innen in m</div></div>
 
-  <div class="controls">
-    <div class="row"><span class="lbl">Animation</span>
-      <div class="seg" id="anims">
-        <button id="a1" aria-pressed="false">Rundgang EG starten</button>
-        <button id="a2" aria-pressed="false">Sofa umbauen</button>
-        <button id="a3" aria-pressed="false">Küchenfronten wechseln</button>
-      </div></div>
-    <div class="row"><span class="lbl">Maßstab</span>
-      <div class="seg"><button id="sc1" aria-pressed="true">1-m-Raster</button><button id="sc2" aria-pressed="true">Raummaße</button></div></div>
-    <div class="row"><span class="lbl">Raum</span>
-      <div class="seg" id="cams">
-        <button id="c1" data-cam="tisch" aria-pressed="true">Küche · vom Tisch</button>
-        <button id="c2" data-cam="kueche" aria-pressed="false">Küche · zum Tisch</button>
-        <button id="c5" data-cam="eingang" aria-pressed="false">Eingang & Flur</button>
-        <button id="c6" data-cam="wc" aria-pressed="false">Gäste-WC</button>
-        <button id="c3" data-cam="podest" aria-pressed="false">Podest</button>
-        <button id="c7" data-cam="wohnen" aria-pressed="false">Wohnzimmer</button>
-        <button id="c8" data-cam="wohnen2" aria-pressed="false">Wohnzimmer · zum Fenster</button>
-        <button id="c12" data-cam="wohnen3" aria-pressed="false">Wohnzimmer · vom Podest</button>
-        <button id="c9" data-cam="buero" aria-pressed="false">Spielzimmer</button>
-        <button id="c13" data-cam="buero2" aria-pressed="false">Spielzimmer · vom Erker</button>
-        <button id="c10" data-cam="flur" aria-pressed="false">Flur & Treppe</button>
-        <button id="c11" data-cam="hwr" aria-pressed="false">HWR · Ablage</button>
-        <button id="c14" data-cam="hwr2" aria-pressed="false">HWR · Waschschrank</button>
-        <button id="c4" data-cam="oben" aria-pressed="false">Ganzes EG von oben</button>
-      </div></div>
-    <div class="row"><span class="lbl">HWR</span>
-      <div class="seg"><button id="hw1" aria-pressed="false">Waschschrank öffnen</button></div></div>
-    <div class="row"><span class="lbl">Sofa</span>
-      <div class="seg" id="sofa">
-        <button id="so1" data-l="zusammen" aria-pressed="true">Zusammen · U-Sofa</button>
-        <button id="so2" data-l="getrennt" aria-pressed="false">Getrennt · zwei Sofas</button>
-        <button id="so3" data-l="liege" aria-pressed="false">Liegewiese · Filmabend</button>
-      </div></div>
-    <div class="row"><span class="lbl">Bezug</span>
-      <button class="schip chip" id="b1" data-b="#e6dfd2" style="background:#e6dfd2" aria-label="Creme" aria-pressed="true"></button>
-      <button class="schip chip" id="b2" data-b="#cdbfa9" style="background:#cdbfa9" aria-label="Sand" aria-pressed="false"></button>
-      <button class="schip chip" id="b3" data-b="#b3a997" style="background:#b3a997" aria-label="Greige" aria-pressed="false"></button>
-      <button class="schip chip" id="b4" data-b="#8f8576" style="background:#8f8576" aria-label="Taupe" aria-pressed="false"></button>
-      <span class="meta" id="bname">Creme</span>
+  <div class="panel">
+    <div class="bar1">
+      <div class="seg" id="modes" role="group" aria-label="Ansicht">
+        <button id="m-walk" aria-pressed="true">Rundgang</button>
+        <button id="m-orbit" aria-pressed="false">Drehen</button>
+        <button id="m-top" aria-pressed="false">Von oben</button>
+      </div>
+      <div class="seg" role="group" aria-label="Maßstab"><button id="sc1" aria-pressed="true">1-m-Raster</button><button id="sc2" aria-pressed="true">Raummaße</button></div>
     </div>
-    <div class="row"><span class="lbl">Fronten</span>
-      <div class="seg" id="fins">
-        <button id="s1" data-s="1" aria-pressed="true">Eiche unten · Greige hoch</button>
-        <button id="s2" data-s="2" aria-pressed="false">Greige · Insel Eiche</button>
-        <button id="s3" data-s="3" aria-pressed="false">Beige · Eiche hoch</button>
-      </div></div>
-    <div class="row"><span class="lbl">Wand</span>
-      <div class="seg" id="vars">
-        <button id="v1" data-v="offen" aria-pressed="true">Offen mit Wandbord</button>
-        <button id="v2" data-v="hoch" aria-pressed="false">Mit Hochschränken</button>
-      </div></div>
-    <div class="row"><span class="lbl">WC-Fliese</span>
-      <button class="tchip chip" id="t1" data-t="#2f4a3c" style="background:#2f4a3c" aria-label="Dunkelgrün" aria-pressed="true"></button>
-      <button class="tchip chip" id="t2" data-t="#1f3b3f" style="background:#1f3b3f" aria-label="Petrol" aria-pressed="false"></button>
-      <button class="tchip chip" id="t3" data-t="#7f8f6c" style="background:#7f8f6c" aria-label="Salbeigrün" aria-pressed="false"></button>
-      <button class="tchip chip" id="t4" data-t="#a8783a" style="background:#a8783a" aria-label="Ocker" aria-pressed="false"></button>
-      <span class="meta" id="tname">Dunkelgrün</span>
+    <div class="rooms" id="rooms" role="group" aria-label="Raum">
+      <button data-room="flur" aria-pressed="false">Eingang &amp; Flur</button>
+      <button data-room="wc" aria-pressed="false">Gäste-WC</button>
+      <button data-room="kueche" aria-pressed="true">Kochen | Essen</button>
+      <button data-room="wohnen" aria-pressed="false">Wohnzimmer</button>
+      <button data-room="spiel" aria-pressed="false">Spielzimmer</button>
+      <button data-room="hwr" aria-pressed="false">HWR</button>
     </div>
-    <div class="row"><span class="lbl">Polster</span>
-      <button class="chip" id="f1" data-f="#8d8f8a" style="background:#8d8f8a" aria-label="Steingrau" aria-pressed="true"></button>
-      <button class="chip" id="f2" data-f="#8a9a7b" style="background:#8a9a7b" aria-label="Salbeigrün" aria-pressed="false"></button>
-      <button class="chip" id="f3" data-f="#b8893f" style="background:#b8893f" aria-label="Ocker" aria-pressed="false"></button>
-      <button class="chip" id="f4" data-f="#d9d2c4" style="background:#d9d2c4" aria-label="Leinen" aria-pressed="false"></button>
-      <span class="meta" id="fname">Steingrau</span>
+    <div class="card3">
+      <div class="crow"><span class="lbl">Blickpunkt</span>
+        <div class="seg" id="cams">
+          <button id="c5" data-cam="eingang" aria-pressed="false">An der Haustür</button>
+          <button id="c3" data-cam="podest" aria-pressed="false">Podest</button>
+          <button id="c10" data-cam="flur" aria-pressed="false">Treppe</button>
+          <button id="c6" data-cam="wc" aria-pressed="false">In der Tür</button>
+          <button id="c1" data-cam="tisch" aria-pressed="true">Vom Tisch</button>
+          <button id="c2" data-cam="kueche" aria-pressed="false">Zum Tisch</button>
+          <button id="c12" data-cam="wohnen3" aria-pressed="false">Vom Podest</button>
+          <button id="c7" data-cam="wohnen" aria-pressed="false">Vom Flur</button>
+          <button id="c8" data-cam="wohnen2" aria-pressed="false">Zum Fenster</button>
+          <button id="c9" data-cam="buero" aria-pressed="false">Vom Flur</button>
+          <button id="c13" data-cam="buero2" aria-pressed="false">Vom Erker</button>
+          <button id="c11" data-cam="hwr" aria-pressed="false">Ablage</button>
+          <button id="c14" data-cam="hwr2" aria-pressed="false">Waschschrank</button>
+          <button id="c4" data-cam="oben" aria-pressed="false" hidden>Von oben</button>
+        </div></div>
+      <h3 class="oh">Varianten · <span id="roomname">Kochen | Essen</span></h3>
+      <p id="noopt" class="meta" hidden>Für diesen Raum gibt es noch keine Varianten.</p>
+      <div class="crow" data-for="kueche"><span class="lbl">Fronten</span>
+        <div class="seg" id="fins">
+          <button id="s1" data-s="1" aria-pressed="true">Eiche unten · Greige hoch</button>
+          <button id="s2" data-s="2" aria-pressed="false">Greige · Insel Eiche</button>
+          <button id="s3" data-s="3" aria-pressed="false">Beige · Eiche hoch</button>
+        </div></div>
+      <div class="crow" data-for="kueche"><span class="lbl">Wand</span>
+        <div class="seg" id="vars">
+          <button id="v1" data-v="offen" aria-pressed="true">Offen mit Wandbord</button>
+          <button id="v2" data-v="hoch" aria-pressed="false">Mit Hochschränken</button>
+        </div></div>
+      <div class="crow" data-for="kueche"><span class="lbl">Polster</span>
+        <button class="chip" id="f1" data-f="#8d8f8a" style="background:#8d8f8a" aria-label="Steingrau" aria-pressed="true"></button>
+        <button class="chip" id="f2" data-f="#8a9a7b" style="background:#8a9a7b" aria-label="Salbeigrün" aria-pressed="false"></button>
+        <button class="chip" id="f3" data-f="#b8893f" style="background:#b8893f" aria-label="Ocker" aria-pressed="false"></button>
+        <button class="chip" id="f4" data-f="#d9d2c4" style="background:#d9d2c4" aria-label="Leinen" aria-pressed="false"></button>
+        <span class="meta" id="fname">Steingrau</span></div>
+      <div class="crow" data-for="wohnen"><span class="lbl">Sofa</span>
+        <div class="seg" id="sofa">
+          <button id="so1" data-l="zusammen" aria-pressed="true">Zusammen</button>
+          <button id="so2" data-l="getrennt" aria-pressed="false">Getrennt</button>
+          <button id="so3" data-l="liege" aria-pressed="false">Liegewiese</button>
+        </div></div>
+      <div class="crow" data-for="wohnen"><span class="lbl">Bezug</span>
+        <button class="schip chip" id="b1" data-b="#e6dfd2" style="background:#e6dfd2" aria-label="Creme" aria-pressed="true"></button>
+        <button class="schip chip" id="b2" data-b="#cdbfa9" style="background:#cdbfa9" aria-label="Sand" aria-pressed="false"></button>
+        <button class="schip chip" id="b3" data-b="#b3a997" style="background:#b3a997" aria-label="Greige" aria-pressed="false"></button>
+        <button class="schip chip" id="b4" data-b="#8f8576" style="background:#8f8576" aria-label="Taupe" aria-pressed="false"></button>
+        <span class="meta" id="bname">Creme</span></div>
+      <div class="crow" data-for="wc"><span class="lbl">Fliese</span>
+        <button class="tchip chip" id="t1" data-t="#2f4a3c" style="background:#2f4a3c" aria-label="Dunkelgrün" aria-pressed="true"></button>
+        <button class="tchip chip" id="t2" data-t="#1f3b3f" style="background:#1f3b3f" aria-label="Petrol" aria-pressed="false"></button>
+        <button class="tchip chip" id="t3" data-t="#7f8f6c" style="background:#7f8f6c" aria-label="Salbeigrün" aria-pressed="false"></button>
+        <button class="tchip chip" id="t4" data-t="#a8783a" style="background:#a8783a" aria-label="Ocker" aria-pressed="false"></button>
+        <span class="meta" id="tname">Dunkelgrün</span></div>
+      <div class="crow" data-for="hwr"><span class="lbl">Schrank</span>
+        <div class="seg"><button id="hw1" aria-pressed="false">Waschschrank öffnen</button></div></div>
+      <div class="crow" data-for="kueche wohnen"><span class="lbl">Ablauf</span>
+        <div class="seg" id="anims">
+          <button id="a3" data-for="kueche" aria-pressed="false">Fronten nacheinander zeigen</button>
+          <button id="a2" data-for="wohnen" aria-pressed="false">Sofa umbauen</button>
+        </div></div>
     </div>
+    <div class="bar1"><span class="meta">Animation</span><div class="seg"><button id="a1" aria-pressed="false" class="tour">Rundgang durchs EG starten</button></div></div>
   </div>
 
   <section>
@@ -292,7 +318,7 @@ function pendant(x,z,y,shade){const cord=new THREE.Mesh(new THREE.CylinderGeomet
 /* lights */
 const hemi=new THREE.HemisphereLight('#f4f7fb','#d8cdbd',0.75);scene.add(hemi);
 scene.add(new THREE.AmbientLight('#ffffff',0.22));
-const sun=new THREE.DirectionalLight('#fff3e0',1.35);sun.position.set(6,8,16);sun.target.position.set(-2.2,0,6);
+const sun=new THREE.DirectionalLight('#fff3e0',1.35);sun.position.set(13,9,-7);sun.target.position.set(-2.2,0,6);
 sun.castShadow=true;sun.shadow.mapSize.set(3072,3072);const sc=sun.shadow.camera;sc.left=-11;sc.right=11;sc.top=11;sc.bottom=-11;sc.near=1;sc.far=45;sun.shadow.bias=-0.0006;
 scene.add(sun);scene.add(sun.target);
 const fill=new THREE.PointLight('#fff8ee',0.35,9,2);fill.position.set(W/2,H-0.15,3.0);scene.add(fill);
@@ -747,18 +773,18 @@ new ResizeObserver(resize).observe(host);resize();go('tisch',true);
 function loop(now){requestAnimationFrame(loop);
   if(anim){let k=Math.min(1,(now-anim.t0)/Math.max(1,animDur));k=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
     camera.position.lerpVectors(anim.from.p,anim.to.p,k);controls.target.lerpVectors(anim.from.t,anim.to.t,k);camera.fov=anim.from.f+(anim.to.f-anim.from.f)*k;camera.updateProjectionMatrix();if(k>=1)anim=null;}
-  tickers.forEach(f=>f(now));controls.update();renderer.render(scene,camera);}
+  tickers.forEach(f=>f(now));if(walk)walkTick(now);else controls.update();renderer.render(scene,camera);}
 requestAnimationFrame(loop);
 
 /* ui */
 /* ===== Animationen: Rundgang EG, Sofa und Küchenfronten automatisch, Maßstab ein/aus ===== */
 let tourTimer=null;const TOUR=['eingang','wc','podest','wohnen3','wohnen2','buero','buero2','flur','hwr','hwr2','tisch','kueche'];
 function pressCam(name){document.querySelectorAll('#cams button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cam===name));}
-function stopAll(){clearTimeout(tourTimer);tourTimer=null;animDur=700;document.querySelectorAll('#anims button').forEach(b=>{b.setAttribute('aria-pressed','false');b.textContent=b.dataset.label;});}
+function stopAll(){clearTimeout(tourTimer);tourTimer=null;animDur=700;document.querySelectorAll('#anims button,#a1').forEach(b=>{b.setAttribute('aria-pressed','false');b.textContent=b.dataset.label;});}
 function startAnim(btn,steps,hold){const was=btn.getAttribute('aria-pressed')==='true';stopAll();if(was)return;
   btn.setAttribute('aria-pressed','true');btn.textContent='Stopp';let i=0;
   const next=()=>{if(i>=steps.length){stopAll();return;}steps[i++]();tourTimer=setTimeout(next,hold);};next();}
-document.querySelectorAll('#anims button').forEach(b=>b.dataset.label=b.textContent);
+document.querySelectorAll('#anims button,#a1').forEach(b=>b.dataset.label=b.textContent);
 document.getElementById('a1').addEventListener('click',e=>{const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   startAnim(e.currentTarget,TOUR.map(n=>()=>{animDur=reduce?0:2200;pressCam(n);go(n,reduce);}),4300);});
 document.getElementById('a2').addEventListener('click',e=>{const L=['zusammen','getrennt','liege','zusammen'];
@@ -768,6 +794,71 @@ document.getElementById('a3').addEventListener('click',e=>{
 controls.addEventListener('start',()=>{if(tourTimer)stopAll();});
 function toggle(id,obj){const b=document.getElementById(id);b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);obj.visible=on;});}
 toggle('sc1',scaleG);toggle('sc2',dimsG);
+
+/* ===== Rundgang wie Street View: Ziehen = umsehen, Antippen auf den Boden = hingehen, Augenhöhe 1,60 m ===== */
+let walk=false,yaw=0,pitch=-0.08,walkAnim=null,drag=null;
+const EYE=1.60,ray=new THREE.Raycaster(),down=new THREE.Vector3(0,-1,0),ndc=new THREE.Vector2();
+const curMat=new THREE.MeshBasicMaterial({color:'#ffffff',transparent:true,opacity:.9,depthTest:false});
+const cursor=new THREE.Mesh(new THREE.RingGeometry(0.16,0.22,40),curMat);cursor.rotation.x=-Math.PI/2;cursor.renderOrder=20;cursor.visible=false;scene.add(cursor);
+const dot=new THREE.Mesh(new THREE.CircleGeometry(0.05,24),curMat);dot.rotation.x=-Math.PI/2;dot.renderOrder=20;cursor.add(dot);dot.rotation.x=0;
+const pickables=[];scene.traverse(o=>{if(o.isMesh&&o!==cursor&&o!==dot)pickables.push(o);});
+function isVis(o){while(o){if(!o.visible)return false;o=o.parent;}return true;}
+function isFloor(h){if(!h.face)return false;const n=h.face.normal.clone().transformDirection(h.object.matrixWorld);return n.y>0.9&&h.point.y<F+0.12&&h.point.y>-0.1;}
+function floorHit(hits){for(const h of hits){if(!isVis(h.object))continue;if(h.object.material&&h.object.material.transparent&&h.object.material.opacity<0.3)continue;return isFloor(h)?h:null;}return null;}
+function floorAt(x,z){ray.set(new THREE.Vector3(x,3.2,z),down);for(const h of ray.intersectObjects(pickables,false)){if(isVis(h.object)&&isFloor(h))return h.point.y;}return (x<0&&z>2.5?F:0);}
+function lookDir(){return new THREE.Vector3(-Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),-Math.cos(yaw)*Math.cos(pitch));}
+function applyLook(){camera.lookAt(camera.position.clone().add(lookDir()));}
+function setYawTo(tx,tz,px,pz){yaw=Math.atan2(-(tx-px),-(tz-pz));}
+function walkTo(x,z,turn,dur){const fy=floorAt(x,z);const from=camera.position.clone(),to=new THREE.Vector3(x,fy+EYE,z);
+  const y0=yaw;let y1=turn===undefined?yaw:turn;while(y1-y0>Math.PI)y1-=2*Math.PI;while(y1-y0<-Math.PI)y1+=2*Math.PI;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)dur=0;
+  walkAnim={from,to,y0,y1,t0:performance.now(),dur:dur===undefined?Math.min(1400,350+from.distanceTo(to)*260):dur};}
+function walkTick(now){if(walkAnim){let k=walkAnim.dur?Math.min(1,(now-walkAnim.t0)/walkAnim.dur):1;k=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+  camera.position.lerpVectors(walkAnim.from,walkAnim.to,k);yaw=walkAnim.y0+(walkAnim.y1-walkAnim.y0)*k;if(k>=1)walkAnim=null;}applyLook();}
+function dimsDepth(on){dimsG.traverse(o=>{if(o.material){o.material.depthTest=on;o.material.needsUpdate=true;}});}
+function setWalk(on){walk=on;dimsDepth(on);controls.enabled=!on;host.classList.toggle('walking',on);
+  if(on){if(mode==='oben'){mode='tisch';setVis();}const d=new THREE.Vector3();camera.getWorldDirection(d);yaw=Math.atan2(-d.x,-d.z);pitch=-0.08;
+    camera.fov=72;camera.updateProjectionMatrix();walkTo(camera.position.x,camera.position.z,yaw,0);anim=null;}
+  else{cursor.visible=false;controls.target.copy(camera.position.clone().add(lookDir().multiplyScalar(2.5)));}}
+/* go() im Rundgang: an den Standpunkt des Raums gehen und zum Blickziel drehen */
+const goOrbit=go;
+go=function(name,instant){if(!walk||name==='oben'){if(walk&&name==='oben')setWalkMode('m-top');return goOrbit(name,instant);}
+  mode=name;setVis();const c=CAMS[name];setYawTo(c.t[0],c.t[2],c.p[0],c.p[2]);pitch=-0.08;walkTo(c.p[0],c.p[2],yaw,instant?0:undefined);};
+function pointer(e){const r=renderer.domElement.getBoundingClientRect();ndc.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(ndc,camera);return floorHit(ray.intersectObjects(pickables,false));}
+const el=renderer.domElement;
+el.addEventListener('pointerdown',e=>{if(!walk)return;drag={x:e.clientX,y:e.clientY,yaw,pitch,moved:false,id:e.pointerId};});
+el.addEventListener('pointermove',e=>{if(!walk)return;
+  if(drag&&drag.id===e.pointerId){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>6)drag.moved=true;
+    if(drag.moved){yaw=drag.yaw+dx*0.0045;pitch=Math.max(-1.1,Math.min(0.9,drag.pitch+dy*0.0035));walkAnim=null;cursor.visible=false;}return;}
+  if(e.pointerType==='mouse'){const h=pointer(e);cursor.visible=!!h;if(h)cursor.position.set(h.point.x,h.point.y+0.012,h.point.z);}});
+el.addEventListener('pointerup',e=>{if(!walk||!drag)return;const d=drag;drag=null;if(d.moved)return;
+  const h=pointer(e);if(h){cursor.visible=true;cursor.position.set(h.point.x,h.point.y+0.012,h.point.z);if(tourTimer)stopAll();walkTo(h.point.x,h.point.z);}});
+el.addEventListener('pointerleave',()=>{cursor.visible=false;});
+el.addEventListener('wheel',e=>{if(!walk)return;e.preventDefault();camera.fov=Math.max(40,Math.min(90,camera.fov+e.deltaY*0.03));camera.updateProjectionMatrix();},{passive:false});
+document.addEventListener('keydown',e=>{if(!walk||/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;
+  const step=0.7,fw=lookDir();fw.y=0;fw.normalize();const p=camera.position;
+  if(e.key==='ArrowUp'){walkTo(p.x+fw.x*step,p.z+fw.z*step,yaw,280);e.preventDefault();}
+  if(e.key==='ArrowDown'){walkTo(p.x-fw.x*step,p.z-fw.z*step,yaw,280);e.preventDefault();}
+  if(e.key==='ArrowLeft'){yaw+=0.25;e.preventDefault();} if(e.key==='ArrowRight'){yaw-=0.25;e.preventDefault();}});
+/* Ansicht: Rundgang | Drehen | Von oben */
+function setWalkMode(id){document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',b.id===id));
+  document.getElementById('hint').textContent=id==='m-walk'?'Auf den Boden tippen = hingehen · ziehen = umsehen':'Ziehen zum Drehen · zwei Finger zum Zoomen';}
+document.getElementById('m-walk').addEventListener('click',()=>{setWalkMode('m-walk');if(mode==='oben'){walk=true;dimsDepth(true);controls.enabled=false;host.classList.add('walking');go(curRoomCam());}else setWalk(true);});
+document.getElementById('m-orbit').addEventListener('click',()=>{setWalkMode('m-orbit');if(walk)setWalk(false);if(mode==='oben')goOrbit(curRoomCam());});
+document.getElementById('m-top').addEventListener('click',()=>{setWalkMode('m-top');if(walk)setWalk(false);goOrbit('oben');});
+/* Räume: Auswahl zeigt nur die passenden Blickpunkte und Varianten */
+const ROOMCAMS={flur:['eingang','podest','flur'],wc:['wc'],kueche:['tisch','kueche'],wohnen:['wohnen3','wohnen','wohnen2'],spiel:['buero','buero2'],hwr:['hwr','hwr2']};
+let curRoom='kueche';function curRoomCam(){return ROOMCAMS[curRoom][0];}
+function showRoom(r,goThere){curRoom=r;document.querySelectorAll('#rooms button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.room===r));
+  document.querySelectorAll('#cams button').forEach(b=>b.hidden=b.dataset.room!==r);
+  let any=false;document.querySelectorAll('[data-for]').forEach(x=>{const on=x.dataset.for.split(' ').includes(r);x.hidden=!on;if(on)any=true;});
+  document.getElementById('noopt').hidden=any;document.getElementById('roomname').textContent=document.querySelector(`#rooms button[data-room="${r}"]`).textContent;
+  if(goThere){const c=ROOMCAMS[r][0];pressCam(c);if(mode==='oben'&&!walk){setWalkMode('m-orbit');}go(c);}}
+document.querySelectorAll('#rooms button').forEach(b=>b.addEventListener('click',()=>{if(tourTimer)stopAll();showRoom(b.dataset.room,true);}));
+const camRoom={};Object.keys(ROOMCAMS).forEach(r=>ROOMCAMS[r].forEach(c=>camRoom[c]=r));
+document.querySelectorAll('#cams button').forEach(b=>{b.dataset.room=camRoom[b.dataset.cam]||'';});
+const _press=pressCam;pressCam=function(n){_press(n);if(camRoom[n]&&camRoom[n]!==curRoom)showRoom(camRoom[n],false);};
+showRoom('kueche',false);setWalkMode('m-walk');setWalk(true);
 
 function seg(id,fn){const bs=[...document.querySelectorAll('#'+id+' button')];bs.forEach(b=>b.addEventListener('click',()=>{bs.forEach(x=>x.setAttribute('aria-pressed',x===b));fn(b);}));}
 seg('cams',b=>go(b.dataset.cam));

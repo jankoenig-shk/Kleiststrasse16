@@ -137,7 +137,8 @@ function dormer(x0,x1,z0,z1,face,wins){const g=new THREE.Group();roofG.add(g);
 dormer(-4.62,-2.43,ALT.z0,ALT.z0+1.4,'S',[[-4.16,-3.05,7.05,8.41,2]]);
 /* Nordgaube über dem Nebeneingang: gleiche Größe wie die Südgaube (Angabe Bauherr, DG-Plan Entwurf II zeigt noch die breite Gaube) */
 /* Bauamt: Nordgaube wegen Grenzabstand 0,50 m hinter die Außenwand zurückgesetzt. Dachfläche liegt dort bei ca. 7,65 m, daher Fenster niedriger */
-dormer(-4.62,-2.43,ALT.z1-0.5-1.4,ALT.z1-0.5,'N',[[-4.16,-3.05,7.82,8.62,2]]);
+/* Plan: Gaubenhöhe bleibt, Fensterbank so tief wie möglich (knapp über dem Dachanschluss), Fenster dafür breiter; innen entsteht eine tiefe Fensterbank */
+dormer(-4.62,-2.43,ALT.z1-0.5-1.4,ALT.z1-0.5,'N',[[-4.32,-2.73,7.78,8.66,2]]);
 dormer(ALT.x0,ALT.x0+1.77,4.81,9.60,'E',[[5.74,6.84,7.05,8.39,2],[7.56,8.66,7.05,8.39,2]]);
 dormer(ALT.x1-1.6,ALT.x1,5.86,8.86,'W',[[6.56,8.16,7.03,8.42,3]]);
 /* Bäume als Maßstab */

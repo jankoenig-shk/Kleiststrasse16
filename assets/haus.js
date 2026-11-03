@@ -57,7 +57,8 @@ B(-11,9,G-0.02,G,-4.5,-0.3,M.paving,1);B(-10.5,-3.9,G-0.02,G,-0.3,14.5,M.gravel,
 /* Altbau: verputzt, Sockel rosé, Traufe +6,42 m über Gelände (Ansicht Süd) */
 const ALT={x0:-7.22,x1:0,z0:2.40,z1:12.0},EAVE=5.77,SOCK=0.15;
 B(ALT.x0,ALT.x1,G,SOCK,ALT.z0,ALT.z1,M.sockel);B(ALT.x0,ALT.x1,SOCK,EAVE,ALT.z0,ALT.z1,M.plaster,1.2);
-B(ALT.x0-0.12,ALT.x1+0.12,EAVE,EAVE+0.2,ALT.z0-0.12,ALT.z1+0.12,M.plaster);
+/* Dachsims mit weiß gestrichener Stülpschalung */
+B(ALT.x0-0.12,ALT.x1+0.12,EAVE,EAVE+0.2,ALT.z0-0.12,ALT.z1+0.12,M.dormer,1);
 /* Erker Ostseite (Spielzimmer), Höhe aus Ansicht */
 B(-8.42,ALT.x0,G,SOCK,7.6,11.6,M.sockel);B(-8.42,ALT.x0,SOCK,2.48,7.6,11.6,M.plaster,1.2);B(-8.47,ALT.x0,0.80,0.90,7.55,11.65,M.plaster);
 B(-8.48,ALT.x0,2.48,3.11,7.54,11.66,M.plaster,1.2);B(-8.62,ALT.x0,3.11,3.19,7.41,11.78,M.zinc);B(-8.3,ALT.x0,3.19,3.35,8.62,10.75,M.zinc);
@@ -126,8 +127,11 @@ const roofG=new THREE.Group();scene.add(roofG);
   const pos=[],uv=[];faces.forEach(f=>f.forEach(i=>{const p=v[i];pos.push(...p);uv.push(p[0]+p[2]*0.7,p[1]*1.35);}));
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv.map(x=>x/2.2),2));g.computeVertexNormals();
   const m=new THREE.Mesh(g,M.roof);m.castShadow=m.receiveShadow=true;roofG.add(m);
+  /* Untersicht und Stirnbrett am Dachüberstand: Stülpschalung weiß */
+  [[x0,x1,z0,ALT.z0-0.12],[x0,x1,ALT.z1+0.12,z1],[x0,ALT.x0-0.12,ALT.z0-0.12,ALT.z1+0.12],[ALT.x1+0.12,x1,ALT.z0-0.12,ALT.z1+0.12]].forEach(([a,b,c,d])=>B(a,b,ye-0.03,ye,c,d,M.dormer,1,roofG));
+  [[x0-0.03,x1+0.03,z0-0.03,z0],[x0-0.03,x1+0.03,z1,z1+0.03],[x0-0.03,x0,z0,z1],[x1,x1+0.03,z0,z1]].forEach(([a,b,c,d])=>B(a,b,ye-0.22,ye+0.04,c,d,M.dormer,1,roofG));
   /* Dachrinne */
-  [[x0,x1,z0,z0],[x0,x1,z1,z1],[x0,x0,z0,z1],[x1,x1,z0,z1]].forEach(([a,b,c,d])=>B(Math.min(a,b)-0.06,Math.max(a,b)+0.06,ye-0.1,ye,Math.min(c,d)-0.06,Math.max(c,d)+0.06,M.zinc,null,roofG));})();
+  const q=0.15;[[x0-q,x1+q,z0-q,z0-0.03],[x0-q,x1+q,z1+0.03,z1+q],[x0-q,x0-0.03,z0,z1],[x1+0.03,x1+q,z0,z1]].forEach(([a,b,c,d])=>B(a,b,ye-0.14,ye-0.02,c,d,M.zinc,null,roofG));})();
 /* Gauben (DG-Plan): Süd = Bad, Nord = Abstell/Ankleide, Ost = Schlafen, West = Treppe; Oberkante 8,85 m */
 const TOPD=8.85,gaub=[];
 function dormer(x0,x1,z0,z1,face,wins){const g=new THREE.Group();roofG.add(g);

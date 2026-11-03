@@ -39,7 +39,7 @@ const M={brick:new THREE.MeshStandardMaterial({map:brick.lang.w,roughness:.9}),s
   frame:new THREE.MeshStandardMaterial({color:'#3d4144',roughness:.5}),glass:new THREE.MeshStandardMaterial({color:'#2f3c44',roughness:.06,metalness:.4}),
   zinc:new THREE.MeshStandardMaterial({color:'#a7adb1',roughness:.4,metalness:.6}),flat:new THREE.MeshStandardMaterial({color:'#4a4d50',roughness:.9}),
   grass:new THREE.MeshStandardMaterial({color:'#8ea873',roughness:1}),paving:new THREE.MeshStandardMaterial({color:'#c9c4bb',roughness:.95}),
-  door:new THREE.MeshStandardMaterial({color:'#3d4144',roughness:.5}),shutter:new THREE.MeshStandardMaterial({map:shutterT,roughness:.6}),gravel:new THREE.MeshStandardMaterial({color:'#cfd2d2',roughness:1}),
+  door:new THREE.MeshStandardMaterial({color:'#3d4144',roughness:.5}),shutter:new THREE.MeshStandardMaterial({map:shutterT,roughness:.6}),canopy:new THREE.MeshStandardMaterial({color:'#3a3e41',roughness:.45,metalness:.3}),beton:new THREE.MeshStandardMaterial({color:'#b9b5ad',roughness:.95}),wp:new THREE.MeshStandardMaterial({color:'#d6d8d7',roughness:.6}),gravel:new THREE.MeshStandardMaterial({color:'#cfd2d2',roughness:1}),
   plant:new THREE.MeshStandardMaterial({color:'#5f7f4c',roughness:.9,flatShading:true}),trunk:new THREE.MeshStandardMaterial({color:'#6b5a45',roughness:1})};
 /* Welt-UVs: Texturen bleiben auf jeder Fläche im Meter-Maßstab */
 function worldUV(mesh,scale){const g=mesh.geometry,p=g.attributes.position,n=g.attributes.normal,uv=g.attributes.uv,o=mesh.position;
@@ -49,7 +49,10 @@ function B(x0,x1,y0,y1,z0,z1,mat,uvs,parent){const m=new THREE.Mesh(new THREE.Bo
   if(uvs)worldUV(m,uvs);m.castShadow=m.receiveShadow=true;(parent||scene).add(m);return m;}
 const G=-0.65; /* Gelände 0,65 m unter Küchenfußboden (Ansichten: drei Stufen à 16 cm) */
 /* Gelände, Wege, Garten */
-const ground=new THREE.Mesh(new THREE.PlaneGeometry(160,160),M.grass);ground.rotation.x=-Math.PI/2;ground.position.set(-2,G-0.01,6);ground.receiveShadow=true;scene.add(ground);
+/* Gelände mit Aussparung für den Kellerabgang (West, x 0–1,0 / z 8,63–11,27) */
+const gS=new THREE.Shape([new THREE.Vector2(-82,-86),new THREE.Vector2(78,-86),new THREE.Vector2(78,74),new THREE.Vector2(-82,74)]);
+gS.holes.push(new THREE.Path([new THREE.Vector2(0,-8.63),new THREE.Vector2(0,-11.27),new THREE.Vector2(1.0,-11.27),new THREE.Vector2(1.0,-8.63)]));
+const ground=new THREE.Mesh(new THREE.ShapeGeometry(gS),M.grass);ground.rotation.x=-Math.PI/2;ground.position.set(0,G-0.01,0);ground.receiveShadow=true;scene.add(ground);
 B(-11,9,G-0.02,G,-4.5,-0.3,M.paving,1);B(-10.5,-3.9,G-0.02,G,-0.3,14.5,M.gravel,1);
 /* Altbau: verputzt, Sockel rosé, Traufe +6,42 m über Gelände (Ansicht Süd) */
 const ALT={x0:-7.22,x1:0,z0:2.40,z1:12.0},EAVE=5.77,SOCK=0.15;
@@ -91,13 +94,23 @@ win('W',8.92,9.57,1.24,2.34,{f:FO,n:1,sill:true});win('W',9.97,10.62,1.24,2.34,{
 /* Nord: im EG nur der Nebeneingang, im OG keine Fenster (EG- und OG-Plan) */
 B(ALT.x0+4.39,ALT.x0+5.44,0.34,2.39,ALT.z1,ALT.z1+0.06,M.door);win('N',-2.83,-1.78,2.0,2.39,{f:FO,n:1});
 win('E',8.00,8.71,0.90,2.40,{f:FE,n:1});win('E',9.00,10.24,0.90,2.40,{f:FE,n:2});win('E',10.50,11.20,0.90,2.40,{f:FE,n:1});
-/* Kellerfenster: Ost frei, West mit Lichtschacht und Gitter */
+/* Kellerfenster Ost; West: Kelleraußentreppe (EG-Plan) mit Geländer und Abdach */
 win('E',3.94,5.18,-0.60,-0.22,{f:FO,n:2});win('W',8.74,9.64,-0.50,-0.16,{f:FO,n:2});win('W',10.34,10.99,-0.50,-0.16,{f:FO,n:1});
-B(0,0.9,G,-0.55,8.63,11.24,M.gravel);for(let z=8.63;z<=11.25;z+=0.19)B(0.89,0.91,G,G+0.92,z-0.01,z+0.01,M.frame);B(0.88,0.92,G+0.88,G+0.92,8.63,11.24,M.frame);B(0,0.9,G+0.88,G+0.92,8.62,8.66,M.frame);B(0,0.9,G+0.88,G+0.92,11.21,11.25,M.frame);
+B(0.95,1.05,-2.7,G+0.04,8.58,11.32,M.beton);B(0,1.05,-2.7,G+0.04,8.53,8.63,M.beton);B(0,1.05,-2.7,G+0.04,11.27,11.32,M.beton);B(0,0.95,-2.75,-2.6,8.63,9.77,M.beton);
+for(let k=0;k<8;k++){const z=9.77+k*0.1875;B(0,0.95,-2.75,-2.6+(k+1)*0.2438,z,z+0.1875,M.beton);}
+B(-0.02,0,-2.6,-0.6,8.75,9.6,M.door);
+/* Abdach Kellerabgang: Stahl anthrazit, an der Westwand über den Fenstern */
+B(0,1.25,2.50,2.56,8.45,11.45,M.canopy);B(1.19,1.25,2.42,2.56,8.45,11.45,M.canopy);[8.6,11.3].forEach(z=>{const r=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,1.4,6),M.canopy);r.position.set(0.62,2.88,z);r.rotation.z=Math.PI/2-Math.atan2(0.7,1.2);scene.add(r);});for(let z=8.63;z<=11.25;z+=0.19)B(0.89,0.91,G,G+0.92,z-0.01,z+0.01,M.frame);B(0.88,0.92,G+0.88,G+0.92,8.63,11.24,M.frame);B(0,0.9,G+0.88,G+0.92,8.62,8.66,M.frame);B(0,0.9,G+0.88,G+0.92,11.21,11.25,M.frame);
 /* Haustür-Podest und Stufen, Nebeneingang Nord */
 B(-4.85,-3.89,G,-0.17,0.99,2.38,M.paving,1);B(-5.15,-4.85,G,-0.33,0.99,2.38,M.paving,1);B(-5.45,-5.15,G,-0.49,0.99,2.38,M.paving,1);
-[[12.0,12.45,0.22],[12.45,12.65,0.0],[12.65,12.85,-0.17],[12.85,13.05,-0.33],[13.05,13.25,-0.49]].forEach(([a,b,h])=>B(-3.0,-1.6,G,h,a,b,M.paving,1));
-B(-3.04,-3.0,0.22,1.15,12.05,13.2,M.frame);
+/* Nebeneingang Nord (EG-Plan): Podest vor der Tür, vier Stufen nach Osten */
+B(-3.12,-1.39,G,0.22,12.0,13.3,M.paving,1);[[-3.37,0.0],[-3.63,-0.17],[-3.90,-0.33],[-4.12,-0.49]].forEach(([x,h],i)=>B(x,i?x+0.27:-3.12,G,h,12.0,13.3,M.paving,1));
+[-4.08,-2.75,-1.43].forEach(x=>B(x-0.02,x+0.02,x<-3.2?-0.49:0.22,1.14,13.25,13.29,M.frame));B(-4.1,-1.41,1.10,1.14,13.25,13.29,M.frame);
+/* Abdach Nebeneingang über Podest und Stufen */
+B(-4.25,-1.38,2.56,2.64,12.0,13.5,M.canopy);B(-4.25,-1.38,2.48,2.64,13.44,13.5,M.canopy);[-3.9,-1.7].forEach(x=>{const r=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,1.55,6),M.canopy);r.position.set(x,2.97,12.72);r.rotation.x=-Math.atan2(1.44,0.66);scene.add(r);});
+/* Wärmepumpe (EG-Plan) */
+B(-1.31,-0.10,G,G+1.0,12.07,12.58,M.wp);B(-1.2,-0.62,G+0.25,G+0.85,12.58,12.585,M.frame);
+
 function F_(v){return v;}
 /* Terrasse vor der Glasfront (West), gemauert, mit Stufen und Hochbeet */
 B(4.0,7.2,G,-0.21,2.73,8.47,M.brick,1);B(4.0,7.2,-0.21,-0.17,2.73,8.47,M.paving,1);B(7.2,7.5,G,-0.33,2.73,8.47,M.paving,1);B(7.5,7.8,G,-0.49,2.73,8.47,M.paving,1);

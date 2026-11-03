@@ -144,7 +144,7 @@
 08.01.2;Kostenschätzung 28.10.2026;Fenster und Türen;EG · Anbau;Kochen | Essen;Fenster Anbau;Fenster 1 Flg. ohne Oberlicht (b x h) 200 x 280 cm;1;Stk;ja;Firma;;;
 08.01.3;Kostenschätzung 28.10.2026;Fenster und Türen;EG · Anbau;Kochen | Essen;Fenster Anbau;Fenster 2 Flg. ohne Oberlicht (b x h) 135 x 190 cm;1;Stk;ja;Firma;;;
 08.01.4;Kostenschätzung 28.10.2026;Fenster und Türen;EG · Anbau;Kochen | Essen, Eingang, Flur, Podest, Gäste-WC;Fenster Anbau;Fenster 2 Flg. ohne Oberlicht, eine Festverglasung (b x h) 20…;1;Stk;ja;Firma;;;
-08.01.5;Kostenschätzung 28.10.2026;Fenster und Türen;EG · Anbau;Kochen | Essen;Fenster Anbau;Fenstertür 4 Flg. ohne Oberlicht (b x h) 3,95 x 2,80 cm;1;Stk;ja;Firma;Ansicht West (Entwurf): Glasfront ca. 3,94 × 2,40 m einschl. Rahmen, Glas bis ca. 2,36 m über Fußboden. Höhe 2,80 m vor dem Angebot klären (Raumhöhe Anbau ca. 2,50 m).;;
+08.01.5;Kostenschätzung 28.10.2026;Fenster und Türen;EG · Anbau;Kochen | Essen;Fenster Anbau;Fenstertür 4 Flg. ohne Oberlicht (b x h) 3,95 x 2,80 cm;1;Stk;ja;Firma;Raumhöhe Anbau ca. 2,80 m (Decke auf Höhe Altbau), Glasfront raumhoch. Die Ansicht West zeigt noch ca. 2,40 m, Maß mit dem Büro festlegen.;;
 08.01.6;Kostenschätzung 28.10.2026;Fenster und Türen;EG · Anbau;Kochen | Essen, Eingang, Flur, Podest, Gäste-WC;Fenster Anbau;Fensterfläche Anbau Holz;25;m²;ja;Firma;;;
 08.01.7;Kostenschätzung 28.10.2026;Fenster und Türen;EG · Anbau;Kochen | Essen, Eingang, Flur, Podest, Gäste-WC;Fenster Anbau;Fensterfläche Anbau Kunststoff;25;m²;;Firma;;;
 08.03.1;Kostenschätzung 28.10.2026;Fenster und Türen;Haus gesamt;;Fenster Bestand;Fenster 1 Flg. ohne Oberlicht (b x h) 65 x 115 cm;4;Stk;ja;Firma;Bestandsfenster in EG, OG und DG;;
@@ -268,7 +268,7 @@
 17.00.8;Kostenschätzung 28.10.2026;Fliesenarbeiten;Haus gesamt;;Allgemein;Stundenlohnarbeiten Geselle;20;h;;Firma;;;
 17.02.1;Kostenschätzung 28.10.2026;Fliesenarbeiten;EG;HWR;Bäder/HWR Erdgeschoss;Haftbrücke herstellen;2,85;m²;;Firma;;;
 17.02.2;Kostenschätzung 28.10.2026;Fliesenarbeiten;EG;HWR;Bäder/HWR Erdgeschoss;Elastische Fugen;5;m;;Firma;;;
-17.02.3;Kostenschätzung 28.10.2026;Fliesenarbeiten;EG;HWR;Bäder/HWR Erdgeschoss;Wandfliesen Bäder;1,2;m²;;Firma;Raumplanung Gäste-WC: Stäbchenfliese an zwei Wänden ≈ 4,6 m², dazu HWR-Spritzschutz ≈ 0,8 m²;;
+17.02.3;Kostenschätzung 28.10.2026;Fliesenarbeiten;EG;HWR;Bäder/HWR Erdgeschoss;Wandfliesen Bäder;1,2;m²;;Firma;Raumplanung Gäste-WC: Stäbchenfliese an zwei Wänden ≈ 5,2 m² (Raumhöhe ca. 2,80 m), dazu HWR-Spritzschutz ≈ 0,8 m²;;
 17.02.4;Kostenschätzung 28.10.2026;Fliesenarbeiten;EG;HWR;Bäder/HWR Erdgeschoss;Bodenfliesen Bäder;1,65;m²;;Firma;Raumplanung: Terrazzo statt Fliese, Position prüfen;;
 17.02.5;Kostenschätzung 28.10.2026;Fliesenarbeiten;EG;HWR;Bäder/HWR Erdgeschoss;Sockelfliesen aus Bodenfliese;4;m;;Firma;;;
 17.02.6;Kostenschätzung 28.10.2026;Fliesenarbeiten;EG;HWR;Bäder/HWR Erdgeschoss;Türabschlussschienen;1;m;;Firma;;;
@@ -304,7 +304,7 @@ R01.002;Raumplanung;Putz- und Malerarbeiten;EG · Anbau;Gäste-WC;;Kalkputz bzw.
 R01.003;Raumplanung;Putz- und Malerarbeiten;EG · Anbau;Kochen | Essen;;Kalkputz bzw. Kalkfarbe warmes Beige auf Wandflächen;35;m²;;Eigenleistung;;;
 R01.004;Raumplanung;Putz- und Malerarbeiten;EG;Wohnzimmer;;Kalkputz bzw. Kalkfarbe warmes Beige;40;m²;;Eigenleistung;;;
 R01.005;Raumplanung;Putz- und Malerarbeiten;EG;Spielzimmer;;Kalkputz bzw. Kalkfarbe warmes Beige;38;m²;;Eigenleistung;;;
-R02.001;Raumplanung;Fliesenarbeiten;EG · Anbau;Gäste-WC;;Wandfliese Stäbchen ca. 3 × 15 cm, glänzend, Dunkelgrün, senkrecht verlegt, Fuge sandbeige (Waschtischwand raumhoch, WC-Wand);4,6;m²;;Firma;;;
+R02.001;Raumplanung;Fliesenarbeiten;EG · Anbau;Gäste-WC;;Wandfliese Stäbchen ca. 3 × 15 cm, glänzend, Dunkelgrün, senkrecht verlegt, Fuge sandbeige (Waschtischwand raumhoch, WC-Wand);5,2;m²;;Firma;;;
 R02.002;Raumplanung;Fliesenarbeiten;EG;HWR;;Spritzschutz Stäbchenfliese wie Gäste-WC;0,8;m²;;Firma;;;
 R03.001;Raumplanung;Bodenbelag Terrazzo;EG · Anbau;Eingang, Flur, Podest;;Terrazzo-Boden Eingangsflur;4,85;m²;;Firma;;;
 R03.002;Raumplanung;Bodenbelag Terrazzo;EG · Anbau;Gäste-WC;;Terrazzo-Boden hell, feine Körnung, wie Flur;1,65;m²;;Firma;;;

@@ -154,7 +154,7 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
 
   <section>
     <h2>Zum Maßstab</h2>
-    <p class="note">Das Modell ist in Metern aus dem Architektenplan aufgebaut. In einer perspektivischen Ansicht erscheint Entferntes kleiner, deshalb gibt es keine einzelne Maßstabsleiste. Stattdessen liegt auf jedem Boden ein Raster von 1 × 1 m, und die Innenmaße der Räume sind als Maßlinien eingeblendet. Raumhöhen sind bis zum Vorliegen des Schnitts angenommen (Anbau 2,50 m, Altbau 2,40 m).</p>
+    <p class="note">Das Modell ist in Metern aus dem Architektenplan aufgebaut. In einer perspektivischen Ansicht erscheint Entferntes kleiner, deshalb gibt es keine einzelne Maßstabsleiste. Stattdessen liegt auf jedem Boden ein Raster von 1 × 1 m, und die Innenmaße der Räume sind als Maßlinien eingeblendet. Die Decke von Anbau und Altbau liegt auf einer Höhe. Weil der Anbau zwei Stufen tiefer liegt, ist er höher: Anbau ca. 2,80 m, Altbau ca. 2,46 m. Genaue Werte folgen mit dem Schnitt.</p>
   </section>
 </div>
 
@@ -162,7 +162,7 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 (function(){
-const W=3.70,L=8.15,H=2.50,T=0.25;
+const W=3.70,L=8.15,H=2.80,T=0.25;
 const host=document.getElementById('view');
 const renderer=new THREE.WebGLRenderer({antialias:true});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
@@ -337,7 +337,7 @@ const herring=canvasTex(512,512,(g,w,h)=>{const u=64,l=4,cols=['#c79a5f','#c2935
     g.strokeStyle='rgba(70,45,20,.6)';g.lineWidth=1.4;g.strokeRect(x+.5,y+.5,pw-1,ph-1);};
   for(let k=-40;k<40;k++)for(let m=-12;m<12;m++){const x=(k+m*l)*u,y=(k-m*l)*u;
     if(x>-2*l*u&&x<w+2*l*u&&y>-2*l*u&&y<h+2*l*u){plank(x,y,l*u,u);plank(x+l*u,y-(l-1)*u,u,l*u);}}});
-const F=0.34,HE=2.50,HO=F+2.40;
+const F=0.34,HE=2.80,HO=F+2.46; /* Decke Anbau = Decke Altbau */
 const ext=new THREE.Group();scene.add(ext);
 const shell=new THREE.Group();scene.add(shell);
 const lintels=new THREE.Group();scene.add(lintels);
@@ -359,7 +359,7 @@ SH.forEach(([x0,z0,x1,z1])=>B(x0,x1,0,topOf(x0,z0,x1,z1),z0,z1,M.wall,shell));
 /* openings: [x0,z0,x1,z1,type,base,sill,head] */
 const OP=[
  [-3.03,-0.3,-2.39,0,'win',0,1.40,2.10],[0.8,-0.3,2.8,0,'win',0,1.00,2.25],[-3.89,1.12,-3.59,2.40,'entry',0,0,2.20],
- [-0.3,1.05,0,2.40,'open',0,0,2.10],[3.7,1.05,4.0,2.40,'win',0,1.0,2.25],[3.7,3.3,4.0,7.25,'front',0,0,2.25],
+ [-0.3,1.05,0,2.40,'open',0,0,2.10],[3.7,1.05,4.0,2.40,'win',0,1.0,2.25],[3.7,3.3,4.0,7.25,'front',0,0,2.78],
  [0.8,8.15,2.8,8.45,'win',0,0.9,2.25],[-0.3,3.22,0,5.32,'open',0,0,2.20],[-3.18,0.93,-2.53,1.05,'open',0,0,2.05],
  [-1.70,0.93,-0.30,1.05,'open',0,0,2.05],[-3.0,2.4,-1.82,2.7,'open',0,0,2.20],[-7.22,3.8,-6.92,6.0,'win',F,F+0.85,F+2.10],
  [-5.67,7.2,-4.22,7.5,'open',F,0,F+2.10],[-3.0,7.2,-1.82,7.5,'open',F,0,F+2.10],[-3.12,7.83,-3.0,8.69,'open',F,0,F+2.05],

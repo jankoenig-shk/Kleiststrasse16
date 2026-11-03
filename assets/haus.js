@@ -79,15 +79,17 @@ function win(face,a0,a1,y0,y1,opt){opt=opt||{};const d=opt.d||0.06,t=0.07,g=new 
 const FA={S:-0.3,N:8.45,E:-3.89,W:4.0},FO={S:ALT.z0,N:ALT.z1,E:ALT.x0,W:ALT.x1},FE={E:-8.42,N:11.6,S:7.6};
 /* Anbau (Plan + Ansicht Süd) */
 win('S',0.73,2.73,0.73,2.40,{f:FA,n:2,soldier:true});win('S',-3.03,-2.39,0.77,2.36,{f:FA,n:1,soldier:true});
-win('W',1.01,2.36,0.74,2.41,{f:FA,n:2,soldier:true});win('W',3.33,7.27,0.0,2.38,{f:FA,n:4});
+win('W',1.01,2.36,0.74,2.41,{f:FA,n:2,soldier:true});win('W',3.33,7.27,0.0,2.80,{f:FA,n:4});
 win('N',0.8,2.8,0.9,2.25,{f:FA,n:2,soldier:true});
 B(-3.95,-3.89,-0.17,1.88,1.09,2.19,M.door);win('E',1.09,2.19,1.93,2.40,{f:FA,n:1});B(-3.93,-3.89,1.88,1.93,1.09,2.19,M.frame);
-/* Altbau: EG nach Plan, Südseite nach Ansicht; OG Nord/Ost/West geschätzt */
-win('S',-4.97,-3.56,0.88,2.37,{f:FO,n:2,sill:true});win('S',-4.97,-3.56,3.92,5.49,{f:FO,n:2,sill:true});
+/* Altbau: Fenster nach EG- und OG-Plan sowie Ansichten Ost und West */
+/* Süd OG nach OG-Plan (Kind I); im EG-Plan an der Südwand kein Fenster */
+win('S',-5.67,-4.22,3.98,5.50,{f:FO,n:2,sill:true});
 win('E',3.90,5.90,0.90,2.40,{f:FO,n:3,sill:true});win('E',3.90,5.90,4.00,5.50,{f:FO,n:3,sill:true});win('E',8.60,10.60,4.00,5.50,{f:FO,n:3,sill:true});
 [[3.21,3.84,0.90,2.40],[5.96,6.59,0.90,2.40],[3.21,3.84,4.00,5.50],[5.96,6.59,4.00,5.50],[7.90,8.54,4.00,5.50],[10.66,11.29,4.00,5.50]].forEach(([a,b,y0,y1])=>B(ALT.x0-0.05,ALT.x0,y0,y1,a,b,M.shutter,1));
 win('W',8.92,9.57,1.24,2.34,{f:FO,n:1,sill:true});win('W',9.97,10.62,1.24,2.34,{f:FO,n:1,sill:true});win('W',8.92,9.57,4.34,5.44,{f:FO,n:1,sill:true});win('W',9.97,10.62,4.34,5.44,{f:FO,n:1,sill:true});win('W',3.92,5.25,3.98,5.50,{f:FO,n:2,sill:true});
-win('N',-2.83,-1.78,0.34,2.39,{f:FO,n:1});win('N',-6.1,-4.8,3.92,5.32,{f:FO,n:2,sill:true});win('N',-2.9,-1.6,3.92,5.32,{f:FO,n:2,sill:true});win('N',-5.4,-4.3,1.19,2.44,{f:FO,n:2,sill:true});
+/* Nord: im EG nur der Nebeneingang, im OG keine Fenster (EG- und OG-Plan) */
+B(ALT.x0+4.39,ALT.x0+5.44,0.34,2.39,ALT.z1,ALT.z1+0.06,M.door);win('N',-2.83,-1.78,2.0,2.39,{f:FO,n:1});
 win('E',8.00,8.71,0.90,2.40,{f:FE,n:1});win('E',9.00,10.24,0.90,2.40,{f:FE,n:2});win('E',10.50,11.20,0.90,2.40,{f:FE,n:1});
 /* Kellerfenster: Ost frei, West mit Lichtschacht und Gitter */
 win('E',3.94,5.18,-0.60,-0.22,{f:FO,n:2});win('W',8.74,9.64,-0.50,-0.16,{f:FO,n:2});win('W',10.34,10.99,-0.50,-0.16,{f:FO,n:1});

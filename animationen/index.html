@@ -387,7 +387,13 @@ OP.forEach(([x0,z0,x1,z1,type,base,sill,head])=>{
 });
 /* ceilings */
 function ceilP(x0,x1,z0,z1,y){const c=new THREE.Mesh(new THREE.PlaneGeometry(x1-x0,z1-z0),M.ceil);c.rotation.x=Math.PI/2;c.position.set((x0+x1)/2,y,(z0+z1)/2);ceilings.add(c);}
-ceilP(0,3.7,0,8.15,HE);ceilP(-3.89,0,-0.3,2.4,HE);ceilP(-8.42,0,2.4,12.0,HO);
+/* Lichtkuppeln: Küche 1,0 × 1,0 m, Eingang beim Gäste-WC 0,70 × 0,70 m, mit Lichtschacht */
+function skylight(x0,x1,z0,z1,y){const sh=0.42;[[x0-0.02,x0,z0,z1],[x1,x1+0.02,z0,z1],[x0,x1,z0-0.02,z0],[x0,x1,z1,z1+0.02]].forEach(([a,b,c,d])=>B(a,b,y,y+sh,c,d,M.wall,ceilings));
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(x1-x0,z1-z0),new THREE.MeshBasicMaterial({color:'#f2f7fa'}));p.rotation.x=Math.PI/2;p.position.set((x0+x1)/2,y+sh,(z0+z1)/2);ceilings.add(p);
+  const l=new THREE.PointLight('#f4f8ff',0.3,4.5,2);l.position.set((x0+x1)/2,y-0.15,(z0+z1)/2);ceilings.add(l);}
+ceilP(0,3.7,0,5.5,HE);ceilP(0,3.7,6.5,8.15,HE);ceilP(0,1.5,5.5,6.5,HE);ceilP(2.5,3.7,5.5,6.5,HE);skylight(1.5,2.5,5.5,6.5,HE);
+ceilP(-3.89,0,-0.3,1.37,HE);ceilP(-3.89,0,2.07,2.4,HE);ceilP(-3.89,-2.9,1.37,2.07,HE);ceilP(-2.2,0,1.37,2.07,HE);skylight(-2.9,-2.2,1.37,2.07,HE);
+ceilP(-8.42,-1.72,2.4,12.0,HO);ceilP(-0.28,0,2.4,12.0,HO);ceilP(-1.72,-0.28,2.4,6.01,HO);ceilP(-1.72,-0.28,8.3,12.0,HO);ceilP(-1.72,-0.28,6.01,8.3,HO+2.75);
 /* floors: terrazzo on kitchen level, oak herringbone in the whole old house (+0.34) */
 const fl=new THREE.Mesh(new THREE.PlaneGeometry(3.89,2.7),texMat(terrazzo,3.89,2.7,{roughness:.45}));fl.rotation.x=-Math.PI/2;fl.position.set(-3.89/2,0.001,-0.3+1.35);fl.receiveShadow=true;ext.add(fl);
 const hbMat=texMat(herring,6.62/0.8,9.3/0.8,{roughness:.55});hbMat.map.center.set(.5,.5);hbMat.map.rotation=Math.PI/4;
@@ -551,8 +557,26 @@ B(-8.12,-7.70,F,F+0.45,7.92,11.28,M.oakDark,ext);B(-8.10,-7.72,F+0.45,F+0.55,7.9
 [[-7.95,8.4,'#c9b48e'],[-7.95,8.9,'#9fb39a'],[-7.95,10.4,'#e2b48a'],[-7.95,10.9,'#d9cdb8']].forEach(([x,z,c])=>{const p=soft(0.14,0.38,0.38,0.05,new THREE.MeshStandardMaterial({color:c,map:weave,roughness:1}));p.position.set(x-0.1,F+0.74,z);p.rotation.z=0.15;ext.add(p);});
 const floorCush=soft(0.7,0.12,0.7,0.05,new THREE.MeshStandardMaterial({color:'#b8a582',map:weave,roughness:1}));floorCush.position.set(-7.35,F+0.06,9.6);ext.add(floorCush);
 /* Flur unten + stair to the upper floor (assumed) */
-for(let i=0;i<13;i++){const z1=9.0-i*0.23,z0=z1-0.23;B(-1.70,-0.30,F,F+(i+1)*0.205,z0,z1,i%2?M.oak:M.oakDark,ext);}
-B(-1.70,-1.66,F,F+2.7,6.02,9.0,M.frame,ext);
+/* offene Treppe ins OG: Eichenstufen ohne Setzstufen, schwarze Stahlwange, Geländer mit Stäben und Eichenhandlauf */
+const steelBlack=new THREE.MeshStandardMaterial({color:'#1d1f20',roughness:.45,metalness:.5});
+const RISE=(HO+0.25-F)/14;
+for(let i=0;i<13;i++){const z1=9.0-i*0.23,z0=z1-0.23,t=F+(i+1)*RISE;B(-1.66,-0.30,t-0.055,t,z0-0.02,z1,M.oak,ext);}
+function slopeBox(x0,x1,ya,za,yb,zb,th,mat){const L=Math.hypot(yb-ya,zb-za);const m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,th,L),mat);
+  m.position.set((x0+x1)/2,(ya+yb)/2,(za+zb)/2);m.rotation.x=Math.atan2(yb-ya,za-zb);m.castShadow=m.receiveShadow=true;ext.add(m);return m;}
+slopeBox(-1.71,-1.66,F-0.12,9.23,HO+0.13,6.01,0.26,steelBlack);slopeBox(-0.34,-0.30,F-0.12,9.23,HO+0.13,6.01,0.26,steelBlack);
+slopeBox(-1.70,-1.66,F+0.95,9.23,HO+1.20,6.01,0.05,M.oak);
+for(let i=0;i<13;i++){const z=9.0-i*0.23-0.115,t=F+(i+1)*RISE,top=F+0.95+(9.23-z)*RISE/0.23;B(-1.693,-1.677,t,top-0.02,z-0.008,z+0.008,steelBlack,ext);}
+B(-1.71,-1.65,F,F+1.0,9.18,9.24,steelBlack,ext);
+/* Treppenloch in der Decke mit umlaufenden Wänden bis zur OG-Decke */
+[[-1.72,-1.70,6.01,8.3],[-0.30,-0.28,6.01,8.3],[-1.70,-0.30,5.99,6.01],[-1.70,-0.30,8.3,8.32]].forEach(([a,b,c,d])=>B(a,b,HO,HO+2.75,c,d,M.wall,ceilings));
+/* Loft-Tür Wohnzimmer | Flur und Treppe: Glas mit schwarzem Stahlrahmen, zweiflügelig, Oberlicht bis zur Decke */
+(function(){const x=-1.76,za=3.22,zb=5.32,y0=F,y1=HO,yt=F+2.10,zm=(za+zb)/2;
+  const g=(z0,z1,a,b)=>B(x-0.022,x+0.022,a,b,z0,z1,steelBlack,ext);
+  B(x-0.005,x+0.005,y0,y1,za,zb,M.glass,ext,false);
+  g(za,za+0.05,y0,y1);g(zb-0.05,zb,y0,y1);g(za,zb,y0,y0+0.07);g(za,zb,y1-0.05,y1);g(za,zb,yt-0.03,yt+0.03);g(zm-0.03,zm+0.03,y0,yt);
+  [[za+0.05,zm-0.03],[zm+0.03,zb-0.05]].forEach(([a,b])=>{const c=(a+b)/2;g(c-0.011,c+0.011,y0,yt);for(let k=1;k<4;k++){const y=y0+0.07+(yt-0.03-y0-0.07)*k/4;g(a,b,y-0.011,y+0.011);}});
+  for(let k=1;k<4;k++){const z=za+(zb-za)*k/4;g(z-0.011,z+0.011,yt,y1);}
+  [-1,1].forEach(sg=>B(x-0.07,x+0.07,F+0.98,F+1.18,zm+sg*0.08-0.01,zm+sg*0.08+0.01,steelBlack,ext));})();
 B(-2.95,-2.15,F,F+0.45,8.75,9.70,M.oakDark,ext);
 
 /* ===== Gäste-WC: green vertical stick tiles on WC wall + basin wall, oak shelf with vessel basin, brushed brass ===== */

@@ -39,7 +39,7 @@ const M={brick:new THREE.MeshStandardMaterial({map:brick.lang.w,roughness:.9}),s
   frame:new THREE.MeshStandardMaterial({color:'#3d4144',roughness:.5}),glass:new THREE.MeshStandardMaterial({color:'#2f3c44',roughness:.06,metalness:.4}),
   zinc:new THREE.MeshStandardMaterial({color:'#a7adb1',roughness:.4,metalness:.6}),flat:new THREE.MeshStandardMaterial({color:'#4a4d50',roughness:.9}),
   grass:new THREE.MeshStandardMaterial({color:'#8ea873',roughness:1}),paving:new THREE.MeshStandardMaterial({color:'#c9c4bb',roughness:.95}),
-  door:new THREE.MeshStandardMaterial({color:'#3d4144',roughness:.5}),shutter:new THREE.MeshStandardMaterial({map:shutterT,roughness:.6}),canopy:new THREE.MeshStandardMaterial({color:'#3a3e41',roughness:.45,metalness:.3}),beton:new THREE.MeshStandardMaterial({color:'#b9b5ad',roughness:.95}),wp:new THREE.MeshStandardMaterial({color:'#d6d8d7',roughness:.6}),gravel:new THREE.MeshStandardMaterial({color:'#cfd2d2',roughness:1}),
+  door:new THREE.MeshStandardMaterial({color:'#3d4144',roughness:.5}),shutter:new THREE.MeshStandardMaterial({map:shutterT,roughness:.6}),canopy:new THREE.MeshStandardMaterial({color:'#3a3e41',roughness:.45,metalness:.3}),cplate:new THREE.MeshStandardMaterial({color:'#3a3e41',roughness:.45,metalness:.3}),cfascia:new THREE.MeshStandardMaterial({color:'#3a3e41',roughness:.45,metalness:.3}),beton:new THREE.MeshStandardMaterial({color:'#b9b5ad',roughness:.95}),wp:new THREE.MeshStandardMaterial({color:'#d6d8d7',roughness:.6}),gravel:new THREE.MeshStandardMaterial({color:'#cfd2d2',roughness:1}),
   plant:new THREE.MeshStandardMaterial({color:'#5f7f4c',roughness:.9,flatShading:true}),trunk:new THREE.MeshStandardMaterial({color:'#6b5a45',roughness:1})};
 /* Welt-UVs: Texturen bleiben auf jeder Fläche im Meter-Maßstab */
 function worldUV(mesh,scale){const g=mesh.geometry,p=g.attributes.position,n=g.attributes.normal,uv=g.attributes.uv,o=mesh.position;
@@ -66,7 +66,9 @@ const ATT=3.17;const anbau=new THREE.Group();scene.add(anbau);
 B(0,4.0,G,ATT,-0.3,8.45,M.brick,1,anbau);B(-3.89,0,G,ATT,-0.3,2.40,M.brick,1,anbau);
 B(-3.89,4.0,ATT,ATT+0.02,-0.3,2.4,M.zinc,null,anbau);B(0,4.0,ATT,ATT+0.02,2.4,8.45,M.zinc,null,anbau);
 B(-3.79,3.9,ATT-0.05,ATT-0.03,-0.2,2.3,M.flat,null,anbau);B(0.1,3.9,ATT-0.05,ATT-0.03,2.3,8.35,M.flat,null,anbau);
-B(1.5,2.5,ATT,ATT+0.25,5.5,6.5,new THREE.MeshStandardMaterial({color:'#e9eef0',roughness:.2,transparent:true,opacity:.8}),null,anbau);
+const domeM=new THREE.MeshStandardMaterial({color:'#e9eef0',roughness:.2,transparent:true,opacity:.8});B(1.5,2.5,ATT,ATT+0.25,5.5,6.5,domeM,null,anbau);
+/* kleinere Lichtkuppel im Eingangsbereich beim Gäste-WC, 0,70 × 0,70 m */
+B(-2.9,-2.2,ATT,ATT+0.2,1.37,2.07,domeM,null,anbau);
 /* Fenster: Rahmen + Glas auf der Fassade. Liste: Fläche, a0..a1 entlang der Wand, y0..y1, Art */
 const fr=[];
 function win(face,a0,a1,y0,y1,opt){opt=opt||{};const d=opt.d||0.06,t=0.07,g=new THREE.Group();scene.add(g);
@@ -100,14 +102,14 @@ B(0.95,1.05,-2.7,G+0.04,8.58,11.32,M.beton);B(0,1.05,-2.7,G+0.04,8.53,8.63,M.bet
 for(let k=0;k<8;k++){const z=9.77+k*0.1875;B(0,0.95,-2.75,-2.6+(k+1)*0.2438,z,z+0.1875,M.beton);}
 B(-0.02,0,-2.6,-0.6,8.75,9.6,M.door);
 /* Abdach Kellerabgang: Stahl anthrazit, an der Westwand über den Fenstern */
-B(0,1.25,2.50,2.56,8.45,11.45,M.canopy);B(1.19,1.25,2.42,2.56,8.45,11.45,M.canopy);[8.6,11.3].forEach(z=>{const r=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,1.4,6),M.canopy);r.position.set(0.62,2.88,z);r.rotation.z=Math.PI/2-Math.atan2(0.7,1.2);scene.add(r);});for(let z=8.63;z<=11.25;z+=0.19)B(0.89,0.91,G,G+0.92,z-0.01,z+0.01,M.frame);B(0.88,0.92,G+0.88,G+0.92,8.63,11.24,M.frame);B(0,0.9,G+0.88,G+0.92,8.62,8.66,M.frame);B(0,0.9,G+0.88,G+0.92,11.21,11.25,M.frame);
+B(0,1.25,2.50,2.56,8.45,11.45,M.cplate);B(1.19,1.25,2.42,2.56,8.45,11.45,M.cfascia);[8.6,11.3].forEach(z=>{const r=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,1.4,6),M.canopy);r.position.set(0.62,2.88,z);r.rotation.z=Math.PI/2-Math.atan2(0.7,1.2);scene.add(r);});for(let z=8.63;z<=11.25;z+=0.19)B(0.89,0.91,G,G+0.92,z-0.01,z+0.01,M.frame);B(0.88,0.92,G+0.88,G+0.92,8.63,11.24,M.frame);B(0,0.9,G+0.88,G+0.92,8.62,8.66,M.frame);B(0,0.9,G+0.88,G+0.92,11.21,11.25,M.frame);
 /* Haustür-Podest und Stufen, Nebeneingang Nord */
 B(-4.85,-3.89,G,-0.17,0.99,2.38,M.paving,1);B(-5.15,-4.85,G,-0.33,0.99,2.38,M.paving,1);B(-5.45,-5.15,G,-0.49,0.99,2.38,M.paving,1);
 /* Nebeneingang Nord (EG-Plan): Podest vor der Tür, vier Stufen nach Osten */
 B(-3.12,-1.39,G,0.22,12.0,13.3,M.paving,1);[[-3.37,0.0],[-3.63,-0.17],[-3.90,-0.33],[-4.12,-0.49]].forEach(([x,h],i)=>B(x,i?x+0.27:-3.12,G,h,12.0,13.3,M.paving,1));
 [-4.08,-2.75,-1.43].forEach(x=>B(x-0.02,x+0.02,x<-3.2?-0.49:0.22,1.14,13.25,13.29,M.frame));B(-4.1,-1.41,1.10,1.14,13.25,13.29,M.frame);
 /* Abdach Nebeneingang über Podest und Stufen */
-B(-4.25,-1.38,2.56,2.64,12.0,13.5,M.canopy);B(-4.25,-1.38,2.48,2.64,13.44,13.5,M.canopy);[-3.9,-1.7].forEach(x=>{const r=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,1.55,6),M.canopy);r.position.set(x,2.97,12.72);r.rotation.x=-Math.atan2(1.44,0.66);scene.add(r);});
+B(-4.25,-1.38,2.56,2.64,12.0,13.5,M.cplate);B(-4.25,-1.38,2.48,2.64,13.44,13.5,M.cfascia);[-3.9,-1.7].forEach(x=>{const r=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,1.55,6),M.canopy);r.position.set(x,2.97,12.72);r.rotation.x=-Math.atan2(1.44,0.66);scene.add(r);});
 /* Wärmepumpe (EG-Plan) */
 B(-1.31,-0.10,G,G+1.0,12.07,12.58,M.wp);B(-1.2,-0.62,G+0.25,G+0.85,12.58,12.585,M.frame);
 
@@ -165,5 +167,8 @@ const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function seg(id,fn){const bs=[...document.querySelectorAll('#'+id+' button')];bs.forEach(b=>b.addEventListener('click',()=>{bs.forEach(x=>x.setAttribute('aria-pressed',x===b));fn(b.dataset.v);}));}
 seg('h-view',v=>view(v));
 seg('h-brick',v=>{M.brick.map=brick[v].w;M.soldier.map=brick[v].s;M.brick.needsUpdate=M.soldier.needsUpdate=true;});
+/* Abdächer: Stahl anthrazit | Glas auf Stahlträgern | Holz (Lärche) */
+const CAN={stahl:{p:{color:'#3a3e41',opacity:1,map:null,metalness:.3,roughness:.45},f:{color:'#3a3e41',map:null}},glas:{p:{color:'#d4e6ec',opacity:.38,map:null,metalness:.1,roughness:.05},f:{color:'#3a3e41',map:null}},holz:{p:{color:'#ffffff',opacity:1,map:woodT,metalness:0,roughness:.8},f:{color:'#ffffff',map:woodT}}};
+seg('h-canopy',v=>{const c=CAN[v];['opacity','map','metalness','roughness'].forEach(k=>M.cplate[k]=c.p[k]);M.cplate.transparent=c.p.opacity<1;M.cplate.color.set(c.p.color);M.cfascia.color.set(c.f.color);M.cfascia.map=c.f.map;M.cplate.needsUpdate=M.cfascia.needsUpdate=true;});
 seg('h-frame',v=>{M.frame.color.set(v==='holz'?'#b0814e':'#3d4144');M.door.color.set(v==='holz'?'#b0814e':'#3d4144');});
 })();

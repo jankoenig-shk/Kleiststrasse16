@@ -34,7 +34,7 @@ const whiteBoardT=tex(512,512,(g,w,h)=>{g.fillStyle='#f3f1ec';g.fillRect(0,0,w,h
 const shutterT=tex(128,128,(g,w,h)=>{g.fillStyle='#2a2e30';g.fillRect(0,0,w,h);for(let y=0;y<h;y+=8){g.fillStyle='#3a3f42';g.fillRect(0,y,w,4);g.fillStyle='rgba(0,0,0,.35)';g.fillRect(0,y+6,w,2);}});
 const brick={};['lang','sand','anthra','rot'].forEach(k=>brick[k]={w:brickTex(k),s:soldierTex(k)});
 const M={brick:new THREE.MeshStandardMaterial({map:brick.lang.w,roughness:.9}),soldier:new THREE.MeshStandardMaterial({map:brick.lang.s,roughness:.9}),
-  plaster:new THREE.MeshStandardMaterial({map:plasterT,roughness:.95}),sockel:new THREE.MeshStandardMaterial({color:'#d8b2a6',roughness:.95}),
+  plaster:new THREE.MeshStandardMaterial({map:plasterT,roughness:.95}),sockel:new THREE.MeshStandardMaterial({map:brick.rot.w,roughness:.9}),
   roof:new THREE.MeshStandardMaterial({map:roofT,roughness:.8,side:THREE.DoubleSide}),dormer:new THREE.MeshStandardMaterial({map:whiteBoardT,roughness:.7}),
   frame:new THREE.MeshStandardMaterial({color:'#3d4144',roughness:.5}),glass:new THREE.MeshStandardMaterial({color:'#2f3c44',roughness:.06,metalness:.4}),
   zinc:new THREE.MeshStandardMaterial({color:'#a7adb1',roughness:.4,metalness:.6}),flat:new THREE.MeshStandardMaterial({color:'#4a4d50',roughness:.9}),
@@ -54,13 +54,14 @@ const gS=new THREE.Shape([new THREE.Vector2(-82,-86),new THREE.Vector2(78,-86),n
 gS.holes.push(new THREE.Path([new THREE.Vector2(0,-8.63),new THREE.Vector2(0,-11.27),new THREE.Vector2(1.0,-11.27),new THREE.Vector2(1.0,-8.63)]));
 const ground=new THREE.Mesh(new THREE.ShapeGeometry(gS),M.grass);ground.rotation.x=-Math.PI/2;ground.position.set(0,G-0.01,0);ground.receiveShadow=true;scene.add(ground);
 B(-11,9,G-0.02,G,-4.5,-0.3,M.paving,1);B(-10.5,-3.9,G-0.02,G,-0.3,14.5,M.gravel,1);
-/* Altbau: verputzt, Sockel rosé, Traufe +6,42 m über Gelände (Ansicht Süd) */
+/* Altbau: verputzt, Sockel roter Klinker, Traufe +6,42 m über Gelände (Ansicht Süd) */
 const ALT={x0:-7.22,x1:0,z0:2.40,z1:12.0},EAVE=5.77,SOCK=0.15;
-B(ALT.x0,ALT.x1,G,SOCK,ALT.z0,ALT.z1,M.sockel);B(ALT.x0,ALT.x1,SOCK,EAVE,ALT.z0,ALT.z1,M.plaster,1.2);
+/* Sockel Altbau: roter Klinker (Bestand) */
+B(ALT.x0,ALT.x1,G,SOCK,ALT.z0,ALT.z1,M.sockel,1);B(ALT.x0,ALT.x1,SOCK,EAVE,ALT.z0,ALT.z1,M.plaster,1.2);
 /* Dachsims mit weiß gestrichener Stülpschalung */
 B(ALT.x0-0.12,ALT.x1+0.12,EAVE,EAVE+0.2,ALT.z0-0.12,ALT.z1+0.12,M.dormer,1);
 /* Erker Ostseite (Spielzimmer), Höhe aus Ansicht */
-B(-8.42,ALT.x0,G,SOCK,7.6,11.6,M.sockel);B(-8.42,ALT.x0,SOCK,2.48,7.6,11.6,M.plaster,1.2);B(-8.47,ALT.x0,0.80,0.90,7.55,11.65,M.plaster);
+B(-8.42,ALT.x0,G,SOCK,7.6,11.6,M.sockel,1);B(-8.42,ALT.x0,SOCK,2.48,7.6,11.6,M.plaster,1.2);B(-8.47,ALT.x0,0.80,0.90,7.55,11.65,M.plaster);
 B(-8.48,ALT.x0,2.48,3.11,7.54,11.66,M.plaster,1.2);B(-8.62,ALT.x0,3.11,3.19,7.41,11.78,M.zinc);B(-8.3,ALT.x0,3.19,3.35,8.62,10.75,M.zinc);
 /* Anbau: Klinker, Flachdach mit Attika +3,82 m über Gelände */
 const ATT=3.17;const anbau=new THREE.Group();scene.add(anbau);

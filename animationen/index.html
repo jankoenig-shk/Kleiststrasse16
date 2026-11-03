@@ -108,14 +108,14 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
       <p id="noopt" class="meta" hidden>Für diesen Raum gibt es noch keine Varianten.</p>
       <div class="crow" data-for="kueche"><span class="lbl">Fronten</span>
         <div class="seg" id="fins">
-          <button id="s1" data-s="1" aria-pressed="true">Eiche unten · Greige hoch</button>
-          <button id="s2" data-s="2" aria-pressed="false">Greige · Insel Eiche</button>
-          <button id="s3" data-s="3" aria-pressed="false">Beige · Eiche hoch</button>
+          <button id="s1" data-s="1" aria-pressed="true">Eiche · Hochschrank Greige</button>
+          <button id="s2" data-s="2" aria-pressed="false">Greige unten · Eiche hoch</button>
+          <button id="s3" data-s="3" aria-pressed="false">Eiche · Lehmton</button>
         </div></div>
-      <div class="crow" data-for="kueche"><span class="lbl">Wand</span>
+      <div class="crow" data-for="kueche"><span class="lbl">Westseite</span>
         <div class="seg" id="vars">
-          <button id="v1" data-v="offen" aria-pressed="true">Offen mit Wandbord</button>
-          <button id="v2" data-v="hoch" aria-pressed="false">Mit Hochschränken</button>
+          <button id="v1" data-v="offen" aria-pressed="true">Offene Borde rechts</button>
+          <button id="v2" data-v="hoch" aria-pressed="false">Hochschränke beidseitig</button>
         </div></div>
       <div class="crow" data-for="kueche"><span class="lbl">Polster</span>
         <button class="chip" id="f1" data-f="#8d8f8a" style="background:#8d8f8a" aria-label="Steingrau" aria-pressed="true"></button>
@@ -154,7 +154,7 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
 
   <section>
     <h2>Zum Maßstab</h2>
-    <p class="note">Das Modell ist in Metern aus dem Architektenplan aufgebaut. In einer perspektivischen Ansicht erscheint Entferntes kleiner, deshalb gibt es keine einzelne Maßstabsleiste. Stattdessen liegt auf jedem Boden ein Raster von 1 × 1 m, und die Innenmaße der Räume sind als Maßlinien eingeblendet. Die Decke von Anbau und Altbau liegt auf einer Höhe. Weil der Anbau zwei Stufen tiefer liegt, ist er höher: Anbau ca. 2,80 m, Altbau ca. 2,46 m. Genaue Werte folgen mit dem Schnitt.</p>
+    <p class="note">Das Modell ist in Metern aus dem Architektenplan aufgebaut. In einer perspektivischen Ansicht erscheint Entferntes kleiner, deshalb gibt es keine einzelne Maßstabsleiste. Stattdessen liegt auf jedem Boden ein Raster von 1 × 1 m, und die Innenmaße der Räume sind als Maßlinien eingeblendet. Die Decke von Anbau und Altbau liegt auf einer Höhe. Weil der Anbau zwei Stufen tiefer liegt, ist er höher: Anbau ca. 3,20 m, Altbau ca. 2,86 m (aus dem Schnitt: Anbau-Fußboden +0,44, OKFF EG +0,80, OKFF OG +3,90).</p>
   </section>
 </div>
 
@@ -162,7 +162,7 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 (function(){
-const W=3.70,L=8.15,H=2.80,T=0.25;
+const W=3.70,L=8.15,H=3.20,T=0.25;
 const host=document.getElementById('view');
 const renderer=new THREE.WebGLRenderer({antialias:true});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
@@ -241,47 +241,57 @@ function groovesAlong(axis,fixed,a,b,step,sign){return p=>{
   const n=Math.max(1,Math.round((b-a)/step));
   for(let i=1;i<n;i++){const t=a+(b-a)*i/n;axis==='x'?B(t-0.003,t+0.003,PL,CAB,fixed,fixed+0.004*sign,M.groove,p,false):B(fixed,fixed+0.004*sign,PL,CAB,t-0.003,t+0.003,M.groove,p,false);}
   const y=CAB-0.18;axis==='x'?B(a,b,y-0.003,y+0.003,fixed,fixed+0.004*sign,M.groove,p,false):B(fixed,fixed+0.004*sign,y-0.003,y+0.003,a,b,M.groove,p,false);};}
-/* tall fridge unit in NW corner (plan: KS) */
-B(0,0.6,PL,2.30,0,0.6,M.fTall,kit);B(0.06,0.6,0,PL,0,0.54,M.plinth,kit);B(0,0.6,1.20,1.206,0.6,0.604,M.groove,kit,false);
-/* north run */
-run(0.6,3.7,0,0.6,'s',kit,[groovesAlong('x',0.6,0.6,3.1,0.62,1)],M.fRun);
-/* sink + tap */
-B(1.47,2.23,TOP-0.001,TOP+0.002,0.14,0.50,M.sink,kit,false);
-const tap=new THREE.Group();kit.add(tap);
-const tp=new THREE.Mesh(new THREE.CylinderGeometry(0.018,0.022,0.32,16),M.steel);tp.position.set(1.85,TOP+0.16,0.08);tp.castShadow=true;tap.add(tp);
-const arc=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.014,10,24,Math.PI),M.steel);arc.position.set(1.85,TOP+0.32,0.19);arc.rotation.y=Math.PI/2;arc.castShadow=true;tap.add(arc);
-
-/* variant groups for east leg */
+/* ===== Küche neu (3.11.): eine Zeile an der Südwand, große Insel, Eiche + zweiter Ton =====
+   Südwand z = 0, Fenster x 0,80–2,80 (Brüstung 1,00). Links (Ost) Hochschrankblock mit Kühlschrank,
+   rechts (West) je nach Variante Hochschrank mit Backöfen oder offene Eichenborde mit Lichtleiste. */
+const TALL=2.60;
+/* zweiter Ton: matter Sand-Greige-Lack auf den Hochschränken (Variante 1) */
+M.fEast.map=null;M.fEast.color.set('#b7a48b');M.fEast.roughness=.78;M.fEast.needsUpdate=true;
+/* Hochschrank Ost: Kühl-Gefrier-Kombination, 0,80 m */
+B(0,0.80,PL,TALL,0,0.62,M.fEast,kit);B(0.06,0.80,0,PL,0,0.56,M.plinth,kit);
+B(0.398,0.402,PL,TALL,0.62,0.624,M.groove,kit,false);B(0,0.80,1.40,1.404,0.62,0.624,M.groove,kit,false);
+/* Zeile unter dem Fenster mit Spüle */
 const varOpen=new THREE.Group(),varHigh=new THREE.Group();kit.add(varOpen);kit.add(varHigh);
-run(3.1,3.7,0.6,3.3,'w',varOpen,[groovesAlong('z',3.1,0.6,3.3,0.68,-1)],M.fEast);
-/* Wandbord oak above east run between small window and glass front, and next to north window */
-B(3.45,3.7,1.55,1.59,2.40,3.25,M.oakDark,varOpen);B(2.86,3.7,1.55,1.59,0,0.25,M.oakDark,varOpen);
-function jar(x,z,h,c,p){const m=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,h,16),new THREE.MeshStandardMaterial({color:c,roughness:.4}));m.position.set(x,1.59+h/2,z);m.castShadow=true;p.add(m);}
-[[3.57,2.55,.16,'#e9e2d4'],[3.57,2.7,.22,'#c9c3b8'],[3.57,2.86,.14,'#6c7a6a'],[3.57,3.1,.2,'#e9e2d4'],[3.0,0.12,.18,'#d9d2c4'],[3.2,0.12,.24,'#8c8378'],[3.45,0.12,.14,'#e9e2d4']].forEach(a=>jar(...a,varOpen));
-/* variant hoch: counter shortened, tall units 2.40–3.30 with ovens */
-run(3.1,3.7,0.6,2.40,'w',varHigh,[groovesAlong('z',3.1,0.6,2.40,0.6,-1)],M.fEast);
-B(3.1,3.7,PL,2.30,2.40,3.30,M.fTall,varHigh);B(3.16,3.7,0,PL,2.40,3.30,M.plinth,varHigh);
-B(3.096,3.1,PL,2.30,2.85-0.003,2.85+0.003,M.groove,varHigh,false);
-B(3.096,3.1,0.95,1.55,2.45,2.80,M.black,varHigh,false);B(3.096,3.1,1.62,2.08,2.45,2.80,M.black,varHigh,false);
-B(3.096,3.1,1.55,1.553,2.40,3.30,M.groove,varHigh,false);
-B(2.86,3.7,1.55,1.59,0,0.25,M.oakDark,varHigh);
+run(0.80,2.80,0,0.62,'s',kit,[groovesAlong('x',0.62,0.80,2.80,0.66,1)],M.fRun);
+B(1.42,2.18,TOP-0.001,TOP+0.002,0.14,0.50,M.sink,kit,false);
+const tap=new THREE.Group();kit.add(tap);
+const tp=new THREE.Mesh(new THREE.CylinderGeometry(0.018,0.022,0.32,16),M.steel);tp.position.set(1.80,TOP+0.16,0.08);tp.castShadow=true;tap.add(tp);
+const arc=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.014,10,24,Math.PI),M.steel);arc.position.set(1.80,TOP+0.32,0.19);arc.rotation.y=Math.PI/2;arc.castShadow=true;tap.add(arc);
+/* Variante 1 (Standard): West Unterschrank mit Backofen, darüber offene Eichenborde mit Lichtleiste */
+run(2.80,3.70,0,0.62,'s',varOpen,[groovesAlong('x',0.62,2.80,3.70,0.9,1)],M.fRun);
+B(2.88,3.62,0.16,0.76,0.62,0.624,M.black,varOpen,false);
+const ledMat=new THREE.MeshStandardMaterial({color:'#fff4e0',emissive:'#ffdcae',emissiveIntensity:1.2});
+[1.45,1.90,2.35].forEach(y=>{B(2.84,3.70,y,y+0.04,0,0.28,M.oakDark,varOpen);B(2.86,3.68,y-0.006,y,0.22,0.235,ledMat,varOpen,false);});
+const shelfLight=new THREE.PointLight('#ffd9a8',0.22,1.6,2);shelfLight.position.set(3.25,1.30,0.3);varOpen.add(shelfLight);
+function cerObj(x,y,z,r,h,c,p){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r*0.8,h,20),new THREE.MeshStandardMaterial({color:c,roughness:.55}));m.position.set(x,y+h/2,z);m.castShadow=true;p.add(m);}
+[[2.98,1.49,.12,.07,.08,'#e2dbcf'],[3.18,1.49,.12,.08,.07,'#cfc6b8'],[3.42,1.49,.12,.07,.09,'#e2dbcf'],[3.0,1.94,.13,.09,.05,'#d8cfc1'],[3.0,1.99,.13,.09,.05,'#d8cfc1'],[3.3,1.94,.12,.05,.16,'#b9ad9c'],[3.55,1.94,.12,.04,.11,'#e6e0d6'],[3.1,2.39,.12,.06,.14,'#cfc6b8'],[3.45,2.39,.12,.08,.06,'#e2dbcf']]
+  .forEach(([x,y,z,r,h,c])=>cerObj(x,y,z,r,h,c,varOpen));
+/* Variante 2: West zweiter Hochschrankblock mit Backofen und Kompaktgerät */
+B(2.80,3.70,PL,TALL,0,0.62,M.fEast,varHigh);B(2.80,3.64,0,PL,0,0.56,M.plinth,varHigh);
+B(3.248,3.252,PL,TALL,0.62,0.624,M.groove,varHigh,false);
+B(2.90,3.60,0.95,1.55,0.62,0.624,M.black,varHigh,false);B(2.90,3.60,1.62,2.08,0.62,0.624,M.black,varHigh,false);
 varHigh.visible=false;
-
-/* island 0.80–2.30 × 1.80–3.30 */
-/* island: oak/greige body between terrazzo waterfall ends, matching the floor */
-B(0.90,2.20,0,PL,1.86,3.24,M.plinth,kit);
-B(0.84,2.26,PL,CAB,1.82,3.28,M.fIsland,kit);
-B(0.80,0.84,0,TOP,1.80,3.30,tzMat(1.5,.92),kit);B(2.26,2.30,0,TOP,1.80,3.30,tzMat(1.5,.92),kit);
-B(0.80,2.30,CAB,TOP,1.80,3.30,tzMat(1.5,1.5),kit);
-groovesAlong('x',1.82,0.84,2.26,0.47,-1)(kit);
-B(1.15,1.95,TOP,TOP+0.004,2.29,2.81,M.black,kit,false);
+/* Insel 2,20 × 1,28 m: Korpus wie die Zeile, Terrazzo-Platte, Sitzüberstand nach Norden mit drei Hockern */
+const IX0=1.00,IX1=3.20,IZ0=1.70,IZ1=2.98;
+B(IX0+0.10,IX1-0.10,0,PL,IZ0+0.10,IZ1-0.34,M.plinth,kit);
+B(IX0+0.04,IX1-0.04,PL,CAB,IZ0+0.04,IZ1-0.28,M.fIsland,kit);
+B(IX0,IX1,CAB,TOP,IZ0,IZ1,tzMat(IX1-IX0,IZ1-IZ0),kit);
+groovesAlong('x',IZ0+0.04,IX0+0.04,IX1-0.04,0.73,-1)(kit);
+B(1.70,2.50,TOP,TOP+0.004,1.85,2.37,M.black,kit,false);
 const ringMat=new THREE.MeshBasicMaterial({color:'#3a3b3d'});
-[[1.35,2.42],[1.75,2.42],[1.35,2.68],[1.75,2.68]].forEach(([x,z],i)=>{const r=new THREE.Mesh(new THREE.RingGeometry(i%2?0.07:0.09,(i%2?0.07:0.09)+0.006,40),ringMat);r.rotation.x=-Math.PI/2;r.position.set(x,TOP+0.005,z);kit.add(r);});
-B(1.47,1.63,TOP+0.004,TOP+0.006,2.30,2.80,new THREE.MeshBasicMaterial({color:'#222'}),kit,false);
-/* cutting board + bowl on island */
-B(0.95,1.3,TOP,TOP+0.025,1.95,2.2,M.oakDark,kit);
-const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.13,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),new THREE.MeshStandardMaterial({color:'#e8e3da',roughness:.4,side:THREE.DoubleSide}));bowl.position.set(2.05,TOP+0.13,3.05);bowl.castShadow=true;kit.add(bowl);
-for(let i=0;i<4;i++){const a=new THREE.Mesh(new THREE.SphereGeometry(0.04,12,8),new THREE.MeshStandardMaterial({color:i%2?'#d9a13b':'#9cb04f',roughness:.6}));a.position.set(2.05+Math.cos(i*1.6)*0.05,TOP+0.06,3.05+Math.sin(i*1.6)*0.05);kit.add(a);}
+[[1.90,1.98],[2.30,1.98],[1.90,2.24],[2.30,2.24]].forEach(([x,z],i)=>{const r=new THREE.Mesh(new THREE.RingGeometry(i%2?0.07:0.09,(i%2?0.07:0.09)+0.006,40),ringMat);r.rotation.x=-Math.PI/2;r.position.set(x,TOP+0.005,z);kit.add(r);});
+B(1.70,2.50,TOP+0.004,TOP+0.006,2.39,2.45,new THREE.MeshBasicMaterial({color:'#222'}),kit,false);
+/* Schneidebrett, Schale, Vase mit Eukalyptus wie im Vorbild */
+B(1.15,1.50,TOP,TOP+0.025,1.85,2.10,M.oakDark,kit);
+const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.13,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),new THREE.MeshStandardMaterial({color:'#e8e3da',roughness:.4,side:THREE.DoubleSide}));bowl.position.set(2.85,TOP+0.13,2.20);bowl.castShadow=true;kit.add(bowl);
+cerObj(2.75,TOP,2.65,0.07,0.24,'#cdbfa9',kit);
+for(let i=0;i<14;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(rnd(.025,.045),8,6),new THREE.MeshStandardMaterial({color:'#6f8a6c',roughness:.9}));b.position.set(2.75+rnd(-.14,.14),TOP+0.30+rnd(0,.28),2.65+rnd(-.10,.10));b.castShadow=true;kit.add(b);}
+/* Hocker am Sitzüberstand */
+function stool(x,z){const g=new THREE.Group();g.position.set(x,0,z);kit.add(g);
+  [[-0.14,-0.14],[0.14,-0.14],[-0.14,0.14],[0.14,0.14]].forEach(([a,b])=>B(a-0.015,a+0.015,0,0.62,b-0.015,b+0.015,M.oak,g));
+  B(-0.15,0.15,0.22,0.24,-0.15,0.15,M.oak,g);
+  const s=new THREE.Mesh(new THREE.CylinderGeometry(0.19,0.19,0.06,24),M.fabric);s.position.y=0.65;s.castShadow=true;g.add(s);}
+[1.50,2.10,2.70].forEach(x=>stool(x,IZ1+0.22));
 
 /* table 1.39–2.39 × 4.88–7.38 */
 const TX0=1.39,TX1=2.39,TZ0=4.88,TZ1=7.38,TH=0.75;
@@ -313,7 +323,14 @@ function pendant(x,z,y,shade){const cord=new THREE.Mesh(new THREE.CylinderGeomet
   if(shade){const b=new THREE.Mesh(new THREE.SphereGeometry(0.05,12,8),M.lamp);b.position.set(x,y-0.03,z);scene.add(b);}
   const l=new THREE.PointLight('#ffe6c4',0.35,3.2,2);l.position.set(x,y-0.12,z);scene.add(l);pend.push(l);}
 [5.38,6.13,6.88].forEach(z=>pendant(1.89,z,1.55,false));
-[2.25,2.85].forEach(z=>pendant(1.55,z,1.65,true));
+/* Rattan-Pendelleuchten über der Insel (wie im Vorbild) */
+const weaveR=canvasTex(256,256,(g,w,h)=>{g.fillStyle='#d9c29a';g.fillRect(0,0,w,h);for(let i=0;i<w;i+=8){g.strokeStyle='rgba(120,85,45,.45)';g.lineWidth=2;g.beginPath();g.moveTo(i,0);g.lineTo(i+h*0.5,h);g.stroke();g.beginPath();g.moveTo(i,h);g.lineTo(i+h*0.5,0);g.stroke();}},4,3);
+const rattanMat=new THREE.MeshStandardMaterial({map:weaveR,color:"#f2e6d0",roughness:.9,side:THREE.DoubleSide,emissive:'#4a3218',emissiveIntensity:.12});
+function rattan(x,z,y){const cord=new THREE.Mesh(new THREE.CylinderGeometry(0.004,0.004,H-y-0.2,6),M.frame);cord.position.set(x,(H+y+0.2)/2,z);scene.add(cord);
+  const s=new THREE.Mesh(new THREE.SphereGeometry(0.15,28,16,0,Math.PI*2,0,Math.PI*0.78),rattanMat);s.scale.set(1,1.15,1);s.position.set(x,y,z);s.castShadow=true;scene.add(s);
+  const b=new THREE.Mesh(new THREE.SphereGeometry(0.045,12,8),M.lamp);b.position.set(x,y-0.02,z);scene.add(b);
+  const l=new THREE.PointLight('#ffd9a8',0.35,3.4,2);l.position.set(x,y-0.2,z);scene.add(l);pend.push(l);}
+[1.50,2.10,2.70].forEach(x=>rattan(x,2.34,2.05));
 
 /* lights */
 const hemi=new THREE.HemisphereLight('#f4f7fb','#d8cdbd',0.75);scene.add(hemi);
@@ -337,7 +354,7 @@ const herring=canvasTex(512,512,(g,w,h)=>{const u=64,l=4,cols=['#c79a5f','#c2935
     g.strokeStyle='rgba(70,45,20,.6)';g.lineWidth=1.4;g.strokeRect(x+.5,y+.5,pw-1,ph-1);};
   for(let k=-40;k<40;k++)for(let m=-12;m<12;m++){const x=(k+m*l)*u,y=(k-m*l)*u;
     if(x>-2*l*u&&x<w+2*l*u&&y>-2*l*u&&y<h+2*l*u){plank(x,y,l*u,u);plank(x+l*u,y-(l-1)*u,u,l*u);}}});
-const F=0.34,HE=2.80,HO=F+2.46; /* Decke Anbau = Decke Altbau */
+const F=0.34,HE=3.20,HO=3.20; /* Bauantrag: Decke Anbau = Decke Altbau, Anbau ca. 3,20 m, Altbau ca. 2,86 m */ /* Decke Anbau = Decke Altbau */
 const ext=new THREE.Group();scene.add(ext);
 const shell=new THREE.Group();scene.add(shell);
 const lintels=new THREE.Group();scene.add(lintels);
@@ -391,7 +408,7 @@ function ceilP(x0,x1,z0,z1,y){const c=new THREE.Mesh(new THREE.PlaneGeometry(x1-
 function skylight(x0,x1,z0,z1,y){const sh=0.42;[[x0-0.02,x0,z0,z1],[x1,x1+0.02,z0,z1],[x0,x1,z0-0.02,z0],[x0,x1,z1,z1+0.02]].forEach(([a,b,c,d])=>B(a,b,y,y+sh,c,d,M.wall,ceilings));
   const p=new THREE.Mesh(new THREE.PlaneGeometry(x1-x0,z1-z0),new THREE.MeshBasicMaterial({color:'#f2f7fa'}));p.rotation.x=Math.PI/2;p.position.set((x0+x1)/2,y+sh,(z0+z1)/2);ceilings.add(p);
   const l=new THREE.PointLight('#f4f8ff',0.3,4.5,2);l.position.set((x0+x1)/2,y-0.15,(z0+z1)/2);ceilings.add(l);}
-ceilP(0,3.7,0,5.5,HE);ceilP(0,3.7,6.5,8.15,HE);ceilP(0,1.5,5.5,6.5,HE);ceilP(2.5,3.7,5.5,6.5,HE);skylight(1.5,2.5,5.5,6.5,HE);
+ceilP(0,3.7,0,3.85,HE);ceilP(0,3.7,4.75,8.15,HE);ceilP(0,1.37,3.85,4.75,HE);ceilP(2.27,3.7,3.85,4.75,HE);skylight(1.37,2.27,3.85,4.75,HE);
 ceilP(-3.89,0,-0.3,1.37,HE);ceilP(-3.89,0,2.07,2.4,HE);ceilP(-3.89,-2.9,1.37,2.07,HE);ceilP(-2.2,0,1.37,2.07,HE);skylight(-2.9,-2.2,1.37,2.07,HE);
 ceilP(-8.42,-1.72,2.4,12.0,HO);ceilP(-0.28,0,2.4,12.0,HO);ceilP(-1.72,-0.28,2.4,6.01,HO);ceilP(-1.72,-0.28,8.3,12.0,HO);ceilP(-1.72,-0.28,6.01,8.3,HO+2.75);
 /* floors: terrazzo on kitchen level, oak herringbone in the whole old house (+0.34) */
@@ -569,14 +586,16 @@ for(let i=0;i<13;i++){const z=9.0-i*0.23-0.115,t=F+(i+1)*RISE,top=F+0.95+(9.23-z
 B(-1.71,-1.65,F,F+1.0,9.18,9.24,steelBlack,ext);
 /* Treppenloch in der Decke mit umlaufenden Wänden bis zur OG-Decke */
 [[-1.72,-1.70,6.01,8.3],[-0.30,-0.28,6.01,8.3],[-1.70,-0.30,5.99,6.01],[-1.70,-0.30,8.3,8.32]].forEach(([a,b,c,d])=>B(a,b,HO,HO+2.75,c,d,M.wall,ceilings));
-/* Loft-Tür Wohnzimmer | Flur und Treppe: Glas mit schwarzem Stahlrahmen, zweiflügelig, Oberlicht bis zur Decke */
-(function(){const x=-1.76,za=3.22,zb=5.32,y0=F,y1=HO,yt=F+2.10,zm=(za+zb)/2;
-  const g=(z0,z1,a,b)=>B(x-0.022,x+0.022,a,b,z0,z1,steelBlack,ext);
-  B(x-0.005,x+0.005,y0,y1,za,zb,M.glass,ext,false);
-  g(za,za+0.05,y0,y1);g(zb-0.05,zb,y0,y1);g(za,zb,y0,y0+0.07);g(za,zb,y1-0.05,y1);g(za,zb,yt-0.03,yt+0.03);g(zm-0.03,zm+0.03,y0,yt);
-  [[za+0.05,zm-0.03],[zm+0.03,zb-0.05]].forEach(([a,b])=>{const c=(a+b)/2;g(c-0.011,c+0.011,y0,yt);for(let k=1;k<4;k++){const y=y0+0.07+(yt-0.03-y0-0.07)*k/4;g(a,b,y-0.011,y+0.011);}});
-  for(let k=1;k<4;k++){const z=za+(zb-za)*k/4;g(z-0.011,z+0.011,yt,y1);}
-  [-1,1].forEach(sg=>B(x-0.07,x+0.07,F+0.98,F+1.18,zm+sg*0.08-0.01,zm+sg*0.08+0.01,steelBlack,ext));})();
+/* Schiebetür im Loft-Stil zwischen Wohnen/Plateau und Flur zur Treppe: Glas mit schwarzem Stahlraster, läuft auf einer Wandschiene nach Westen */
+(function(){const z=7.15,x0=-3.06,x1=-1.78,y0=F+0.01,y1=F+2.14,xm=(x0+x1)/2;
+  const g=(a,b,c,d)=>B(a,b,c,d,z-0.02,z+0.02,steelBlack,ext);
+  B(x0,x1,y0,y1,z-0.004,z+0.004,M.glass,ext,false);
+  g(x0,x0+0.05,y0,y1);g(x1-0.05,x1,y0,y1);g(x0,x1,y0,y0+0.08);g(x0,x1,y1-0.05,y1);
+  [1,2].forEach(k=>{const x=x0+(x1-x0)*k/3;g(x-0.011,x+0.011,y0,y1);});
+  [1,2,3].forEach(k=>{const y=y0+0.08+(y1-0.05-y0-0.08)*k/4;g(x0,x1,y-0.011,y+0.011);});
+  B(-4.30,-1.74,F+2.17,F+2.21,z-0.03,z+0.01,steelBlack,ext);
+  [x0+0.15,x1-0.15].forEach(x=>B(x-0.02,x+0.02,F+2.12,F+2.19,z-0.03,z-0.01,steelBlack,ext));
+  B(x1-0.12,x1-0.10,F+0.85,F+1.25,z+0.02,z+0.05,steelBlack,ext);})();
 B(-2.95,-2.15,F,F+0.45,8.75,9.70,M.oakDark,ext);
 
 /* ===== Gäste-WC: green vertical stick tiles on WC wall + basin wall, oak shelf with vessel basin, brushed brass ===== */
@@ -886,13 +905,13 @@ showRoom('kueche',false);setWalkMode('m-walk');setWalk(true);
 
 function seg(id,fn){const bs=[...document.querySelectorAll('#'+id+' button')];bs.forEach(b=>b.addEventListener('click',()=>{bs.forEach(x=>x.setAttribute('aria-pressed',x===b));fn(b);}));}
 seg('cams',b=>go(b.dataset.cam));
-const FIN={oak:{map:oakV,c:'#ffffff',r:.62},greige:{map:null,c:'#bcb2a5',r:.75},beige:{map:null,c:'#d8ccb8',r:.75}};
+const FIN={oak:{map:oakV,c:'#ffffff',r:.62},greige:{map:null,c:'#b7a48b',r:.78},beige:{map:null,c:'#d8ccb8',r:.75},lehm:{map:null,c:'#b59c80',r:.8}};
 function fin(mat,k){const f=FIN[k];mat.map=f.map;mat.color.set(f.c);mat.roughness=f.r;mat.needsUpdate=true;}
-const SCH={1:['oak','oak','greige','oak'],2:['greige','greige','greige','oak'],3:['beige','beige','oak','beige']};
+const SCH={1:['oak','greige','','oak'],2:['greige','oak','','oak'],3:['oak','lehm','','lehm']};
 document.getElementById('hw1').addEventListener('click',e=>{const t=window.__hwrToggle();e.currentTarget.setAttribute('aria-pressed',!!t);e.currentTarget.textContent=t?'Waschschrank schließen':'Waschschrank öffnen';if(!/^hwr/.test(mode))document.getElementById('c14').click();});
 seg('sofa',b=>{setSofa(b.dataset.l);if(!/^wohnen/.test(mode)){const cb=document.getElementById('c12');cb.click();}});
 const schips=[...document.querySelectorAll('.schip')];schips.forEach(c=>c.addEventListener('click',()=>{schips.forEach(x=>x.setAttribute('aria-pressed',x===c));sofaMat.color.set(c.dataset.b);document.getElementById('bname').textContent=c.getAttribute('aria-label');}));
-seg('fins',b=>{const a=SCH[b.dataset.s];fin(M.fRun,a[0]);fin(M.fEast,a[1]);fin(M.fTall,a[2]);fin(M.fIsland,a[3]);});
+seg('fins',b=>{const a=SCH[b.dataset.s];fin(M.fRun,a[0]);fin(M.fEast,a[1]);fin(M.fIsland,a[3]);});
 seg('vars',b=>{const h=b.dataset.v==='hoch';varHigh.visible=h;varOpen.visible=!h;});
 const tchips=[...document.querySelectorAll('.tchip')];tchips.forEach(c=>c.addEventListener('click',()=>{tchips.forEach(x=>x.setAttribute('aria-pressed',x===c));paintTiles(c.dataset.t);document.getElementById('tname').textContent=c.getAttribute('aria-label');}));
 const chips=[...document.querySelectorAll('.chip:not(.tchip):not(.schip)')];chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.setAttribute('aria-pressed',x===c));M.fabric.color.set(c.dataset.f);document.getElementById('fname').textContent=c.getAttribute('aria-label');}));

@@ -83,7 +83,7 @@ win('W',1.01,2.36,0.74,2.41,{f:FA,n:2,soldier:true});win('W',3.33,7.27,0.0,2.80,
 win('N',0.8,2.8,0.9,2.25,{f:FA,n:2,soldier:true});
 B(-3.95,-3.89,-0.17,1.88,1.09,2.19,M.door);win('E',1.09,2.19,1.93,2.40,{f:FA,n:1});B(-3.93,-3.89,1.88,1.93,1.09,2.19,M.frame);
 /* Altbau: Fenster nach EG- und OG-Plan sowie Ansichten Ost und West */
-/* Süd OG nach OG-Plan (Kind I); im EG-Plan an der Südwand kein Fenster */
+/* Süd OG nach OG-Plan (Kind I); EG-Südwand zum neuen Eingang ohne Fenster (bestätigt, Ansicht Süd ist alter Stand) */
 win('S',-5.67,-4.22,3.98,5.50,{f:FO,n:2,sill:true});
 win('E',3.90,5.90,0.90,2.40,{f:FO,n:3,sill:true});win('E',3.90,5.90,4.00,5.50,{f:FO,n:3,sill:true});win('E',8.60,10.60,4.00,5.50,{f:FO,n:3,sill:true});
 [[3.21,3.84,0.90,2.40],[5.96,6.59,0.90,2.40],[3.21,3.84,4.00,5.50],[5.96,6.59,4.00,5.50],[7.90,8.54,4.00,5.50],[10.66,11.29,4.00,5.50]].forEach(([a,b,y0,y1])=>B(ALT.x0-0.05,ALT.x0,y0,y1,a,b,M.shutter,1));

@@ -280,22 +280,22 @@ B(0.80,2.80,1.45,TALL,0,0.36,M.fRun,varHigh);B(0.82,2.78,1.444,1.45,0.30,0.315,l
 [1.30,1.80,2.30].forEach(x=>B(x-0.003,x+0.003,1.45,TALL,0.36,0.364,M.groove,varHigh,false));
 const ohLight=new THREE.PointLight('#ffd9a8',0.2,1.6,2);ohLight.position.set(1.8,1.30,0.3);varHigh.add(ohLight);
 varHigh.visible=false;
-/* Insel 2,20 × 1,28 m, ganz Stauraum: Schränke von beiden Seiten, Terrazzo-Platte, kein Sitzüberstand */
-const IX0=1.00,IX1=3.20,IZ0=1.70,IZ1=2.98;
+/* Insel 1,70 × 1,28 m mittig (je 1,00 m Durchgang), ganz Stauraum: Schränke von beiden Seiten, Terrazzo-Platte, kein Sitzüberstand */
+const IX0=1.00,IX1=2.70,IZ0=1.70,IZ1=2.98;
 B(IX0+0.10,IX1-0.10,0,PL,IZ0+0.10,IZ1-0.10,M.plinth,kit);
 B(IX0+0.04,IX1-0.04,PL,CAB,IZ0+0.04,IZ1-0.04,M.fIsland,kit);
 B(IX0,IX1,CAB,TOP,IZ0,IZ1,tzMat(IX1-IX0,IZ1-IZ0),kit);
 groovesAlong('x',IZ0+0.04,IX0+0.04,IX1-0.04,0.73,-1)(kit);
 groovesAlong('x',IZ1-0.04,IX0+0.04,IX1-0.04,0.55,1)(kit);
-B(1.70,2.50,TOP,TOP+0.004,1.85,2.37,M.black,kit,false);
+B(1.45,2.25,TOP,TOP+0.004,1.85,2.37,M.black,kit,false);
 const ringMat=new THREE.MeshBasicMaterial({color:'#3a3b3d'});
-[[1.90,1.98],[2.30,1.98],[1.90,2.24],[2.30,2.24]].forEach(([x,z],i)=>{const r=new THREE.Mesh(new THREE.RingGeometry(i%2?0.07:0.09,(i%2?0.07:0.09)+0.006,40),ringMat);r.rotation.x=-Math.PI/2;r.position.set(x,TOP+0.005,z);kit.add(r);});
-B(1.70,2.50,TOP+0.004,TOP+0.006,2.39,2.45,new THREE.MeshBasicMaterial({color:'#222'}),kit,false);
+[[1.65,1.98],[2.05,1.98],[1.65,2.24],[2.05,2.24]].forEach(([x,z],i)=>{const r=new THREE.Mesh(new THREE.RingGeometry(i%2?0.07:0.09,(i%2?0.07:0.09)+0.006,40),ringMat);r.rotation.x=-Math.PI/2;r.position.set(x,TOP+0.005,z);kit.add(r);});
+B(1.45,2.25,TOP+0.004,TOP+0.006,2.39,2.45,new THREE.MeshBasicMaterial({color:'#222'}),kit,false);
 /* Schneidebrett, Schale, Vase mit Eukalyptus */
-B(1.15,1.50,TOP,TOP+0.025,1.85,2.10,M.oakDark,kit);
-const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.13,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),new THREE.MeshStandardMaterial({color:'#e8e3da',roughness:.4,side:THREE.DoubleSide}));bowl.position.set(2.85,TOP+0.13,2.20);bowl.castShadow=true;kit.add(bowl);
-cerObj(2.75,TOP,2.65,0.07,0.24,'#cdbfa9',kit);
-for(let i=0;i<14;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(rnd(.025,.045),8,6),new THREE.MeshStandardMaterial({color:'#6f8a6c',roughness:.9}));b.position.set(2.75+rnd(-.14,.14),TOP+0.30+rnd(0,.28),2.65+rnd(-.10,.10));b.castShadow=true;kit.add(b);}
+B(1.08,1.40,TOP,TOP+0.025,1.85,2.10,M.oakDark,kit);
+const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.13,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),new THREE.MeshStandardMaterial({color:'#e8e3da',roughness:.4,side:THREE.DoubleSide}));bowl.position.set(2.48,TOP+0.13,2.20);bowl.castShadow=true;kit.add(bowl);
+cerObj(2.45,TOP,2.66,0.07,0.24,'#cdbfa9',kit);
+for(let i=0;i<14;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(rnd(.025,.045),8,6),new THREE.MeshStandardMaterial({color:'#6f8a6c',roughness:.9}));b.position.set(2.45+rnd(-.14,.14),TOP+0.30+rnd(0,.28),2.65+rnd(-.10,.10));b.castShadow=true;kit.add(b);}
 
 
 /* table 1.39–2.39 × 4.88–7.38 */
@@ -335,7 +335,7 @@ function rattan(x,z,y){const cord=new THREE.Mesh(new THREE.CylinderGeometry(0.00
   const s=new THREE.Mesh(new THREE.SphereGeometry(0.15,28,16,0,Math.PI*2,0,Math.PI*0.78),rattanMat);s.scale.set(1,1.15,1);s.position.set(x,y,z);s.castShadow=true;scene.add(s);
   const b=new THREE.Mesh(new THREE.SphereGeometry(0.045,12,8),M.lamp);b.position.set(x,y-0.02,z);scene.add(b);
   const l=new THREE.PointLight('#ffd9a8',0.35,3.4,2);l.position.set(x,y-0.2,z);scene.add(l);pend.push(l);}
-[1.50,2.10,2.70].forEach(x=>rattan(x,2.34,2.05));
+[1.35,1.85,2.35].forEach(x=>rattan(x,2.34,2.05));
 
 /* lights */
 const hemi=new THREE.HemisphereLight('#f4f7fb','#d8cdbd',0.75);scene.add(hemi);

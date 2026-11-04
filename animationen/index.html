@@ -112,10 +112,10 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
           <button id="s2" data-s="2" aria-pressed="false">Greige unten · Eiche hoch</button>
           <button id="s3" data-s="3" aria-pressed="false">Eiche · Lehmton</button>
         </div></div>
-      <div class="crow" data-for="kueche"><span class="lbl">Westseite</span>
+      <div class="crow" data-for="kueche"><span class="lbl">Über der Spüle</span>
         <div class="seg" id="vars">
-          <button id="v1" data-v="offen" aria-pressed="true">Offene Borde rechts</button>
-          <button id="v2" data-v="hoch" aria-pressed="false">Hochschränke beidseitig</button>
+          <button id="v1" data-v="offen" aria-pressed="true">Offene Borde</button>
+          <button id="v2" data-v="hoch" aria-pressed="false">Oberschränke</button>
         </div></div>
       <div class="crow" data-for="kueche"><span class="lbl">Polster</span>
         <button class="chip" id="f1" data-f="#8d8f8a" style="background:#8d8f8a" aria-label="Steingrau" aria-pressed="true"></button>
@@ -178,10 +178,14 @@ controls.enableDamping=true;controls.dampingFactor=.08;controls.maxPolarAngle=Ma
 function canvasTex(w,h,draw,rx,ry){const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);
   const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rx||1,ry||1);t.anisotropy=8;return t;}
 function rnd(a,b){return a+Math.random()*(b-a)}
-const terrazzo=canvasTex(1024,1024,(g,w,h)=>{g.fillStyle='#ece8e1';g.fillRect(0,0,w,h);
-  const cols=['#b9b4ab','#8f8a83','#d9d3c8','#6f6a64','#c8b9a6','#ffffff','#a9a39a'];
-  for(let i=0;i<9000;i++){g.fillStyle=cols[i%cols.length];g.beginPath();const r=rnd(1,i%9===0?6:3.2);
-   g.ellipse(rnd(0,w),rnd(0,h),r,r*rnd(.6,1),rnd(0,3),0,7);g.fill();}},W,L);
+const terrazzo=canvasTex(1024,1024,(g,w,h)=>{g.fillStyle='#e3dacb';g.fillRect(0,0,w,h);
+  /* beiger Terrazzo nach Muster (viamaterial): heller warmer Grund, dichte eckige Beige-Splitter, wenige weiße und grünlich-graue */
+  for(let i=0;i<14000;i++){g.fillStyle=['#d9d2c7','#e4ded5','#cfc6b8'][i%3];g.fillRect(rnd(0,w),rnd(0,h),1.4,1.4);}
+  const cols=['#cdb999','#c2ab89','#d9c9b0','#bba383','#d4c1a5','#c8b293','#f3eee6','#b4aa94','#e2d3bc','#b9a07e'];
+  for(let i=0;i<3600;i++){const cx=rnd(0,w),cy=rnd(0,h),r=rnd(3,i%7===0?13:8.5),k=5+(i%3),a0=rnd(0,6.3);
+   g.fillStyle=cols[i%cols.length];g.beginPath();
+   for(let j=0;j<k;j++){const a=a0+j*6.283/k+rnd(-.35,.35),rr=r*rnd(.55,1.15)*(j%2?rnd(.6,.9):1);g.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr*rnd(.6,1));}
+   g.closePath();g.fill();}},W,L);
 function oakTex(vertical){return canvasTex(512,512,(g,w,h)=>{g.fillStyle='#c9a06a';g.fillRect(0,0,w,h);
   for(let i=0;i<140;i++){g.strokeStyle=`rgba(${120+rnd(-20,20)|0},${80+rnd(-15,15)|0},${40|0},${rnd(.08,.28)})`;g.lineWidth=rnd(.6,2.4);
    g.beginPath();let x=rnd(0,w);g.moveTo(x,0);for(let y=0;y<=h;y+=32){x+=rnd(-2.5,2.5);g.lineTo(x,y)}g.stroke();}
@@ -242,7 +246,7 @@ function groovesAlong(axis,fixed,a,b,step,sign){return p=>{
   for(let i=1;i<n;i++){const t=a+(b-a)*i/n;axis==='x'?B(t-0.003,t+0.003,PL,CAB,fixed,fixed+0.004*sign,M.groove,p,false):B(fixed,fixed+0.004*sign,PL,CAB,t-0.003,t+0.003,M.groove,p,false);}
   const y=CAB-0.18;axis==='x'?B(a,b,y-0.003,y+0.003,fixed,fixed+0.004*sign,M.groove,p,false):B(fixed,fixed+0.004*sign,y-0.003,y+0.003,a,b,M.groove,p,false);};}
 /* ===== Küche neu (3.11.): eine Zeile an der Südwand, große Insel, Eiche + zweiter Ton =====
-   Südwand z = 0, Fenster x 0,80–2,80 (Brüstung 1,00). Links (Ost) Hochschrankblock mit Kühlschrank,
+   Südwand z = 0, ohne Fenster. Links (Ost) Hochschrankblock mit Kühlschrank,
    rechts (West) je nach Variante Hochschrank mit Backöfen oder offene Eichenborde mit Lichtleiste. */
 const TALL=2.60;
 /* zweiter Ton: matter Sand-Greige-Lack auf den Hochschränken (Variante 1) */
@@ -252,46 +256,47 @@ B(0,0.80,PL,TALL,0,0.62,M.fEast,kit);B(0.06,0.80,0,PL,0,0.56,M.plinth,kit);
 B(0.398,0.402,PL,TALL,0.62,0.624,M.groove,kit,false);B(0,0.80,1.40,1.404,0.62,0.624,M.groove,kit,false);
 /* Zeile unter dem Fenster mit Spüle */
 const varOpen=new THREE.Group(),varHigh=new THREE.Group();kit.add(varOpen);kit.add(varHigh);
+/* 4.11.: Südwand ohne Fenster. Zeile mit Spüle 0,80–2,80, in der Ecke zum Garten ein zweiter Hochschrank */
 run(0.80,2.80,0,0.62,'s',kit,[groovesAlong('x',0.62,0.80,2.80,0.66,1)],M.fRun);
 B(1.42,2.18,TOP-0.001,TOP+0.002,0.14,0.50,M.sink,kit,false);
 const tap=new THREE.Group();kit.add(tap);
 const tp=new THREE.Mesh(new THREE.CylinderGeometry(0.018,0.022,0.32,16),M.steel);tp.position.set(1.80,TOP+0.16,0.08);tp.castShadow=true;tap.add(tp);
 const arc=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.014,10,24,Math.PI),M.steel);arc.position.set(1.80,TOP+0.32,0.19);arc.rotation.y=Math.PI/2;arc.castShadow=true;tap.add(arc);
-/* Variante 1 (Standard): West Unterschrank mit Backofen, darüber offene Eichenborde mit Lichtleiste */
-run(2.80,3.70,0,0.62,'s',varOpen,[groovesAlong('x',0.62,2.80,3.70,0.9,1)],M.fRun);
-B(2.88,3.62,0.16,0.76,0.62,0.624,M.black,varOpen,false);
+/* Hochschrank West (Ecke zum Garten): Backofen und Kompaktgerät, 0,90 m */
+B(2.80,3.70,PL,TALL,0,0.62,M.fEast,kit);B(2.80,3.64,0,PL,0,0.56,M.plinth,kit);
+B(3.248,3.252,PL,TALL,0.62,0.624,M.groove,kit,false);
+B(2.90,3.60,0.95,1.55,0.62,0.624,M.black,kit,false);B(2.90,3.60,1.62,2.08,0.62,0.624,M.black,kit,false);
 const ledMat=new THREE.MeshStandardMaterial({color:'#fff4e0',emissive:'#ffdcae',emissiveIntensity:1.2});
-[1.45,1.90,2.35].forEach(y=>{B(2.84,3.70,y,y+0.04,0,0.28,M.oakDark,varOpen);B(2.86,3.68,y-0.006,y,0.22,0.235,ledMat,varOpen,false);});
-const shelfLight=new THREE.PointLight('#ffd9a8',0.22,1.6,2);shelfLight.position.set(3.25,1.30,0.3);varOpen.add(shelfLight);
+/* Variante 1 (Standard): drei offene Eichenborde über der Spüle mit Lichtleiste */
+[1.50,1.95,2.40].forEach(y=>{B(0.80,2.80,y,y+0.04,0,0.28,M.oakDark,varOpen);B(0.82,2.78,y-0.006,y,0.22,0.235,ledMat,varOpen,false);});
+const shelfLight=new THREE.PointLight('#ffd9a8',0.25,1.8,2);shelfLight.position.set(1.8,1.35,0.3);varOpen.add(shelfLight);
 function cerObj(x,y,z,r,h,c,p){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r*0.8,h,20),new THREE.MeshStandardMaterial({color:c,roughness:.55}));m.position.set(x,y+h/2,z);m.castShadow=true;p.add(m);}
-[[2.98,1.49,.12,.07,.08,'#e2dbcf'],[3.18,1.49,.12,.08,.07,'#cfc6b8'],[3.42,1.49,.12,.07,.09,'#e2dbcf'],[3.0,1.94,.13,.09,.05,'#d8cfc1'],[3.0,1.99,.13,.09,.05,'#d8cfc1'],[3.3,1.94,.12,.05,.16,'#b9ad9c'],[3.55,1.94,.12,.04,.11,'#e6e0d6'],[3.1,2.39,.12,.06,.14,'#cfc6b8'],[3.45,2.39,.12,.08,.06,'#e2dbcf']]
+[[0.98,1.54,.12,.07,.08,'#e2dbcf'],[1.18,1.54,.12,.08,.07,'#cfc6b8'],[2.45,1.54,.12,.07,.09,'#e2dbcf'],[2.62,1.54,.12,.05,.14,'#b9ad9c'],
+ [1.05,1.99,.13,.09,.05,'#d8cfc1'],[1.05,2.04,.13,.09,.05,'#d8cfc1'],[1.70,1.99,.12,.05,.16,'#b9ad9c'],[1.95,1.99,.12,.04,.11,'#e6e0d6'],[2.55,1.99,.12,.06,.12,'#cfc6b8'],
+ [1.30,2.44,.12,.06,.14,'#cfc6b8'],[2.10,2.44,.12,.08,.06,'#e2dbcf']]
   .forEach(([x,y,z,r,h,c])=>cerObj(x,y,z,r,h,c,varOpen));
-/* Variante 2: West zweiter Hochschrankblock mit Backofen und Kompaktgerät */
-B(2.80,3.70,PL,TALL,0,0.62,M.fEast,varHigh);B(2.80,3.64,0,PL,0,0.56,M.plinth,varHigh);
-B(3.248,3.252,PL,TALL,0.62,0.624,M.groove,varHigh,false);
-B(2.90,3.60,0.95,1.55,0.62,0.624,M.black,varHigh,false);B(2.90,3.60,1.62,2.08,0.62,0.624,M.black,varHigh,false);
+/* Variante 2: geschlossene Oberschränke über der Spüle bis Höhe Hochschrank, mit Lichtleiste */
+B(0.80,2.80,1.45,TALL,0,0.36,M.fRun,varHigh);B(0.82,2.78,1.444,1.45,0.30,0.315,ledMat,varHigh,false);
+[1.30,1.80,2.30].forEach(x=>B(x-0.003,x+0.003,1.45,TALL,0.36,0.364,M.groove,varHigh,false));
+const ohLight=new THREE.PointLight('#ffd9a8',0.2,1.6,2);ohLight.position.set(1.8,1.30,0.3);varHigh.add(ohLight);
 varHigh.visible=false;
-/* Insel 2,20 × 1,28 m: Korpus wie die Zeile, Terrazzo-Platte, Sitzüberstand nach Norden mit drei Hockern */
+/* Insel 2,20 × 1,28 m, ganz Stauraum: Schränke von beiden Seiten, Terrazzo-Platte, kein Sitzüberstand */
 const IX0=1.00,IX1=3.20,IZ0=1.70,IZ1=2.98;
-B(IX0+0.10,IX1-0.10,0,PL,IZ0+0.10,IZ1-0.34,M.plinth,kit);
-B(IX0+0.04,IX1-0.04,PL,CAB,IZ0+0.04,IZ1-0.28,M.fIsland,kit);
+B(IX0+0.10,IX1-0.10,0,PL,IZ0+0.10,IZ1-0.10,M.plinth,kit);
+B(IX0+0.04,IX1-0.04,PL,CAB,IZ0+0.04,IZ1-0.04,M.fIsland,kit);
 B(IX0,IX1,CAB,TOP,IZ0,IZ1,tzMat(IX1-IX0,IZ1-IZ0),kit);
 groovesAlong('x',IZ0+0.04,IX0+0.04,IX1-0.04,0.73,-1)(kit);
+groovesAlong('x',IZ1-0.04,IX0+0.04,IX1-0.04,0.55,1)(kit);
 B(1.70,2.50,TOP,TOP+0.004,1.85,2.37,M.black,kit,false);
 const ringMat=new THREE.MeshBasicMaterial({color:'#3a3b3d'});
 [[1.90,1.98],[2.30,1.98],[1.90,2.24],[2.30,2.24]].forEach(([x,z],i)=>{const r=new THREE.Mesh(new THREE.RingGeometry(i%2?0.07:0.09,(i%2?0.07:0.09)+0.006,40),ringMat);r.rotation.x=-Math.PI/2;r.position.set(x,TOP+0.005,z);kit.add(r);});
 B(1.70,2.50,TOP+0.004,TOP+0.006,2.39,2.45,new THREE.MeshBasicMaterial({color:'#222'}),kit,false);
-/* Schneidebrett, Schale, Vase mit Eukalyptus wie im Vorbild */
+/* Schneidebrett, Schale, Vase mit Eukalyptus */
 B(1.15,1.50,TOP,TOP+0.025,1.85,2.10,M.oakDark,kit);
 const bowl=new THREE.Mesh(new THREE.SphereGeometry(0.13,24,12,0,Math.PI*2,Math.PI/2,Math.PI/2),new THREE.MeshStandardMaterial({color:'#e8e3da',roughness:.4,side:THREE.DoubleSide}));bowl.position.set(2.85,TOP+0.13,2.20);bowl.castShadow=true;kit.add(bowl);
 cerObj(2.75,TOP,2.65,0.07,0.24,'#cdbfa9',kit);
 for(let i=0;i<14;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(rnd(.025,.045),8,6),new THREE.MeshStandardMaterial({color:'#6f8a6c',roughness:.9}));b.position.set(2.75+rnd(-.14,.14),TOP+0.30+rnd(0,.28),2.65+rnd(-.10,.10));b.castShadow=true;kit.add(b);}
-/* Hocker am Sitzüberstand */
-function stool(x,z){const g=new THREE.Group();g.position.set(x,0,z);kit.add(g);
-  [[-0.14,-0.14],[0.14,-0.14],[-0.14,0.14],[0.14,0.14]].forEach(([a,b])=>B(a-0.015,a+0.015,0,0.62,b-0.015,b+0.015,M.oak,g));
-  B(-0.15,0.15,0.22,0.24,-0.15,0.15,M.oak,g);
-  const s=new THREE.Mesh(new THREE.CylinderGeometry(0.19,0.19,0.06,24),M.fabric);s.position.y=0.65;s.castShadow=true;g.add(s);}
-[1.50,2.10,2.70].forEach(x=>stool(x,IZ1+0.22));
+
 
 /* table 1.39–2.39 × 4.88–7.38 */
 const TX0=1.39,TX1=2.39,TZ0=4.88,TZ1=7.38,TH=0.75;
@@ -362,7 +367,7 @@ const ceilings=new THREE.Group();scene.add(ceilings);
 const dz0=0.93;
 const door=new THREE.MeshStandardMaterial({color:'#3a3d40',roughness:.55});
 /* every wall of the ground floor, taken 1:1 from the filled wall shapes of the architect's PDF (metres, x east, z south) */
-const SH=[[-3.89,-0.3,-3.59,1.12],[-3.59,-0.3,-3.03,0],[-2.39,-0.3,0.8,0],[2.8,-0.3,4.0,0],[-1.82,0,-1.7,1.05],[-0.3,0,0,1.05],[3.7,0,4.0,1.05],
+const SH=[[-3.89,-0.3,-3.59,1.12],[-3.59,-0.3,-3.03,0],[-2.39,-0.3,4.0,0],[-1.82,0,-1.7,1.05],[-0.3,0,0,1.05],[3.7,0,4.0,1.05],
  [-3.59,0.93,-3.18,1.05],[-2.53,0.93,-1.82,1.05],[-7.22,2.4,-3.0,2.7],[-1.82,2.4,-1.7,3.22],[-0.3,2.4,0,2.7],[3.7,2.4,4.0,3.3],[-7.22,2.7,-6.92,3.8],
  [-0.3,2.7,0,3.1],[-1.7,3.1,0,3.22],[-7.22,3.8,-7.11,3.83],[-1.82,5.32,-1.7,7.32],[-0.3,5.32,0,8.89],[-1.7,5.9,-1.3,6.02],[-7.22,5.97,-7.11,6.0],
  [-7.22,6.0,-6.92,7.9],[-6.92,7.2,-5.67,7.5],[-4.22,7.2,-3.12,7.5],[-3.12,7.2,-3.0,7.83],[-1.7,7.2,-1.3,7.32],[3.7,7.25,4.0,8.15],[-8.42,7.6,-8.06,7.9],
@@ -375,8 +380,8 @@ function topOf(x0,z0,x1,z1){return (z1<=2.41||(x0>=-0.31&&z0<5.3)||x0>=3.69||(z0
 SH.forEach(([x0,z0,x1,z1])=>B(x0,x1,0,topOf(x0,z0,x1,z1),z0,z1,M.wall,shell));
 /* openings: [x0,z0,x1,z1,type,base,sill,head] */
 const OP=[
- [-3.03,-0.3,-2.39,0,'win',0,1.40,2.10],[0.8,-0.3,2.8,0,'win',0,1.00,2.25],[-3.89,1.12,-3.59,2.40,'entry',0,0,2.20],
- [-0.3,1.05,0,2.40,'open',0,0,2.10],[3.7,1.05,4.0,2.40,'win',0,1.0,2.25],[3.7,3.3,4.0,7.25,'front',0,0,2.78],
+ [-3.03,-0.3,-2.39,0,'win',0,1.40,2.10],[-3.89,1.12,-3.59,2.40,'entry',0,0,2.20],
+ [-0.3,1.05,0,2.40,'open',0,0,2.10],[3.7,1.05,4.0,2.40,'fix',0,0,2.78],[3.7,3.3,4.0,7.25,'front',0,0,2.78],
  [0.8,8.15,2.8,8.45,'win',0,0.9,2.25],[-0.3,3.22,0,5.32,'open',0,0,2.20],[-3.18,0.93,-2.53,1.05,'open',0,0,2.05],
  [-1.70,0.93,-0.30,1.05,'open',0,0,2.05],[-3.0,2.4,-1.82,2.7,'open',0,0,2.20],[-7.22,3.8,-6.92,6.0,'win',F,F+0.85,F+2.10],
  [-5.67,7.2,-4.22,7.5,'open',F,0,F+2.10],[-3.0,7.2,-1.82,7.5,'open',F,0,F+2.10],[-3.12,7.83,-3.0,8.69,'open',F,0,F+2.05],

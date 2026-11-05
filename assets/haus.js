@@ -144,10 +144,10 @@ function dormer(x0,x1,z0,z1,face,wins){const g=new THREE.Group();roofG.add(g);
   wins.forEach(w=>{const f={S:{S:z0},N:{N:z1},E:{E:x0},W:{W:x1}}[face];g.add(win(face,w[0],w[1],w[2],w[3],{f,n:w[4]||2,sill:true}));});
   return g;}
 dormer(-4.70,-2.52,ALT.z0,ALT.z0+1.4,'S',[[-4.16,-3.06,7.44,8.80,2]]); /* mittig, 2,18 m breit (DG Bauantrag) */
-/* Norden (5.11.): Gaube über dem Nebeneingang entfällt, stattdessen zwei Dachflächenfenster (Velux ca. 78 × 140 cm) in der Walmfläche, mittig */
-(function(){const ov=0.78,ze=ALT.z1+ov,ye=EAVE+0.2,zr=9.12,yr=10.99,a=Math.atan2(yr-ye,ze-zr),L=1.40,W=0.78,y0=7.45;
+/* Norden (5.11.): Gaube über dem Nebeneingang entfällt, stattdessen zwei Dachflächenfenster maximal groß (Velux UK10, 134 × 160 cm) in der Walmfläche, mittig */
+(function(){const ov=0.78,ze=ALT.z1+ov,ye=EAVE+0.2,zr=9.12,yr=10.99,a=Math.atan2(yr-ye,ze-zr),L=1.60,W=1.34,y0=7.45;
   const z0=ze-(y0-ye)/Math.tan(a),zc=z0-Math.cos(a)*L/2,yc=y0+Math.sin(a)*L/2;
-  [-4.15,-3.07].forEach(xc=>{const g=new THREE.Group();g.position.set(xc,yc,zc);g.rotation.x=-(Math.PI/2-a);roofG.add(g);
+  [-4.38,-2.84].forEach(xc=>{const g=new THREE.Group();g.position.set(xc,yc,zc);g.rotation.x=-(Math.PI/2-a);roofG.add(g);
     const bx=(w,h,d,oz,mat)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.z=oz;m.castShadow=true;m.receiveShadow=true;g.add(m);};
     bx(W+0.10,L+0.10,0.05,0.03,M.frame);            /* Eindeckrahmen anthrazit */
     bx(W-0.08,L-0.10,0.02,0.065,M.glass);           /* Glas */

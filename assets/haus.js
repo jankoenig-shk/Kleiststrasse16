@@ -143,8 +143,15 @@ function dormer(x0,x1,z0,z1,face,wins){const g=new THREE.Group();roofG.add(g);
   const b=B(x0,x1,EAVE+0.2,TOPD,z0,z1,M.dormer,1,g);gaub.push(b);B(x0-0.15,x1+0.15,TOPD,TOPD+0.12,z0-0.15,z1+0.15,M.zinc,null,g);
   wins.forEach(w=>{const f={S:{S:z0},N:{N:z1},E:{E:x0},W:{W:x1}}[face];g.add(win(face,w[0],w[1],w[2],w[3],{f,n:w[4]||2,sill:true}));});
   return g;}
-dormer(-4.70,-2.52,ALT.z0,ALT.z0+1.4,'S',[[-4.16,-3.06,7.44,8.80,2]]); /* mittig, 2,18 m breit (DG Bauantrag) */
-/* Nordgaube über dem Nebeneingang: gleiche Größe wie die Südgaube (Angabe Bauherr, DG-Plan Entwurf II zeigt noch die breite Gaube) */
+/* Süden (5.11.): keine Gaube mehr, stattdessen zwei Dachflächenfenster (Velux ca. 78 × 140 cm) in der Walmfläche, mittig */
+(function(){const ov=0.78,ze=ALT.z0-ov,ye=EAVE+0.2,zr=5.33,yr=10.99,a=Math.atan2(yr-ye,zr-ze),L=1.40,W=0.78,y0=7.45;
+  const z0=ze+(y0-ye)/Math.tan(a),zc=z0+Math.cos(a)*L/2,yc=y0+Math.sin(a)*L/2;
+  [-4.15,-3.07].forEach(xc=>{const g=new THREE.Group();g.position.set(xc,yc,zc);g.rotation.x=Math.PI/2-a;roofG.add(g);
+    const bx=(w,h,d,oz,mat)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.z=oz;m.castShadow=true;m.receiveShadow=true;g.add(m);};
+    bx(W+0.10,L+0.10,0.05,-0.03,M.frame);           /* Eindeckrahmen anthrazit */
+    bx(W-0.08,L-0.10,0.02,-0.065,M.glass);          /* Glas */
+    bx(W+0.10,0.06,0.07,-0.04,M.frame);});})();
+/* Nordgaube über dem Nebeneingang: 2,18 m breit (Maß der früheren Südgaube) (Angabe Bauherr, DG-Plan Entwurf II zeigt noch die breite Gaube) */
 /* Bauamt: Nordgaube wegen Grenzabstand 0,50 m hinter die Außenwand zurückgesetzt. Dachfläche liegt dort bei ca. 7,65 m, daher Fenster niedriger */
 /* Plan: Gaubenhöhe bleibt, Fensterbank so niedrig wie möglich (knapp über dem Dachanschluss), Breite wie Südgaube */
 dormer(-4.70,-2.52,ALT.z1-0.5-1.4,ALT.z1-0.5,'N',[[-4.16,-3.06,8.00,8.80,2]]);

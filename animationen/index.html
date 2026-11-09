@@ -115,7 +115,7 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
       <div class="crow" data-for="kueche"><span class="lbl">Insel</span>
         <div class="seg" id="lay">
           <button data-l="laengs" aria-pressed="true">Längs · 1,70 × 1,28 m</button>
-          <button data-l="quer" aria-pressed="false">Quer · Blick zum Garten · 2,10 × 1,40 m</button>
+          <button data-l="quer" aria-pressed="false">Quer · Blick zum Garten · 2,10 × 1,40 m</button><button data-l="c1" aria-pressed="false">Eckküche · Halbinsel</button><button data-l="c2" aria-pressed="false">Eckküche · Insel mittig</button>
         </div></div>
       <div class="crow" data-for="kueche"><span class="lbl">Inselfront</span>
         <div class="seg" id="islm"><button data-m="front" aria-pressed="true">wie Fronten</button><button data-m="tz" aria-pressed="false">Terrazzo</button><button data-m="trav" aria-pressed="false">Travertin</button><button data-m="mc" aria-pressed="false">Mikrozement</button><button data-m="salbei" aria-pressed="false">Salbeigrün</button><button data-m="anth" aria-pressed="false">Anthrazit</button></div></div>
@@ -258,21 +258,22 @@ function groovesAlong(axis,fixed,a,b,step,sign){return p=>{
 const TALL=2.60;
 /* zweiter Ton: matter Sand-Greige-Lack auf den Hochschränken (Variante 1) */
 M.fEast.map=null;M.fEast.color.set('#b7a48b');M.fEast.roughness=.78;M.fEast.needsUpdate=true;
+const zeA=new THREE.Group();kit.add(zeA);
 /* Hochschrank Ost: Kühl-Gefrier-Kombination, 0,80 m */
-B(0,0.80,PL,TALL,0,0.62,M.fEast,kit);B(0.06,0.80,0,PL,0,0.56,M.plinth,kit);
-B(0.398,0.402,PL,TALL,0.62,0.624,M.groove,kit,false);B(0,0.80,1.40,1.404,0.62,0.624,M.groove,kit,false);
+B(0,0.80,PL,TALL,0,0.62,M.fEast,zeA);B(0.06,0.80,0,PL,0,0.56,M.plinth,zeA);
+B(0.398,0.402,PL,TALL,0.62,0.624,M.groove,zeA,false);B(0,0.80,1.40,1.404,0.62,0.624,M.groove,zeA,false);
 /* Zeile unter dem Fenster mit Spüle */
-const varOpen=new THREE.Group(),varHigh=new THREE.Group();kit.add(varOpen);kit.add(varHigh);
+const varOpen=new THREE.Group(),varHigh=new THREE.Group();zeA.add(varOpen);zeA.add(varHigh);
 /* 4.11.: Südwand ohne Fenster. Zeile mit Spüle 0,80–2,80, in der Ecke zum Garten ein zweiter Hochschrank */
-run(0.80,2.80,0,0.62,'s',kit,[groovesAlong('x',0.62,0.80,2.80,0.66,1)],M.fRun);
-B(1.42,2.18,TOP-0.001,TOP+0.002,0.14,0.50,M.sink,kit,false);
-const tap=new THREE.Group();kit.add(tap);
+run(0.80,2.80,0,0.62,'s',zeA,[groovesAlong('x',0.62,0.80,2.80,0.66,1)],M.fRun);
+B(1.42,2.18,TOP-0.001,TOP+0.002,0.14,0.50,M.sink,zeA,false);
+const tap=new THREE.Group();zeA.add(tap);
 const tp=new THREE.Mesh(new THREE.CylinderGeometry(0.018,0.022,0.32,16),M.steel);tp.position.set(1.80,TOP+0.16,0.08);tp.castShadow=true;tap.add(tp);
 const arc=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.014,10,24,Math.PI),M.steel);arc.position.set(1.80,TOP+0.32,0.19);arc.rotation.y=Math.PI/2;arc.castShadow=true;tap.add(arc);
 /* Hochschrank West (Ecke zum Garten): Backofen und Kompaktgerät, 0,90 m */
-B(2.80,3.70,PL,TALL,0,0.62,M.fEast,kit);B(2.80,3.64,0,PL,0,0.56,M.plinth,kit);
-B(3.248,3.252,PL,TALL,0.62,0.624,M.groove,kit,false);
-B(2.90,3.60,0.95,1.55,0.62,0.624,M.black,kit,false);B(2.90,3.60,1.62,2.08,0.62,0.624,M.black,kit,false);
+B(2.80,3.70,PL,TALL,0,0.62,M.fEast,zeA);B(2.80,3.64,0,PL,0,0.56,M.plinth,zeA);
+B(3.248,3.252,PL,TALL,0.62,0.624,M.groove,zeA,false);
+B(2.90,3.60,0.95,1.55,0.62,0.624,M.black,zeA,false);B(2.90,3.60,1.62,2.08,0.62,0.624,M.black,zeA,false);
 const ledMat=new THREE.MeshStandardMaterial({color:'#fff4e0',emissive:'#ffdcae',emissiveIntensity:1.2});
 /* Variante 1 (Standard): drei offene Eichenborde über der Spüle mit Lichtleiste */
 [1.50,1.95,2.40].forEach(y=>{B(0.80,2.80,y,y+0.04,0,0.28,M.oakDark,varOpen);B(0.82,2.78,y-0.006,y,0.22,0.235,ledMat,varOpen,false);});
@@ -365,6 +366,45 @@ function rattan(x,z,y,p=scene){const cord=new THREE.Mesh(new THREE.CylinderGeome
   const l=new THREE.PointLight('#ffd9a8',0.35,3.4,2);l.position.set(x,y-0.2,z);p.add(l);pend.push(l);}
 [1.35,1.85,2.35].forEach(x=>rattan(x,2.34,2.05,islA));
 [2.15,2.67,3.19].forEach(z=>rattan(1.85,z,2.05,islB));
+/* Variante C (9.11.): Eckküche. Südwand ganz Hochschränke bis unter die Decke, an der Gartenwand normales Fenster
+   (Brüstung 1,00 m) mit Küchenzeile und Spüle. C1: Halbinsel von der Gartenzeile halb in den Raum. C2: kleinere Insel mittig. */
+const cC=new THREE.Group(),c1=new THREE.Group(),c2=new THREE.Group();kit.add(cC);cC.add(c1);cC.add(c2);cC.visible=false;c2.visible=false;
+const TW=H-0.01;
+B(0,3.70,0,PL,0,0.56,M.plinth,cC);B(0,3.70,PL,TW,0,0.62,M.fEast,cC);
+[0.74,1.48,2.22,2.96].forEach(x=>B(x-0.003,x+0.003,PL,TW,0.62,0.624,M.groove,cC,false));
+B(0,3.70,2.397,2.403,0.62,0.624,M.groove,cC,false);
+B(0.81,1.41,0.95,1.55,0.62,0.624,M.black,cC,false);B(0.81,1.41,1.62,2.08,0.62,0.624,M.black,cC,false);
+/* Fenster zum Garten mit Brüstung statt bodentiefer Scheibe */
+B(3.70,4.00,0,1.00,1.05,2.40,M.wall,cC);B(3.70,3.74,0.985,1.00,1.05,2.40,M.wall,cC);
+/* Spüle unter dem Fenster mit Armatur */
+B(3.18,3.56,TOP-0.001,TOP+0.002,1.34,2.10,M.sink,cC,false);
+const tpC=new THREE.Mesh(new THREE.CylinderGeometry(0.018,0.022,0.32,16),M.steel);tpC.position.set(3.62,TOP+0.16,1.72);tpC.castShadow=true;cC.add(tpC);
+const arcC=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.014,10,24,Math.PI),M.steel);arcC.position.set(3.51,TOP+0.32,1.72);arcC.castShadow=true;cC.add(arcC);
+/* C1: Zeile Garten bis z 2,60, Halbinsel 2,10 × 1,00 m nach Westen in den Raum, Kochfeld zur Küche */
+run(3.08,3.70,0.62,2.60,'w',c1,[groovesAlong('z',3.08,0.62,2.60,0.66,-1)],M.fRun);
+B(1.70,3.70,0,PL,2.66,3.54,M.plinth,c1);B(1.64,3.70,PL,CAB,2.64,3.56,M.fIsland,c1);
+B(1.60,3.70,CAB,TOP,2.60,3.60,tzMat(2.10,1.00),c1);
+groovesAlong('x',2.64,1.64,3.08,0.72,-1)(c1);groovesAlong('x',3.56,1.64,3.70,0.69,1)(c1);
+B(2.10,2.90,TOP,TOP+0.004,2.70,3.22,M.black,c1,false);
+[[2.30,2.83],[2.70,2.83],[2.30,3.09],[2.70,3.09]].forEach(([x,z],i)=>{const r=new THREE.Mesh(new THREE.RingGeometry(i%2?0.07:0.09,(i%2?0.07:0.09)+0.006,40),ringMat);r.rotation.x=-Math.PI/2;r.position.set(x,TOP+0.005,z);c1.add(r);});
+B(2.10,2.90,TOP+0.004,TOP+0.006,3.24,3.30,new THREE.MeshBasicMaterial({color:'#222'}),c1,false);
+B(3.15,3.50,TOP,TOP+0.025,2.80,3.20,M.oakDark,c1);
+cerObj(1.85,TOP,3.10,0.07,0.24,'#cdbfa9',c1);
+for(let i=0;i<14;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(rnd(.025,.045),8,6),new THREE.MeshStandardMaterial({color:'#6f8a6c',roughness:.9}));b.position.set(1.85+rnd(-.14,.14),TOP+0.30+rnd(0,.28),3.10+rnd(-.10,.10));b.castShadow=true;c1.add(b);}
+[1.95,2.55,3.15].forEach(x=>rattan(x,3.10,2.05,c1));
+/* C2: Zeile Garten bis z 3,00, Insel 1,08 × 1,40 m mittig, je 1,00 m Durchgang */
+run(3.08,3.70,0.62,3.00,'w',c2,[groovesAlong('z',3.08,0.62,3.00,0.6,-1)],M.fRun);
+B(3.20,3.55,TOP,TOP+0.025,2.40,2.80,M.oakDark,c2);
+B(1.10,1.98,0,PL,1.72,2.92,M.plinth,c2);B(1.04,2.04,PL,CAB,1.66,2.98,M.fIsland,c2);
+B(1.00,2.08,CAB,TOP,1.62,3.02,tzMat(1.08,1.40),c2);
+groovesAlong('z',1.04,1.66,2.98,0.66,-1)(c2);groovesAlong('z',2.04,1.66,2.98,0.66,1)(c2);
+B(1.10,1.62,TOP,TOP+0.004,1.92,2.72,M.black,c2,false);
+[[1.24,2.12],[1.24,2.52],[1.48,2.12],[1.48,2.52]].forEach(([x,z],i)=>{const r=new THREE.Mesh(new THREE.RingGeometry(i%2?0.07:0.09,(i%2?0.07:0.09)+0.006,40),ringMat);r.rotation.x=-Math.PI/2;r.position.set(x,TOP+0.005,z);c2.add(r);});
+B(1.64,1.70,TOP+0.004,TOP+0.006,1.92,2.72,new THREE.MeshBasicMaterial({color:'#222'}),c2,false);
+cerObj(1.85,TOP,2.85,0.07,0.24,'#cdbfa9',c2);
+for(let i=0;i<14;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(rnd(.025,.045),8,6),new THREE.MeshStandardMaterial({color:'#6f8a6c',roughness:.9}));b.position.set(1.85+rnd(-.14,.14),TOP+0.30+rnd(0,.28),2.85+rnd(-.10,.10));b.castShadow=true;c2.add(b);}
+[2.05,2.60].forEach(z=>rattan(1.54,z,2.05,c2));
+
 
 /* lights */
 const hemi=new THREE.HemisphereLight('#f4f7fb','#d8cdbd',0.75);scene.add(hemi);
@@ -950,7 +990,9 @@ const mcT=canvasTex(512,512,(g,w,h)=>{g.fillStyle='#cbbca7';g.fillRect(0,0,w,h);
 const ISL={tz:{map:tzI,c:'#ffffff',r:.45},trav:{map:travT,c:'#ffffff',r:.7},mc:{map:mcT,c:'#ffffff',r:.88},salbei:{map:null,c:'#8e9a85',r:.72},anth:{map:null,c:'#3c3d3f',r:.6}};
 let islK='front';
 function applyIsl(){if(islK==='front')return;const f=ISL[islK];M.fIsland.map=f.map;M.fIsland.color.set(f.c);M.fIsland.roughness=f.r;M.fIsland.needsUpdate=true;}
-function layout(q){islA.visible=!q;islB.visible=q;dine.position.z=q?0.27:0;}
+function layout(m){if(m===true)m='quer';if(m===false||!m)m='laengs';
+  zeA.visible=(m==='laengs'||m==='quer');islA.visible=m==='laengs';islB.visible=m==='quer';
+  cC.visible=(m==='c1'||m==='c2');c1.visible=m==='c1';c2.visible=m==='c2';dine.position.z=m==='quer'?0.27:0;}
 const FIN={oak:{map:oakV,c:'#ffffff',r:.62},greige:{map:null,c:'#b7a48b',r:.78},beige:{map:null,c:'#d8ccb8',r:.75},lehm:{map:null,c:'#b59c80',r:.8}};
 function fin(mat,k){const f=FIN[k];mat.map=f.map;mat.color.set(f.c);mat.roughness=f.r;mat.needsUpdate=true;}
 const SCH={1:['oak','greige','','oak'],2:['greige','oak','','oak'],3:['oak','lehm','','lehm']};
@@ -958,7 +1000,7 @@ document.getElementById('hw1').addEventListener('click',e=>{const t=window.__hwr
 seg('sofa',b=>{setSofa(b.dataset.l);if(!/^wohnen/.test(mode)){const cb=document.getElementById('c12');cb.click();}});
 const schips=[...document.querySelectorAll('.schip')];schips.forEach(c=>c.addEventListener('click',()=>{schips.forEach(x=>x.setAttribute('aria-pressed',x===c));sofaMat.color.set(c.dataset.b);document.getElementById('bname').textContent=c.getAttribute('aria-label');}));
 seg('fins',b=>{const a=SCH[b.dataset.s];fin(M.fRun,a[0]);fin(M.fEast,a[1]);fin(M.fIsland,a[3]);applyIsl();});
-seg('lay',b=>layout(b.dataset.l==='quer'));
+seg('lay',b=>layout(b.dataset.l));
 seg('islm',b=>{islK=b.dataset.m;if(islK==='front'){const a=SCH[document.querySelector('#fins [aria-pressed="true"]').dataset.s];fin(M.fIsland,a[3]);}else applyIsl();});
 seg('vars',b=>{const h=b.dataset.v==='hoch';varHigh.visible=h;varOpen.visible=!h;});
 const tchips=[...document.querySelectorAll('.tchip')];tchips.forEach(c=>c.addEventListener('click',()=>{tchips.forEach(x=>x.setAttribute('aria-pressed',x===c));paintTiles(c.dataset.t);document.getElementById('tname').textContent=c.getAttribute('aria-label');}));

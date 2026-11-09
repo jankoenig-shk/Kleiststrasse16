@@ -304,7 +304,7 @@ R01.002;Raumplanung;Putz- und Malerarbeiten;EG · Anbau;Gäste-WC;;Kalkputz bzw.
 R01.003;Raumplanung;Putz- und Malerarbeiten;EG · Anbau;Kochen | Essen;;Kalkputz bzw. Kalkfarbe warmes Beige auf Wandflächen;35;m²;;Eigenleistung;;;
 R01.004;Raumplanung;Putz- und Malerarbeiten;EG;Wohnzimmer;;Kalkputz bzw. Kalkfarbe warmes Beige;40;m²;;Eigenleistung;;;
 R01.005;Raumplanung;Putz- und Malerarbeiten;EG;Spielzimmer;;Kalkputz bzw. Kalkfarbe warmes Beige;38;m²;;Eigenleistung;;;
-R02.001;Raumplanung;Fliesenarbeiten;EG · Anbau;Gäste-WC;;"Wandfliese glänzend, Dunkelgrün, Fuge sandbeige, nur an einer Wand: Waschtischwand raumhoch (≈ 3,0 m²) oder WC-Wand (≈ 2,9 m²); Stäbchen 3 × 15 cm senkrecht oder Riemchen 4,5 × 18 cm als Fischgrät (Verschnitt 15 %)";3;m²;;Firma;;;
+R02.001;Raumplanung;Fliesenarbeiten;EG · Anbau;Gäste-WC;;"Wandfliese glänzend, Dunkelgrün, Fuge sandbeige, nur an einer Wand: Waschtischwand raumhoch (≈ 3,0 m²) oder WC-Wand (≈ 2,9 m²), alternativ halbhoch rundum bis 1,16 m (≈ 5,0 m², Messing-Abschlussschiene); Stäbchen 3 × 15 cm senkrecht oder Riemchen 4,5 × 18 cm als Fischgrät (Verschnitt 15 %)";3;m²;;Firma;;;
 R02.002;Raumplanung;Fliesenarbeiten;EG;HWR;;Spritzschutz Stäbchenfliese wie Gäste-WC;0,8;m²;;Firma;;;
 R03.001;Raumplanung;Bodenbelag Terrazzo;EG · Anbau;Eingang, Flur, Podest;;Terrazzo-Boden Eingangsflur;4,85;m²;;Firma;;;
 R03.002;Raumplanung;Bodenbelag Terrazzo;EG · Anbau;Gäste-WC;;Terrazzo-Boden Beige wie Küche und Flur;1,65;m²;;Firma;;;

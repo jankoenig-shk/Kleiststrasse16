@@ -68,7 +68,7 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
     <h2>Ansichten</h2>
     <p class="note" style="margin-bottom:12px">Die Bilder sind 3D-Visualisierungen aus dem Modell, keine Fotos. Proportionen und Maße stimmen, Farben und Glanz wirken auf jedem Bildschirm etwas anders. Fliesenmuster deshalb immer im Laden bei Tageslicht ansehen. Zum Speichern lange auf ein Bild drücken, zum Vergrößern antippen.</p>
     <div style="display:grid;gap:10px;margin-bottom:14px">
-    <div class="bar"><span class="meta l">Fliesen an</span><div class="seg" data-g="side"><button data-v="W" aria-pressed="true">Waschtischwand</button><button data-v="T" aria-pressed="false">WC-Wand</button></div></div>
+    <div class="bar"><span class="meta l">Fliesen an</span><div class="seg" data-g="side"><button data-v="W" aria-pressed="true">Waschtischwand</button><button data-v="T" aria-pressed="false">WC-Wand</button><button data-v="H" aria-pressed="false">Halbhoch rundum</button></div></div>
     <div class="bar"><span class="meta l">Verlegung</span><div class="seg" data-g="pat"><button data-v="s" aria-pressed="true">Stäbchen senkrecht</button><button data-v="h" aria-pressed="false">Fischgrät</button></div></div>
     <div class="bar"><span class="meta l">Waschtisch</span><div class="seg" data-g="bas"><button data-v="o" aria-pressed="true">Eiche + Keramikbecken</button><button data-v="st" aria-pressed="false">Steinablage + Steinbecken</button></div></div>
     <div class="bar"><span class="meta l">Fliesenfarbe</span>
@@ -85,10 +85,12 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
     <h2>Einkaufsliste</h2>
     <div class="tbl"><table>
       <tr><th>Produkt</th><th>Was wir suchen</th><th>Menge</th></tr>
-      <tr data-pat="s"><td><span class="sw swt" style="background:#2f4a3c"></span>Wandfliese</td><td>Stäbchenfliese, senkrecht im Halbverband verlegt, ca. 3 × 15 cm, glänzend, leicht unregelmäßig (handgemachte Optik), <span class="tn">Dunkelgrün</span>. Fuge sandbeige.</td><td class="n">≈ 3,3 m² inkl. 10 % Verschnitt</td></tr>
-      <tr data-pat="h" hidden><td><span class="sw swt" style="background:#2f4a3c"></span>Wandfliese</td><td>Riemchen für Fischgrät, ca. 4,5 × 18 cm (alternativ 6 × 24 cm), glänzend, handgemachte Optik, 45° als Fischgrät verlegt, <span class="tn">Dunkelgrün</span>. Fuge sandbeige.</td><td class="n">≈ 3,4 m² inkl. 15 % Verschnitt</td></tr>
+      <tr data-pat="s"><td><span class="sw swt" style="background:#2f4a3c"></span>Wandfliese</td><td>Stäbchenfliese, senkrecht im Halbverband verlegt, ca. 3 × 15 cm, glänzend, leicht unregelmäßig (handgemachte Optik), <span class="tn">Dunkelgrün</span>. Fuge sandbeige.</td><td class="n">Fläche + 10 % Verschnitt</td></tr>
+      <tr data-pat="h" hidden><td><span class="sw swt" style="background:#2f4a3c"></span>Wandfliese</td><td>Riemchen für Fischgrät, ca. 4,5 × 18 cm (alternativ 6 × 24 cm), glänzend, handgemachte Optik, 45° als Fischgrät verlegt, <span class="tn">Dunkelgrün</span>. Fuge sandbeige.</td><td class="n">Fläche + 15 % Verschnitt</td></tr>
       <tr data-side="W"><td>Fliesenfläche</td><td>nur die Waschtischwand, raumhoch 0,93 × 3,20 m. WC-Wand mit Vorwand in Kalkputz wie die übrigen Wände</td><td class="n">≈ 3,0 m²</td></tr>
       <tr data-side="T" hidden><td>Fliesenfläche</td><td>nur die WC-Wand: Vorwand 0,93 × 1,12 m plus Wand oberhalb der Ablage 0,93 × 2,04 m. Waschtischwand in Kalkputz wie die übrigen Wände</td><td class="n">≈ 2,9 m²</td></tr>
+      <tr data-side="H" hidden><td>Fliesenfläche</td><td>halbhoch an allen Wänden bis 1,16 m (Höhe der Vorwand-Ablage): Waschtischwand, WC-Vorwand, Fensterwand und Türwand links und rechts der Tür. Darüber Kalkputz</td><td class="n">≈ 5,0 m²</td></tr>
+      <tr data-side="H" hidden><td><span class="sw" style="background:#b8935a"></span>Abschlussschiene</td><td>schmale Fliesen-Abschlussschiene Messing gebürstet als oberer Rand der Fliesen</td><td class="n">≈ 4,5 m</td></tr>
       <tr><td><span class="sw" style="background:#e3dacb"></span>Boden</td><td>Terrazzo Beige: helle warme Matrix mit beigen Marmorsplittern, wie Küche und Flur (durchgehend)</td><td class="n">1,65 m²</td></tr>
       <tr><td>Ablage Vorwand</td><td>Terrazzo-Platte passend zum Boden, ca. 93 × 19 cm, 4 cm stark</td><td class="n">1 Stück</td></tr>
       <tr data-bas="o"><td><span class="sw" style="background:#c99d64"></span>Waschtischplatte</td><td>Eiche massiv geölt, wandhängend ohne sichtbare Konsolen, ca. 93 × 42 cm, 4 cm stark, Oberkante 75 cm</td><td class="n">1 Stück</td></tr>
@@ -122,6 +124,7 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
           <line x1="119" y1="47" x2="177" y2="47" stroke="var(--ink)" stroke-width="1"/>
           <rect class="t" id="pW" x="40" y="54" width="3" height="122"/>
           <rect class="t" id="pT" x="287" y="54" width="3" height="122" style="display:none"/>
+          <path id="pH" class="t" d="M41.5 54 V176 M43 55.5 H287 M288.5 54 V176 M43 174.5 H98 M150 174.5 H287" fill="none" stroke="var(--ok)" stroke-width="3" stroke-dasharray="6 3" style="display:none"/>
           <rect class="o" x="267" y="54" width="20" height="122"/>
           <path class="o" d="M267 90 H220 a26 26 0 0 0 0 50 H267"/>
           <rect class="o" x="43" y="56" width="58" height="118"/>
@@ -138,11 +141,12 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
           <path class="d" d="M220 90 V82 M267 90 V82 M220 86 H267"/><text x="243" y="80" text-anchor="middle">≈ 50</text>
         </svg>
       </div>
-      <p class="note" style="margin-top:8px">Zwischen Waschtischkante und WC bleiben etwa 66 cm Bewegungsfläche. Die grüne Linie markiert die geflieste Wand.</p>
+      <p class="note" style="margin-top:8px">Zwischen Waschtischkante und WC bleiben etwa 66 cm Bewegungsfläche. Die grüne Linie markiert die geflieste Wand, gestrichelt die halbhohe Variante rundum.</p>
     </section>
     <section>
       <h2>Im Laden klären</h2>
       <ol>
+        <li>Halbhoch rundum bis 1,16 m: Abschluss oben mit Messingschiene oder Fliesen-Abschlussstück? Fliesenraster so planen, dass die Oberkante ohne schmale Schnittreihe auf Höhe der Ablage endet.</li>
         <li>Fliesen nur an einer Wand: Waschtischwand oder WC-Wand? Wie wird der Übergang zum Kalkputz an der Ecke sauber abgeschlossen (Schiene in Messing oder offene Kante)?</li>
         <li>Fischgrät: Gibt es die Fliese als Riemchen (ca. 4,5 × 18 oder 6 × 24 cm), und wie hoch ist der Verschnitt bei 0,93 m Wandbreite?</li>
         <li>Steinvariante: Welche Steinsorte ist für den Waschtisch geeignet und wie wird sie imprägniert? Hält die Wand eine 10 cm starke Platte, oder besser 3 cm mit Schürze?</li>
@@ -166,7 +170,7 @@ function upd(){const id=ST.side+ST.pat+ST.bas+'_'+ST.t;imgs.forEach(i=>{i.src=`i
   document.querySelectorAll('[data-pat]').forEach(e=>e.hidden=e.dataset.pat!==ST.pat);
   document.querySelectorAll('[data-side]').forEach(e=>e.hidden=e.dataset.side!==ST.side);
   document.querySelectorAll('[data-bas]').forEach(e=>e.hidden=e.dataset.bas!==ST.bas);
-  document.getElementById('pW').style.display=ST.side==='W'?'':'none';document.getElementById('pT').style.display=ST.side==='T'?'':'none';}
+  document.getElementById('pW').style.display=ST.side==='W'?'':'none';document.getElementById('pT').style.display=ST.side==='T'?'':'none';document.getElementById('pH').style.display=ST.side==='H'?'':'none';}
 document.querySelectorAll('.seg').forEach(sg=>{const bs=[...sg.querySelectorAll('button')];bs.forEach(b=>b.addEventListener('click',()=>{bs.forEach(x=>x.setAttribute('aria-pressed',x===b));ST[sg.dataset.g]=b.dataset.v;upd();}));});
 const chips=[...document.querySelectorAll('.chip')];
 chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.setAttribute('aria-pressed',x===c));const n=c.getAttribute('aria-label');

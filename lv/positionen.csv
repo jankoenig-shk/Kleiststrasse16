@@ -300,11 +300,11 @@
 25.11.1;Kostenschätzung 28.10.2026;Eigenleistung;Dach;;Elektriker;PV-Anlage 8KWP und 8KW Speicher;1;psch;;Eigenleistung;;;
 25.16.1;Kostenschätzung 28.10.2026;Eigenleistung;Haus gesamt;;Maler;Malerarbeiten Innen;1;psch;;Eigenleistung;;;
 R01.001;Raumplanung;Putz- und Malerarbeiten;EG · Anbau;Eingang, Flur, Podest;;Kalkputz bzw. Kalkfarbe warmes Beige;30;m²;;Eigenleistung;;;
-R01.002;Raumplanung;Putz- und Malerarbeiten;EG · Anbau;Gäste-WC;;Kalkputz bzw. Kalkfarbe warmes Beige auf nicht gefliesten Wänden;7;m²;;Eigenleistung;;;
+R01.002;Raumplanung;Putz- und Malerarbeiten;EG · Anbau;Gäste-WC;;Kalkputz bzw. Kalkfarbe warmes Beige auf nicht gefliesten Wänden;10;m²;;Eigenleistung;;;
 R01.003;Raumplanung;Putz- und Malerarbeiten;EG · Anbau;Kochen | Essen;;Kalkputz bzw. Kalkfarbe warmes Beige auf Wandflächen;35;m²;;Eigenleistung;;;
 R01.004;Raumplanung;Putz- und Malerarbeiten;EG;Wohnzimmer;;Kalkputz bzw. Kalkfarbe warmes Beige;40;m²;;Eigenleistung;;;
 R01.005;Raumplanung;Putz- und Malerarbeiten;EG;Spielzimmer;;Kalkputz bzw. Kalkfarbe warmes Beige;38;m²;;Eigenleistung;;;
-R02.001;Raumplanung;Fliesenarbeiten;EG · Anbau;Gäste-WC;;Wandfliese Stäbchen ca. 3 × 15 cm, glänzend, Dunkelgrün, senkrecht verlegt, Fuge sandbeige (Waschtischwand raumhoch, WC-Wand);5,9;m²;;Firma;;;
+R02.001;Raumplanung;Fliesenarbeiten;EG · Anbau;Gäste-WC;;"Wandfliese glänzend, Dunkelgrün, Fuge sandbeige, nur an einer Wand: Waschtischwand raumhoch (≈ 3,0 m²) oder WC-Wand (≈ 2,9 m²); Stäbchen 3 × 15 cm senkrecht oder Riemchen 4,5 × 18 cm als Fischgrät (Verschnitt 15 %)";3;m²;;Firma;;;
 R02.002;Raumplanung;Fliesenarbeiten;EG;HWR;;Spritzschutz Stäbchenfliese wie Gäste-WC;0,8;m²;;Firma;;;
 R03.001;Raumplanung;Bodenbelag Terrazzo;EG · Anbau;Eingang, Flur, Podest;;Terrazzo-Boden Eingangsflur;4,85;m²;;Firma;;;
 R03.002;Raumplanung;Bodenbelag Terrazzo;EG · Anbau;Gäste-WC;;Terrazzo-Boden Beige wie Küche und Flur;1,65;m²;;Firma;;;
@@ -317,7 +317,7 @@ R05.001;Raumplanung;Tischlerarbeiten;EG · Anbau;Eingang, Flur, Podest;;Zwei Eic
 R05.002;Raumplanung;Tischlerarbeiten;EG · Anbau;Eingang, Flur, Podest;;Zwei Eichenstufen Flur ↔ Wohnzimmer, Breite 1,18 m;2;Stk;;Firma;;;
 R05.003;Raumplanung;Tischlerarbeiten;EG · Anbau;Eingang, Flur, Podest;;Garderobenschrank ca. 140 × 66 × 230 cm, Fronten Greige;1;Stk;;Firma;;;
 R05.004;Raumplanung;Tischlerarbeiten;EG · Anbau;Eingang, Flur, Podest;;Schranktür als Zugang zum Kellerabgang;1;Stk;;Firma;;;
-R05.005;Raumplanung;Tischlerarbeiten;EG · Anbau;Gäste-WC;;Waschtischplatte Eiche massiv geölt ca. 93 × 42 × 4 cm, wandhängend, Oberkante 75 cm;1;Stk;;Firma;;;
+R05.005;Raumplanung;Tischlerarbeiten;EG · Anbau;Gäste-WC;;Waschtischplatte Eiche massiv geölt ca. 93 × 42 × 4 cm, wandhängend, Oberkante 75 cm (Alternative: Steinablage Travertin/Kalkstein 93 × 42 × 10 cm);1;Stk;;Firma;;;
 R05.006;Raumplanung;Tischlerarbeiten;EG;Spielzimmer;;Fensterbank-Sitzbank im Erker, Eiche, ca. 3,40 m, mit Polsterauflage;1;Stk;;Firma;;;
 R05.007;Raumplanung;Tischlerarbeiten;EG;Spielzimmer;;Deckenbefestigung Schaukel mit Tragfähigkeitsnachweis (Decke prüfen lassen);1;Stk;;Firma;;;
 R05.008;Raumplanung;Tischlerarbeiten;EG;HWR;;Einbauschrank 145 cm bis Decke: Gerätesäule 72 cm (Waschmaschine + Trockner gestapelt) und Vorratsschrank 73 cm, Fronten Greige;1;Stk;;Firma;;;
@@ -334,7 +334,7 @@ R07.002;Raumplanung;Natur- und Kunststein;EG · Anbau;Kochen | Essen;;Arbeitspla
 R07.003;Raumplanung;Natur- und Kunststein;EG;HWR;;Ablage Terrazzo ca. 145 × 45 × 4 cm mit Eichenwangen und Unterboden;1;Stk;;Firma;;;
 R08.001;Raumplanung;Sanitär;EG · Anbau;Gäste-WC;;Vorwandelement Wand-WC inkl. Betätigungsplatte Messing gebürstet;1;Stk;;Firma;;;
 R08.002;Raumplanung;Sanitär;EG · Anbau;Gäste-WC;;Wand-WC spülrandlos, Ausladung 48–52 cm, Softclose-Sitz;1;Stk;;Firma;;;
-R08.003;Raumplanung;Sanitär;EG · Anbau;Gäste-WC;;Aufsatzbecken rund Ø ca. 38 cm, Keramik weiß, ohne Überlauf;1;Stk;;Firma;;;
+R08.003;Raumplanung;Sanitär;EG · Anbau;Gäste-WC;;Aufsatzbecken rund Ø ca. 38 cm, Keramik weiß, ohne Überlauf (Alternative: Steinbecken Ø ca. 44 cm mit Röhrensiphon Messing);1;Stk;;Firma;;;
 R08.004;Raumplanung;Sanitär;EG · Anbau;Gäste-WC;;Wandarmatur Unterputz, Messing gebürstet, Auslauf 18–20 cm;1;Stk;;Firma;;;
 R08.005;Raumplanung;Sanitär;EG · Anbau;Gäste-WC;;Handtuchring Messing gebürstet;1;Stk;;Firma;;;
 R08.006;Raumplanung;Sanitär;EG · Anbau;Kochen | Essen;;Unterbauspüle Einzelbecken 70–76 cm mit Armatur, Anschluss;1;Stk;;Firma;;;

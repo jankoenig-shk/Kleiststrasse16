@@ -89,7 +89,7 @@ function win(face,a0,a1,y0,y1,opt){opt=opt||{};const d=opt.d||0.06,t=0.07,g=new 
 const FA={S:-0.3,N:8.45,E:-3.89,W:4.0},FO={S:ALT.z0,N:ALT.z1,E:ALT.x0,W:ALT.x1},FE={E:-8.42,N:11.6,S:7.6};
 /* Anbau (Plan + Ansicht Süd) */
 /* Küche: Südwand ohne Fenster (4.11.) */win('S',-3.03,-2.39,0.77,2.36,{f:FA,n:1,soldier:true});
-/* Küche zum Garten: bodentiefe Festverglasung */win('W',1.05,2.40,0.0,2.80,{f:FA,n:1});win('W',3.33,7.27,0.0,2.80,{f:FA,n:4});
+/* Küche zum Garten (Variante C1): Fenster mit Brüstung 1,00 m über der Küchenzeile */win('W',1.05,2.40,1.00,2.80,{f:FA,n:2});win('W',3.33,7.27,0.0,2.80,{f:FA,n:4});
 win('N',0.8,2.8,0.9,2.25,{f:FA,n:2,soldier:true});
 B(-3.95,-3.89,-0.17,1.88,1.09,2.19,M.door);win('E',1.09,2.19,1.93,2.40,{f:FA,n:1});B(-3.93,-3.89,1.88,1.93,1.09,2.19,M.frame);
 /* Altbau: Fenster nach EG- und OG-Plan sowie Ansichten Ost und West */

@@ -114,8 +114,8 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
         </div></div>
       <div class="crow" data-for="kueche"><span class="lbl">Insel</span>
         <div class="seg" id="lay">
-          <button data-l="laengs" aria-pressed="true">Längs · 1,70 × 1,28 m</button>
-          <button data-l="quer" aria-pressed="false">Quer · Blick zum Garten · 2,10 × 1,40 m</button><button data-l="c1" aria-pressed="false">Eckküche · Halbinsel</button><button data-l="c2" aria-pressed="false">Eckküche · Insel mittig</button>
+          <button data-l="laengs" aria-pressed="false">Längs · 1,70 × 1,28 m</button>
+          <button data-l="quer" aria-pressed="false">Quer · Blick zum Garten · 2,10 × 1,40 m</button><button data-l="c1" aria-pressed="true">Eckküche · Halbinsel</button><button data-l="c2" aria-pressed="false">Eckküche · Insel mittig</button>
         </div></div>
       <div class="crow" data-for="kueche"><span class="lbl">Inselfront</span>
         <div class="seg" id="islm"><button data-m="front" aria-pressed="true">wie Fronten</button><button data-m="tz" aria-pressed="false">Terrazzo</button><button data-m="trav" aria-pressed="false">Travertin</button><button data-m="mc" aria-pressed="false">Mikrozement</button><button data-m="salbei" aria-pressed="false">Salbeigrün</button><button data-m="anth" aria-pressed="false">Anthrazit</button></div></div>
@@ -1001,6 +1001,7 @@ seg('sofa',b=>{setSofa(b.dataset.l);if(!/^wohnen/.test(mode)){const cb=document.
 const schips=[...document.querySelectorAll('.schip')];schips.forEach(c=>c.addEventListener('click',()=>{schips.forEach(x=>x.setAttribute('aria-pressed',x===c));sofaMat.color.set(c.dataset.b);document.getElementById('bname').textContent=c.getAttribute('aria-label');}));
 seg('fins',b=>{const a=SCH[b.dataset.s];fin(M.fRun,a[0]);fin(M.fEast,a[1]);fin(M.fIsland,a[3]);applyIsl();});
 seg('lay',b=>layout(b.dataset.l));
+layout('c1');
 seg('islm',b=>{islK=b.dataset.m;if(islK==='front'){const a=SCH[document.querySelector('#fins [aria-pressed="true"]').dataset.s];fin(M.fIsland,a[3]);}else applyIsl();});
 seg('vars',b=>{const h=b.dataset.v==='hoch';varHigh.visible=h;varOpen.visible=!h;});
 const tchips=[...document.querySelectorAll('.tchip')];tchips.forEach(c=>c.addEventListener('click',()=>{tchips.forEach(x=>x.setAttribute('aria-pressed',x===c));paintTiles(c.dataset.t);document.getElementById('tname').textContent=c.getAttribute('aria-label');}));

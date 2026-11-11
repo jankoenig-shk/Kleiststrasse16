@@ -143,11 +143,10 @@ nav.sitenav a{color:var(--ink);text-decoration:none}nav.sitenav .b{font-weight:6
         <button class="schip chip" id="b4" data-b="#8f8576" style="background:#8f8576" aria-label="Taupe" aria-pressed="false"></button>
         <span class="meta" id="bname">Creme</span></div>
       <div class="crow" data-for="wc"><span class="lbl">Fliese</span>
-        <button class="tchip chip" id="t1" data-t="#2f4a3c" style="background:#2f4a3c" aria-label="Dunkelgrün" aria-pressed="true"></button>
-        <button class="tchip chip" id="t2" data-t="#1f3b3f" style="background:#1f3b3f" aria-label="Petrol" aria-pressed="false"></button>
-        <button class="tchip chip" id="t3" data-t="#7f8f6c" style="background:#7f8f6c" aria-label="Salbeigrün" aria-pressed="false"></button>
-        <button class="tchip chip" id="t4" data-t="#a8783a" style="background:#a8783a" aria-label="Ocker" aria-pressed="false"></button>
-        <span class="meta" id="tname">Dunkelgrün</span></div>
+        <button class="tchip chip" id="t1" data-t="#5a6650" style="background:#5a6650" aria-label="Olivgrün" aria-pressed="true"></button>
+      <button class="tchip chip" id="t2" data-t="#7d8a6e" style="background:#7d8a6e" aria-label="Salbei hell" aria-pressed="false"></button>
+      <button class="tchip chip" id="t3" data-t="#3a4a3b" style="background:#3a4a3b" aria-label="Dunkelgrün" aria-pressed="false"></button>
+      <span class="meta" id="tname">Olivgrün</span></div>
       <div class="crow" data-for="hwr"><span class="lbl">Schrank</span>
         <div class="seg"><button id="hw1" aria-pressed="false">Waschschrank öffnen</button></div></div>
       <div class="crow" data-for="kueche wohnen"><span class="lbl">Ablauf</span>
@@ -672,14 +671,16 @@ B(-1.71,-1.65,F,F+1.0,9.18,9.24,steelBlack,ext);
   B(x1-0.12,x1-0.10,F+0.85,F+1.25,z+0.02,z+0.05,steelBlack,ext);})();
 B(-2.95,-2.15,F,F+0.45,8.75,9.70,M.oakDark,ext);
 
-/* ===== Gäste-WC: green vertical stick tiles on WC wall + basin wall, oak shelf with vessel basin, brushed brass ===== */
+/* ===== Gäste-WC (Grundlage 11.11.): Zellige nur an der Waschtischwand, Wände warmes Beige, Terrazzo-Waschtischblock, Eichenkasten, Spiegel Ø 70 mit Licht, Pendel Messing ===== */
 const ceramic=new THREE.MeshStandardMaterial({color:'#fbfbf9',roughness:.15});
 const brass=new THREE.MeshStandardMaterial({color:'#b8935a',roughness:.38,metalness:.9});
-function stickCanvas(g,w,h,hex){const c=new THREE.Color(hex);g.fillStyle='#d9d3c8';g.fillRect(0,0,w,h);
-  const cols=30,rows=7,tw=w/cols,th=h/rows;
-  for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){const k=rnd(-.09,.09);const r=Math.min(255,Math.max(0,(c.r+k)*255)),gg=Math.min(255,Math.max(0,(c.g+k)*255)),b=Math.min(255,Math.max(0,(c.b+k)*255));
-    g.fillStyle=`rgb(${r|0},${gg|0},${b|0})`;g.fillRect(i*tw+1,j*th+1,tw-2,th-2);
-    g.fillStyle='rgba(255,255,255,.18)';g.fillRect(i*tw+2,j*th+2,2,th-4);}}
+function stickCanvas(g,w,h,hex){const c=new THREE.Color(hex);g.fillStyle='#cfc4b0';g.fillRect(0,0,w,h);
+  /* Zellige ca. 6,5 × 20 cm im Stapelverband, Glasurwolken (Grundlage 11.11.) */
+  const cols=15,rows=5,tw=w/cols,th=h/rows;
+  for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){const k=rnd(-.09,.09);const col=(dk,a=1)=>`rgba(${Math.min(255,Math.max(0,(c.r+k+dk)*255))|0},${Math.min(255,Math.max(0,(c.g+k+dk)*255))|0},${Math.min(255,Math.max(0,(c.b+k+dk)*255))|0},${a})`;
+    const x=i*tw+1.5,y=j*th+1.5,ww=tw-3,hh=th-3;g.fillStyle=col(0);g.fillRect(x,y,ww,hh);
+    for(let s=0;s<8;s++){const cx=x+rnd(0,ww),cy=y+rnd(0,hh),r=rnd(4,17);const gr=g.createRadialGradient(cx,cy,0,cx,cy,r);const d=rnd(-.08,.10);gr.addColorStop(0,col(d,.55));gr.addColorStop(1,col(d,0));g.fillStyle=gr;g.fillRect(x,y,ww,hh);}
+    g.fillStyle='rgba(255,255,255,.15)';g.fillRect(x+2,y+3,2,hh-6);}}
 const tileCanvas=document.createElement('canvas');tileCanvas.width=tileCanvas.height=512;
 function paintTiles(hex){stickCanvas(tileCanvas.getContext('2d'),512,512,hex);tileTexs.forEach(t=>t.needsUpdate=true);}
 const tileTexs=[];
@@ -687,24 +688,28 @@ function tileMat(w,h){const t=new THREE.CanvasTexture(tileCanvas);t.encoding=THR
   return new THREE.MeshStandardMaterial({map:t,roughness:.22,metalness:.05});}
 /* basin wall (west, inner face x=-3.59) tiled floor to ceiling */
 B(-3.59,-3.575,0,H,0,dz0,tileMat(0.9,H),ext);
-/* WC wall: pre-wall front + wall above, tiled; ledge in terrazzo */
+/* WC wall: pre-wall in Putz, Ablage Terrazzo; Wände warmes Beige gestrichen (dünne Farbschicht) */
 B(-1.97,-1.82,0,1.12,0,dz0,M.wall,ext);
-B(-1.985,-1.97,0,1.12,0,dz0,tileMat(0.9,1.12),ext);
-B(-1.835,-1.82,1.16,H,0,dz0,tileMat(0.9,H-1.16),ext);
+const wcWarm=new THREE.MeshStandardMaterial({map:M.wall.map,color:'#f3dcbd',roughness:.95});
+B(-1.987,-1.97,0,1.12,0,dz0,wcWarm,ext);B(-1.822,-1.82,1.16,H,0,dz0,wcWarm,ext);
+B(-3.575,-1.82,0,H,0,0.002,wcWarm,ext);B(-3.575,-1.82,0,H,dz0-0.002,dz0,wcWarm,ext);
 B(-2.01,-1.82,1.12,1.16,0,dz0,tzMat(.2,.9),ext);
 /* wall-hung toilet + brass flush plate */
 B(-2.50,-1.985,0.22,0.40,0.27,0.63,ceramic,ext);B(-2.48,-1.985,0.40,0.425,0.28,0.62,ceramic,ext);
 B(-1.995,-1.985,0.92,1.06,0.36,0.54,brass,ext);
-/* oak shelf with vessel basin, brass wall tap, round mirror, wall light */
-B(-3.575,-3.16,0.78,0.82,0.02,0.88,texMat(parquet,.4,.86),ext);
-const basin=new THREE.Mesh(new THREE.CylinderGeometry(0.19,0.15,0.13,40,1,true),ceramic);basin.position.set(-3.36,0.885,0.45);basin.castShadow=true;ext.add(basin);
-const bb=new THREE.Mesh(new THREE.CircleGeometry(0.15,32),ceramic);bb.rotation.x=-Math.PI/2;bb.position.set(-3.36,0.83,0.45);ext.add(bb);
-const bin=new THREE.Mesh(new THREE.CylinderGeometry(0.175,0.14,0.12,40,1,true),new THREE.MeshStandardMaterial({color:'#f1f0ec',roughness:.2,side:THREE.BackSide}));bin.position.set(-3.36,0.89,0.45);ext.add(bin);
-B(-3.575,-3.40,1.07,1.095,0.435,0.465,brass,ext);B(-3.575,-3.56,1.04,1.13,0.415,0.485,brass,ext);
-const mir=new THREE.Mesh(new THREE.CircleGeometry(0.27,48),new THREE.MeshStandardMaterial({color:'#cfd9dc',roughness:.04,metalness:.85}));mir.rotation.y=Math.PI/2;mir.position.set(-3.565,1.52,0.45);ext.add(mir);
-const mf=new THREE.Mesh(new THREE.TorusGeometry(0.275,0.012,10,64),brass);mf.rotation.y=Math.PI/2;mf.position.set(-3.565,1.52,0.45);ext.add(mf);
-const wcl=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,0.16,24),new THREE.MeshStandardMaterial({color:'#fff6e6',emissive:'#ffe8c2',emissiveIntensity:.8}));wcl.rotation.z=Math.PI/2;wcl.position.set(-3.51,1.98,0.45);ext.add(wcl);
-B(-3.575,-3.43,1.96,2.00,0.44,0.46,brass,ext);
+/* Waschtischblock Terrazzo mit eingelassenem Becken, Eichenkasten, Korb, Spiegel Ø 70 cm hinterleuchtet, Pendelleuchte Messing */
+B(-3.575,-3.10,0.70,0.76,0.0,dz0,tzMat(.5,.9),ext);
+B(-3.575,-3.47,0.76,0.86,0.0,dz0,tzMat(.1,.9),ext);B(-3.17,-3.10,0.76,0.86,0.0,dz0,tzMat(.1,.9),ext);
+B(-3.47,-3.17,0.76,0.86,0.0,0.22,tzMat(.3,.2),ext);B(-3.47,-3.17,0.76,0.86,0.71,dz0,tzMat(.3,.2),ext);
+B(-3.575,-3.14,0.14,0.40,0.02,0.91,texMat(parquet,.4,.9),ext);
+B(-3.50,-3.20,0.40,0.60,0.06,0.48,new THREE.MeshStandardMaterial({color:'#a77b4c',roughness:.95}),ext);
+B(-3.575,-3.40,1.03,1.055,0.45,0.48,brass,ext);B(-3.575,-3.56,1.00,1.09,0.43,0.50,brass,ext);
+const mir=new THREE.Mesh(new THREE.CircleGeometry(0.35,48),new THREE.MeshStandardMaterial({color:'#cfd9dc',roughness:.04,metalness:.85}));mir.rotation.y=Math.PI/2;mir.position.set(-3.565,1.62,0.465);ext.add(mir);
+const mf=new THREE.Mesh(new THREE.TorusGeometry(0.355,0.012,10,64),brass);mf.rotation.y=Math.PI/2;mf.position.set(-3.565,1.62,0.465);ext.add(mf);
+const mglow=new THREE.Mesh(new THREE.RingGeometry(0.35,0.42,48),new THREE.MeshBasicMaterial({color:'#ffd9a0',transparent:true,opacity:.35,depthWrite:false}));mglow.rotation.y=Math.PI/2;mglow.position.set(-3.572,1.62,0.465);ext.add(mglow);
+const pnd=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,0.22,24),brass);pnd.position.set(-3.38,2.01,0.10);ext.add(pnd);
+const pcord=new THREE.Mesh(new THREE.CylinderGeometry(0.004,0.004,H-2.12,6),new THREE.MeshStandardMaterial({color:'#222'}));pcord.position.set(-3.38,(H+2.12)/2,0.10);ext.add(pcord);
+const pbulb=new THREE.Mesh(new THREE.CircleGeometry(0.045,24),new THREE.MeshBasicMaterial({color:'#fff1d6'}));pbulb.rotation.x=Math.PI/2;pbulb.position.set(-3.38,1.899,0.10);ext.add(pbulb);
 /* towel ring + small plant on ledge */
 const tr=new THREE.Mesh(new THREE.TorusGeometry(0.09,0.008,8,32),brass);tr.position.set(-3.21,1.05,0.015);ext.add(tr);
 const pp=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.04,0.09,16),M.pot);pp.position.set(-1.91,1.205,0.15);ext.add(pp);
@@ -719,7 +724,7 @@ const rugTex=canvasTex(512,640,(g,w,h)=>{g.fillStyle='#ece4d4';g.fillRect(0,0,w,
 const rugM=new THREE.MeshStandardMaterial({map:rugTex,roughness:1});
 const rugEdge=new THREE.MeshStandardMaterial({color:'#e3dac8',roughness:1});
 const wcRug=new THREE.Mesh(new THREE.BoxGeometry(0.52,0.012,0.68),[rugEdge,rugEdge,rugM,rugEdge,rugEdge,rugEdge]);wcRug.position.set(-2.88,0.006,0.45);wcRug.receiveShadow=true;ext.add(wcRug);
-paintTiles('#2f4a3c');
+paintTiles('#5a6650');
 /* ===== HWR: built-in tall cabinet on the south wall (washer + dryer stacked | storage), shallow terrazzo shelf with small basin on the north wall ===== */
 (function(){
   const zf=11.05,zb=11.7,top=HO-0.02,xa=-1.76,xm=-1.04,xb=-0.31;

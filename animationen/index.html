@@ -690,7 +690,7 @@ function tileMat(w,h){const t=new THREE.CanvasTexture(tileCanvas);t.encoding=THR
 B(-3.59,-3.575,0,H,0,dz0,tileMat(0.9,H),ext);
 /* WC wall: pre-wall in Putz, Ablage Terrazzo; Wände warmes Beige gestrichen (dünne Farbschicht) */
 B(-1.97,-1.82,0,1.12,0,dz0,M.wall,ext);
-const wcWarm=new THREE.MeshStandardMaterial({map:M.wall.map,color:'#f3dcbd',roughness:.95});
+const wcWarm=new THREE.MeshStandardMaterial({map:M.wall.map,color:'#e9d6b6',roughness:.9});
 B(-1.987,-1.97,0,1.12,0,dz0,wcWarm,ext);B(-1.822,-1.82,1.16,H,0,dz0,wcWarm,ext);
 B(-3.575,-1.82,0,H,0,0.002,wcWarm,ext);B(-3.575,-1.82,0,H,dz0-0.002,dz0,wcWarm,ext);
 B(-2.01,-1.82,1.12,1.16,0,dz0,tzMat(.2,.9),ext);
@@ -710,19 +710,23 @@ const mglow=new THREE.Mesh(new THREE.RingGeometry(0.35,0.42,48),new THREE.MeshBa
 const pnd=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,0.22,24),brass);pnd.position.set(-3.38,2.01,0.10);ext.add(pnd);
 const pcord=new THREE.Mesh(new THREE.CylinderGeometry(0.004,0.004,H-2.12,6),new THREE.MeshStandardMaterial({color:'#222'}));pcord.position.set(-3.38,(H+2.12)/2,0.10);ext.add(pcord);
 const pbulb=new THREE.Mesh(new THREE.CircleGeometry(0.045,24),new THREE.MeshBasicMaterial({color:'#fff1d6'}));pbulb.rotation.x=Math.PI/2;pbulb.position.set(-3.38,1.899,0.10);ext.add(pbulb);
+/* Eichenschrank über dem WC bis unter die Decke, Nische mit LED darunter; Decke im WC im Wandton */
+(function(){const X0=-2.12,X1=-1.82,Y0=1.46,Y1=H-0.005,zm=dz0/2,ym=2.42,gp=0.004;
+  const oakDoor=texMat(parquet,.5,1.2);B(X0+0.02,X1,Y0,Y1,0,dz0,new THREE.MeshStandardMaterial({color:'#a9824f',roughness:.7}),ext);
+  [[0.003,zm-gp/2],[zm+gp/2,dz0-0.003]].forEach(([z0,z1])=>[[Y0,ym-gp/2],[ym+gp/2,Y1]].forEach(([y0,y1])=>B(X0,X0+0.02,y0,y1,z0,z1,oakDoor,ext)));
+  B(-2.10,-1.86,Y0-0.012,Y0-0.006,0.02,dz0-0.02,new THREE.MeshBasicMaterial({color:'#ffe2b5'}),ext,false);
+  B(-3.575,-1.82,H-0.004,H-0.002,0,dz0,wcWarm,ext,false);})();
 /* towel ring + small plant on ledge */
 const tr=new THREE.Mesh(new THREE.TorusGeometry(0.09,0.008,8,32),brass);tr.position.set(-3.21,1.05,0.015);ext.add(tr);
 const pp=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.04,0.09,16),M.pot);pp.position.set(-1.91,1.205,0.15);ext.add(pp);
 for(let i=0;i<4;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(0.045,10,8),M.plant);b.position.set(-1.91+rnd(-.03,.03),1.29+i*0.03,0.15+rnd(-.03,.03));ext.add(b);}
 /* berber-style wool rug in front of the basin */
-const rugTex=canvasTex(512,640,(g,w,h)=>{g.fillStyle='#ece4d4';g.fillRect(0,0,w,h);
-  for(let i=0;i<5000;i++){g.fillStyle=`rgba(${190+rnd(-20,20)|0},${178+rnd(-20,20)|0},${158|0},${rnd(.1,.35)})`;g.fillRect(rnd(0,w),rnd(0,h),rnd(1,3),rnd(1,3));}
-  g.strokeStyle='#3b3a33';g.lineWidth=5;g.lineJoin='round';
-  for(let r=0;r<3;r++){const cy=110+r*210;g.beginPath();for(let x=-60;x<=w+60;x+=128){g.moveTo(x,cy);g.lineTo(x+64,cy-70);g.lineTo(x+128,cy);g.lineTo(x+64,cy+70);g.closePath();}g.stroke();}
-  g.fillStyle='#2f4a3c';for(let r=0;r<3;r++)for(let x=0;x<=w;x+=128){g.beginPath();g.arc(x+64,110+r*210,9,0,7);g.fill();}
-  g.strokeStyle='#d8ccb6';g.lineWidth=2;for(let x=6;x<w;x+=9){g.beginPath();g.moveTo(x,0);g.lineTo(x+rnd(-2,2),14);g.stroke();g.beginPath();g.moveTo(x,h);g.lineTo(x+rnd(-2,2),h-14);g.stroke();}});
+const rugTex=canvasTex(512,640,(g,w,h)=>{g.fillStyle='#b4966a';g.fillRect(0,0,w,h);
+  /* Jute, naturfarben, grob geflochten */
+  for(let y=0;y<h;y+=10)for(let x=0;x<w;x+=14){const o=(y/10)%2?7:0;const c=150+rnd(-18,18);g.fillStyle=`rgb(${c+40|0},${c+14|0},${c-38|0})`;g.beginPath();g.ellipse(x+o,y+5,7,4.2,0.5*((y/10)%2?1:-1),0,7);g.fill();g.strokeStyle='rgba(80,58,30,.35)';g.lineWidth=1;g.stroke();}
+  g.strokeStyle='#8d7149';g.lineWidth=10;g.strokeRect(5,5,w-10,h-10);});
 const rugM=new THREE.MeshStandardMaterial({map:rugTex,roughness:1});
-const rugEdge=new THREE.MeshStandardMaterial({color:'#e3dac8',roughness:1});
+const rugEdge=new THREE.MeshStandardMaterial({color:'#a68659',roughness:1});
 const wcRug=new THREE.Mesh(new THREE.BoxGeometry(0.52,0.012,0.68),[rugEdge,rugEdge,rugM,rugEdge,rugEdge,rugEdge]);wcRug.position.set(-2.88,0.006,0.45);wcRug.receiveShadow=true;ext.add(wcRug);
 paintTiles('#5a6650');
 /* ===== HWR: built-in tall cabinet on the south wall (washer + dryer stacked | storage), shallow terrazzo shelf with small basin on the north wall ===== */
